@@ -1,2 +1,2 @@
 # NOT-FOUND-404
-Trabajo practido Introduccion al Desarrollo de Software
+Trabajo práctico Introducción al Desarrollo de Software
