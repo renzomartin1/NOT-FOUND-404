@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels.com | Sitio oficial</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/icono.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <header>
+        <div id="logotipo-sesion">
+            <a href="{{ url_for('home') }}"><img id="logotipo" src="{{ url_for('static', filename='images/logotipo.png') }}"></a>
+            <div id="sesion">
+                <button id="iniciar-sesion"><a href="{{ url_for('login') }}">Iniciar sesión</a></button>
+                <button id="registrarse">Registrarse</button>
+            </div>
+        </div>
+        <nav>
+            <ul id="barra-navegacion">
+                <li class="barra-navegacion-opciones"><a href="https://www.fi.uba.ar">Página2</a></li>
+                <li class="barra-navegacion-opciones"><a href="https://www.fi.uba.ar">Página3</a></li>
+                <li class="barra-navegacion-opciones"><a href="https://www.fi.uba.ar">Página4</a></li>
+                <li class="barra-navegacion-opciones"><a href="https://www.fi.uba.ar">Página5</a></li>
+                <li class="barra-navegacion-opciones"><a href="https://www.fi.uba.ar">Página6</a></li>
+                <li class="barra-navegacion-opciones"><a href="https://www.fi.uba.ar">Página7</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    {% block body %}{% endblock %}
+
+    <footer>
+        <div id="linea-footer">
+            <hr>
+        </div>
+        <div id="texto-footer">
+            <p>
+                Trabajo Práctico de IDS.
+            </p>
+            <p>
+                Not Found 404 - Grupo 17, 2024.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

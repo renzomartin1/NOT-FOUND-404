@@ -1,0 +1,126 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px;
+}
+
+
+
+
+/* HEADER: LOGOTIPO, BOTONES DE INGRESO/REGISTRO Y BARRA DE NAVEGACIÓN */
+
+header {
+    display: flex;
+    flex-direction: column;
+    background-color: #ff7922;
+    align-items: center;
+    height: 125px;
+}
+
+#logotipo-sesion {
+    display: flex;
+    justify-content: flex-end;
+    column-gap: 276px;
+    width: 60%;
+}
+
+/* Logotipo */
+
+#logotipo {
+    width: 192px;
+    height: 66px;
+}
+
+/* Botones de ingreso/registro */
+
+#sesion {
+    padding-top: 18px;
+}
+
+#iniciar-sesion {
+    color: #fff;
+    background-color: #522305;
+    border: 0px;
+    border-radius: 5px;
+    padding: 10px;
+    margin-right: 3px;
+}
+
+#iniciar-sesion:hover {
+    background-color: #612b08;
+    cursor: pointer;
+}
+
+#registrarse {
+    color: #ff7922;
+    background-color: #fff;
+    border: 0px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#registrarse:hover {
+    background-color: #ffeee4;
+    cursor: pointer;
+}
+
+/* Barra de navegación */
+
+#barra-navegacion {
+    display: flex;
+    padding: 0px;
+    margin: 0px;
+}
+
+.barra-navegacion-opciones {
+    display: block;
+    padding: 10px 15px;
+}
+
+.barra-navegacion-opciones a {
+    color: #522305;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 15px 20px;
+}
+
+.barra-navegacion-opciones a:hover {
+    background-color: #e96612;
+    border-radius: 30px;
+}
+
+
+
+
+/* FOOTER: LÍNEA Y TEXTO DEL FOOTER */
+
+footer {
+    display: flex;
+    flex-direction: column;
+    background-color: #f3f1ef;
+    align-items: center;
+}
+
+/* Línea del footer */
+
+#linea-footer {
+    width: 45%;
+}
+
+#linea-footer hr {
+    border: 1px solid #eee7e7;
+}
+
+/* Texto del footer */
+
+#texto-footer {
+    display: flex;
+    flex-direction: column;
+}
+
+#texto-footer p {
+    color: #5a5a5a;
+    font-size: smaller;
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 8px;
+}

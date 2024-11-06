@@ -1,0 +1,54 @@
+#login-fondo {
+    display: flex;
+    background-color: #fff;
+    justify-content: center;
+    align-items: center;
+    padding: 100px;
+}
+
+#login-apartado-form {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    border: 1px solid #dad0d0;
+    border-radius: 20px;
+    padding: 35px;
+}
+
+#login-apartado-form h2 {
+    color: #ff7229;
+    align-self: center;
+}
+
+#login-apartado-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+#login-apartado-form form label {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#login-apartado-form form input {
+    border: 0px;
+    border-radius: 10px;
+    outline: 1px solid #dad0d0;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#login-apartado-form form input:focus {
+    outline: 3px solid #ff7229;
+}
+
+#login-boton {
+    color:#fff;
+    background-color: #ff7229;
+    align-self: center;
+    width: 50%;
+    border: 0px;
+    border-radius: 45px;
+    padding: 15px;
+}
