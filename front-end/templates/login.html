@@ -9,12 +9,17 @@
     <div id="login-apartado-form">
         <h2>Iniciar sesión</h2>
         <form>
-            <label>E-mail</label>
+            <label>Correo electrónico</label>
             <input type="email">
             <label>Contraseña</label>
             <input type="password">
             <button id="login-boton" type="submit">Iniciar sesión</button>
         </form>
+        <div id="login-sin-cuenta">
+            <p>
+                ¿No tienes una cuenta? <a href="{{ url_for('register') }}">Registrarse</a>
+            </p>
+        </div>
     </div>
 </div>
 {% endblock %}

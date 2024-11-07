@@ -9,15 +9,17 @@
 #login-apartado-form {
     display: flex;
     flex-direction: column;
-    width: 25%;
+    max-width: 400px;
     border: 1px solid #dad0d0;
-    border-radius: 20px;
+    border-radius: 10px;
     padding: 35px;
 }
 
 #login-apartado-form h2 {
     color: #ff7229;
     align-self: center;
+    margin-top: 0px;
+    margin-bottom: 35px;
 }
 
 #login-apartado-form form {
@@ -26,17 +28,22 @@
 }
 
 #login-apartado-form form label {
-    font-size: 15px;
+    font-size: 13px;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
 #login-apartado-form form input {
+    width: 385px;
     border: 0px;
-    border-radius: 10px;
+    border-radius: 5px;
     outline: 1px solid #dad0d0;
-    padding: 10px;
+    padding: 8px;
     margin-bottom: 20px;
+}
+
+#login-apartado-form form input:hover {
+    outline: 2px solid #dad0d0;
 }
 
 #login-apartado-form form input:focus {
@@ -47,8 +54,33 @@
     color:#fff;
     background-color: #ff7229;
     align-self: center;
-    width: 50%;
+    font-size: 13px;
+    font-weight: bold;
+    width: 75%;
     border: 0px;
     border-radius: 45px;
     padding: 15px;
+    margin: 10px 0px;
+}
+
+#login-boton:hover {
+    background-color: #fd8332;
+    cursor: pointer;
+}
+
+#login-sin-cuenta {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#login-sin-cuenta p {
+    margin: 0px;
+}
+
+#login-sin-cuenta p a {
+    color: #ff7229;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0px;
 }
