@@ -4,6 +4,7 @@
     display: flex;
     justify-content: center;
     padding: 115px;
+    background-color:#96C2DB ;
 }
 
 #cuerpo-formulario-contacto {
@@ -13,6 +14,7 @@
     border: 1px solid #beb8b8;
     border-radius: 15px;
     padding: 45px;
+    background-color: #E5EDF1;
 }
 
 #cuerpo-formulario-contacto h2 {
