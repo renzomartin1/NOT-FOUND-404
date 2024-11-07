@@ -216,6 +216,145 @@ header {
 
 
 
+/* DIALOG: MODAL REGISTER */
+
+#contenedor-modal-register {
+    background-color: #fff;
+    border: 0px;
+    border-radius: 5px;
+    padding: 0px;
+}
+
+#contenedor-modal-register::backdrop {
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+#modal-register {
+    display: flex;
+    flex-direction: column;
+    /* background-color: green; */
+    max-width: 400px;
+    padding: 35px;
+}
+
+/* Título y boton de cierre (X) */
+
+#titulo-boton-cerrar-modal-register {
+    display: flex;
+    justify-content: space-between;
+}
+
+#titulo-boton-cerrar-modal-register h2 {
+    color: #ff7229;
+    margin-top: 0px;
+    margin-bottom: 35px;
+}
+
+#boton-cerrar-modal-register {
+    background-color: #fff;
+    width: 32px;
+    height: 32px;
+    border: 0px;
+}
+
+#boton-cerrar-modal-register:hover {
+    background-color: #f1ebeb;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#boton-cerrar-modal-register div {
+    height: 16px;
+}
+
+/* Formulario de registro */
+
+#modal-register form {
+    display: flex;
+    flex-direction: column;
+    /* background-color: aqua; */
+}
+
+#modal-register form label {
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#modal-register form input {
+    width: 385px;
+    border: 0px;
+    border-radius: 5px;
+    outline: 1px solid #beb8b8;
+    padding: 8px;
+    margin-bottom: 20px;
+}
+
+#modal-register form input:hover {
+    outline: 2px solid #beb8b8;
+}
+
+#modal-register form input:focus {
+    outline: 3px solid #ff7229;
+}
+
+#boton-register {
+    color:#fff;
+    background-color: #ff7229;
+    align-self: center;
+    font-size: 13px;
+    font-weight: bold;
+    width: 75%;
+    border: 0px;
+    border-radius: 45px;
+    padding: 15px;
+    margin: 10px 0px;
+}
+
+#boton-register:hover {
+    background-color: #fd8332;
+    cursor: pointer;
+}
+
+/* Texto: Términos y Avisos */
+
+#terminos-avisos {
+    color: #646161;
+    text-align: center;
+    font-size: 12px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+#terminos-avisos p {
+    margin: 0px;
+}
+
+/* Texto: ¿Ya tienes una cuenta? Inicia sesión */
+
+#con-cuenta-modal-register {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+#con-cuenta-modal-register p {
+    margin: 0px;
+}
+
+#con-cuenta-modal-register a {
+    color: #ff7229;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#con-cuenta-modal-register a:hover {
+    color: #fd8332;
+}
+
+
+
+
 /* FOOTER: LÍNEA Y TEXTO DEL FOOTER */
 
 footer {

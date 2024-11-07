@@ -15,3 +15,18 @@ botonAbrirModalLogin.addEventListener("click", () => {
 botonCerrarModalLogin.addEventListener("click", () => {
     modalLogin.close()
 })
+
+
+
+
+const botonAbrirModalRegister = document.getElementById("boton-abrir-modal-register")
+const botonCerrarModalRegister = document.getElementById("boton-cerrar-modal-register")
+const modalRegister = document.getElementById("contenedor-modal-register")
+
+botonAbrirModalRegister.addEventListener("click", () => {
+    modalRegister.showModal()
+})
+
+botonCerrarModalRegister.addEventListener("click", () => {
+    modalRegister.close()
+})

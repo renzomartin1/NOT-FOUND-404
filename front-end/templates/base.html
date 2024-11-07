@@ -29,6 +29,8 @@
         </nav>
     </header>
 
+    <!-- Modal Login -->
+
     <button id="boton-abrir-modal-login">Abrir modal login</button>
     <dialog id="contenedor-modal-login">
         <div id="modal-login">
@@ -52,6 +54,47 @@
             <div id="sin-cuenta-modal-login">
                 <p>
                     ¿No tienes una cuenta? <a href="{{ url_for('register') }}">Registrarse</a>
+                </p>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Modal Register -->
+
+    <button id="boton-abrir-modal-register">Abrir modal register</button>
+    <dialog id="contenedor-modal-register">
+        <div id="modal-register">
+            <div id="titulo-boton-cerrar-modal-register">
+                <h2>Registrarse</h2>
+                <button id="boton-cerrar-modal-register">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z">
+                        </svg>
+                    </div>
+                </button>
+            </div>
+            <form>
+                <label>Nombre</label>
+                <input type="text">
+                <label>Correo electrónico</label>
+                <input type="email">
+                <label>Número telefónico</label>
+                <input type="number">
+                <label>Contraseña</label>
+                <input type="password">
+                <label>Repetir contraseña</label>
+                <input type="password">
+                <button id="boton-register" type="submit">Registrarse</button>
+            </form>
+            <div id="terminos-avisos">
+                <p>
+                    Al hacer clic en Registrarse, aceptas nuestros Términos de servicio y Avisos de privacidad.
+                </p>
+            </div>
+            <div id="con-cuenta-modal-register">
+                <p>
+                    ¿Ya tienes una cuenta? <a href="{{ url_for('login') }}">Inicia sesión</a>
                 </p>
             </div>
         </div>
