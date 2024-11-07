@@ -26,12 +26,12 @@
         </div>
         <nav>
             <ul id="barra-navegacion">
-                <li class="barra-navegacion-opciones"><a href="https://www.fi.uba.ar">Página2</a></li>
+                <li class="barra-navegacion-opciones"><a href="{{ url_for('home') }}">Inicio</a></li>
                 <li class="barra-navegacion-opciones"><a href="https://www.fi.uba.ar">Página3</a></li>
-                <li class="barra-navegacion-opciones"><a href="https://www.fi.uba.ar">Página4</a></li>
-                <li class="barra-navegacion-opciones"><a href="https://www.fi.uba.ar">Página5</a></li>
-                <li class="barra-navegacion-opciones"><a href="https://www.fi.uba.ar">Página6</a></li>
-                <li class="barra-navegacion-opciones"><a href="https://www.fi.uba.ar">Página7</a></li>
+                <li class="barra-navegacion-opciones"><a href="{{ url_for('hab') }}">Habitaciones</a></li>
+                <li class="barra-navegacion-opciones"><a href="{{ url_for('comprar') }}">Confirmar compra</a></li>
+                <li class="barra-navegacion-opciones"><a href="{{ url_for('sobre_nosotros') }}">Sobre nosotros</a></li>
+                <li class="barra-navegacion-opciones"><a href="{{ url_for('contacto') }}">Contacto</a></li>
             </ul>
         </nav>
     </header>

@@ -50,6 +50,7 @@ def home():
     ]
     return render_template("home.html", hoteles=hoteles)
 
+
 @app.route("/habitacion")
 def hab():
     datosEjemplo = {"1":{"nombre":"habitacion 1","capacidad":"2","precio":"1000"},
@@ -69,6 +70,21 @@ def hab():
 @app.route("/confirmacion-compra")
 def comprar():
     return render_template("confirmacion_compra.html")
+
+
+@app.route("/contacto")
+def contacto():
+    return render_template("contacto.html")
+
+
+@app.route("/sobre-nosotros")
+def sobre_nosotros():
+    return render_template("sobre_nosotros.html")
+
+
+@app.errorhandler(404)
+def not_found_404(e):
+    return render_template("404.html"), 404
 
 if __name__ == "__main__":
     app.run(debug = True, port = 8080)
