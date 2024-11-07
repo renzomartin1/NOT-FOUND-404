@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/hotel.css') }}">
+{% endblock %}
+{% block body %}
+
+<div id="hotel"> <!-- Datos habitaciones del hotel seleccionado -->
+    {% for num, dato in datos.items() %}
+        <div id="grilla">
+            <div class="texto-habitacion">
+                <img src="{{url_for('static', filename='images/perro.jpg')}}" class="imagen-habitacion" alt="habitaciones">
+                <h2 >{{dato["nombre"]}}</h2>
+                <p >Capacidad: {{dato["capacidad"]}}</p>
+                <p >Precio(por noche): {{dato["precio"]}}</p>
+                <a href=""><button class="boton-habitacion">Ver</button></a>
+            </div>
+           
+        </div>
+    {% endfor %}  
+</div>
+
+{% endblock %}
