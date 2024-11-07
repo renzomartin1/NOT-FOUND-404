@@ -1,9 +1,9 @@
 /* paleta de prueba */
 :root{
-    --color1:#506D2F;
+    --color1:#E5EDF1 ;
     --color2: #2A2922;
-    --color3: #F3EBDD;
-    --color4: #7D5642;
+    --color3: #FFFFFF;
+    --color4: #96C2DB;
 }
 
 .info{
@@ -157,8 +157,8 @@ body {
     text-transform: uppercase;
     letter-spacing: 2.5px;
     font-weight: 500;
-    color: var(--color3);
-    background-color: var(--color1);
+    color: var(--color2);
+    background-color: var(--color4);
     border: none;
     border-radius: 45px;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
@@ -169,7 +169,7 @@ body {
 }
 
 .viewmore-button:hover {
-    background-color: #29bbce;
+    background-color: #19465f;
     box-shadow: 0px 15px 20px rgb(8, 102, 139);
     color: #fff;
     transform: translateY(-7px);
