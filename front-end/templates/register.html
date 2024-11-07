@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+{% endblock %}
+
+{% block body %}
+<div id="registro-fondo">
+    <div id="registro-apartado-form">
+        <h2>Registrarse</h2>
+        <form>
+            <label>Nombre</label>
+            <input type="text">
+            <label>Legajo</label>
+            <input type="number">
+            <label>E-mail</label>
+            <input type="email">
+            <label>Número</label>
+            <input type="number">
+            <label>Contraseña</label>
+            <input type="password">
+            <label>Repetir contraseña</label>
+            <input type="password">
+            <button id="registro-boton" type="submit">Registrarse</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

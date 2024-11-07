@@ -1,0 +1,54 @@
+#registro-fondo {
+    display: flex;
+    background-color: #fff;
+    justify-content: center;
+    align-items: center;
+    padding: 100px;
+}
+
+#registro-apartado-form {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    border: 1px solid #dad0d0;
+    border-radius: 20px;
+    padding: 35px;
+}
+
+#registro-apartado-form h2 {
+    color: #ff7229;
+    align-self: center;
+}
+
+#registro-apartado-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+#registro-apartado-form form label {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#registro-apartado-form form input {
+    border: 0px;
+    border-radius: 10px;
+    outline: 1px solid #dad0d0;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#registro-apartado-form form input:focus {
+    outline: 3px solid #ff7229;
+}
+
+#registro-boton {
+    color:#fff;
+    background-color: #ff7229;
+    align-self: center;
+    width: 50%;
+    border: 0px;
+    border-radius: 45px;
+    padding: 15px;
+}
