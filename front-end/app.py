@@ -2,7 +2,6 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-
 @app.route("/")
 def home():
     #ejemplo de hoteles
@@ -50,6 +49,34 @@ def home():
     ]
     return render_template("home.html", hoteles=hoteles)
 
+@app.route("/hotel")
+def hotel(hotel_id):
+    # url = "https://api.nombreapi.dev/hotel"
+    # params = { 'id': hotel_id }
+
+    # response = requests.get(url, params    url = "https://api.nombreapi.dev/hotel")
+    # params = { 'id': hotel_id }
+
+    # response = requests.get(url, params=params)
+
+    # if response.status_code != 200:
+    #     return 400
+    
+    # json_response = response.json()
+    # hoteles = json_response.get()
+
+    # # hasta aca agarra toda la data de las habitaciones de los hoteles
+
+    datosEjemplo = {"1":{"nombre":"habitacion 1","capacidad":"2","precio":"1000"},
+            "2":{"nombre":"habitacion 2","capacidad":"5","precio":"9000"},
+            "3":{"nombre":"habitacion 3","capacidad":"3","precio":"3000"},
+            "4":{"nombre":"habitacion 4","capacidad":"2","precio":"4000"},
+            "5":{"nombre":"habitacion 1","capacidad":"2","precio":"800"},
+            "6":{"nombre":"habitacion 2","capacidad":"5","precio":"700"},
+            "7":{"nombre":"habitacion 3","capacidad":"3","precio":"500"},
+            "8":{"nombre":"habitacion 4","capacidad":"2","precio":"7000"}}
+    
+    return render_template("hotel.html", datos = datosEjemplo)
 
 @app.route("/habitacion")
 def hab():
@@ -66,25 +93,21 @@ def hab():
     nomHotelEjemplo = "Hotel Miami Resort"
     return render_template("habitacion.html", nomHabitacion = nomHabitacionEjemplo, datos = datosEjemplo, precio=precioEjemplo, nomHotel=nomHotelEjemplo)
 
-
 @app.route("/confirmacion-compra")
 def comprar():
     return render_template("confirmacion_compra.html")
 
+@app.errorhandler(404)      #manejo de errores
+def error_404(e):
+    return render_template('404.html'), 404
 
 @app.route("/contacto")
 def contacto():
     return render_template("contacto.html")
 
-
 @app.route("/sobre-nosotros")
 def sobre_nosotros():
     return render_template("sobre_nosotros.html")
-
-
-@app.errorhandler(404)
-def not_found_404(e):
-    return render_template("404.html"), 404
 
 if __name__ == "__main__":
     app.run(debug = True, port = 8080)
