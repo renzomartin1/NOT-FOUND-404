@@ -1,0 +1,214 @@
+/* estilo tarjeta de habitacion */
+
+.contenedor1{
+    background-color: #eee;
+    box-shadow: 1px 1px 6px #000;
+    width: 80vw;
+    height: 70vh;
+    margin: 15px 10vw;
+    padding-top: 5px;
+}
+
+.titulo{
+    font-size: 20px;
+    text-align: center;
+    background-color: transparent;
+    width: 40%;
+    margin: 0 30%;
+    color: #522305;
+}
+
+/* estilo de carrusel imagenes */
+
+.caja1{
+    background-color: transparent;
+    width: 100%;
+    height: 45%;
+    margin-top: 50px ;
+    margin-bottom: 7%;
+    display: flex;
+}
+
+.caja2{
+    width: 30%;
+    height: 100%;
+    padding: 2%;
+    margin-right: 5%;
+    margin-top: 5%;
+}
+
+.contenedorALFA{
+    width: 60%;
+    margin: 0 5%;
+}
+
+.contenedorImg{
+    position: relative;
+    width: 48rem;
+    margin: 0 auto;
+
+}
+
+.deslizador{
+    display: flex;
+    aspect-ratio: 16 / 9;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    /* box-shadow: 0 1.5rem 3rem -0.75rem #222; */
+    border-radius: 0.5rem;
+}
+
+.deslizador::-webkit-scrollbar{
+    display: none;
+}
+
+.deslizador img{
+    flex: 1 0 100%;
+    scroll-snap-align: start;
+    object-fit: cover;
+
+}
+
+.deslizadorNav{
+    display: flex;
+    column-gap: 1rem;
+    position: absolute;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+
+}
+
+.deslizadorNav a{
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background-color: #fff;
+    opacity: 0.75;
+    transition: opacity ease 250ms;
+
+}
+
+.deslizadorNav a:hover{
+    opacity: 1;
+}
+
+/* estilo info de la habitacion */
+
+.info{
+    background-color: transparent;
+    text-align: center;
+    color: #522305;
+    font-size: 25px;
+    border-top: 1px #522305 solid;
+    text-align: left;
+    /* margin-top: 5%; */
+    margin-left: 15%;
+    margin-right: 25%;
+}
+
+/* estilo reserva */
+
+.reserva{
+    margin-top: 10%;
+    margin-left: 15%;
+    margin-right: 25%;
+    width: 50%;
+    height: 40%;
+    border-top: 1px #522305 solid;
+}
+
+.formRes{
+    margin: 5%;
+}
+
+.tituloRes{
+    margin-top: 5%;
+    margin-left: 5%;
+    box-sizing: border-box;
+    display: flex;
+}
+
+.fecha{
+    padding: 0.5px;
+    background-color: #96C2DB;
+    color: #522305;
+}
+
+.boton{
+    margin-left: 25%;
+    border-radius: 0.5rem;
+    background-color: #96C2DB;
+    color: #522305;
+    padding: 10px;
+    font-weight: 700;
+}
+
+/* estilo otras habitaciones */
+
+#hotel{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    
+}
+
+.titulo2{
+    font-size: 30px;
+    text-align: center;
+    background-color: transparent;
+    width: 40%;
+    margin: 0 30%;
+    color: #522305;
+    letter-spacing: 1px;
+}
+
+.contenedor2{
+    background-color: #eee;
+    box-shadow: 1px 1px 6px #000;
+    width: 80vw;
+    margin: 15px 10vw;
+    padding-top: 5px;
+
+}
+
+.otrasHab{
+    width: 90%;
+    height: 20%;
+    margin: 1% 5%;
+}
+
+#grilla{
+    background-color: #96C2DB;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    width: 65%;
+    height: 200px;
+    display: flex;
+}
+
+.grillaImg{
+    height: 90%;
+    max-width: 40%;
+    padding: 10px;
+    margin-right: 5%;
+}
+
+/* boton y texto otras habitaciones */
+
+.texto-habitacion{
+    color: #522305;
+}
+
+.boton-habitacion {
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    font-weight: bold;
+    color: #522305;
+    background-color: #eee;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
