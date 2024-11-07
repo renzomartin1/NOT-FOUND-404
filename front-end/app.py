@@ -50,10 +50,25 @@ def home():
     ]
     return render_template("home.html", hoteles=hoteles)
 
+@app.route("/habitacion")
+def hab():
+    datosEjemplo = {"1":{"nombre":"habitacion 1","capacidad":"2","precio":"1000"},
+            "2":{"nombre":"habitacion 2","capacidad":"5","precio":"9000"},
+            "3":{"nombre":"habitacion 3","capacidad":"3","precio":"3000"},
+            "4":{"nombre":"habitacion 4","capacidad":"2","precio":"4000"},
+            "5":{"nombre":"habitacion 1","capacidad":"2","precio":"800"},
+            "6":{"nombre":"habitacion 2","capacidad":"5","precio":"700"},
+            "7":{"nombre":"habitacion 3","capacidad":"3","precio":"500"},
+            "8":{"nombre":"habitacion 4","capacidad":"2","precio":"7000"}}
+    nomHabitacionEjemplo = "Habitacion de Lujo"
+    precioEjemplo = "10000 usd"
+    nomHotelEjemplo = "Hotel Miami Resort"
+    return render_template("habitacion.html", nomHabitacion = nomHabitacionEjemplo, datos = datosEjemplo, precio=precioEjemplo, nomHotel=nomHotelEjemplo)
+
+
 @app.route("/confirmacion-compra")
 def comprar():
     return render_template("confirmacion_compra.html")
-
 
 if __name__ == "__main__":
     app.run(debug = True, port = 8080)
