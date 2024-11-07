@@ -68,19 +68,20 @@
 }
 
 #hotel{
+    display: grid;
+    background-color: #96C2DB;
+    grid-template-columns: repeat(3, 1fr); /* Esto crea 4 columnas de igual tamaño */
+    padding: 20px;
+}
+#grilla{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 600px;
-}
-#grilla{
-    display: grid;
-    grid-column: repeat(3, 1fr);
-    padding: 20px;
+    height: 500px;
 }
 .texto-habitacion{
     font-family: 'Courier New', Courier, monospace;
-    background-color: #ff7922;
+    background-color: white;
     padding: 20px;
     border-radius: 15px;
     box-shadow: 7px 7px 3.5px 3.5px grey;
@@ -90,7 +91,12 @@
     height: 200px;
 }
 .boton-habitacion{
-    border-color: red;
+    border-color: black;
+    background-color: #522305;
+    border-radius: 10px;
+    width: 50px;
+    height: 30px;
+}
     background-color: midnightblue;
     border-radius: 10px;
     width: 50px;
