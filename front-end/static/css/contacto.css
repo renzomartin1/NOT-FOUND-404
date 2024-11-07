@@ -1,0 +1,87 @@
+/* DIV: FORMULARIO DE CONTACTO */
+
+#contenedor-formulario-contacto {
+    display: flex;
+    justify-content: center;
+    padding: 115px;
+}
+
+#cuerpo-formulario-contacto {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    border: 1px solid #beb8b8;
+    border-radius: 15px;
+    padding: 45px;
+}
+
+#cuerpo-formulario-contacto h2 {
+    color: #ff7229;
+    font-size: 30px;
+    margin-top: 5px;
+    margin-bottom: 29px;
+}
+
+#cuerpo-formulario-contacto form {
+    display: flex;
+    column-gap: 45px;
+}
+
+#datos-personales-formulario-contacto {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    padding-bottom: 60px;
+}
+
+#mensaje-boton-formulario-contacto {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+#cuerpo-formulario-contacto form label {
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#cuerpo-formulario-contacto form input, #cuerpo-formulario-contacto form textarea {
+    border: 0px;
+    border-radius: 5px;
+    outline: 1px solid #beb8b8;
+    padding: 8px;
+    margin-bottom: 20px;
+}
+
+#cuerpo-formulario-contacto form textarea {
+    font-family: Arial, Helvetica, sans-serif;
+    resize: none;
+    height: 244px;
+}
+
+#cuerpo-formulario-contacto form input:hover, #cuerpo-formulario-contacto form textarea:hover {
+    outline: 2px solid #beb8b8;
+}
+
+#cuerpo-formulario-contacto form input:focus, #cuerpo-formulario-contacto form textarea:focus {
+    outline: 3px solid #ff7229;
+}
+
+#boton-formulario-contacto {
+    color:#fff;
+    background-color: #ff7229;
+    align-self: flex-end;
+    font-size: 13px;
+    font-weight: bold;
+    width: 50%;
+    border: 0px;
+    border-radius: 45px;
+    padding: 15px;
+    margin-top: 10px;
+}
+
+#boton-formulario-contacto:hover {
+    background-color: #fd8332;
+    cursor: pointer;
+}
