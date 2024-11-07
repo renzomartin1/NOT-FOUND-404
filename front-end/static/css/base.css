@@ -1,8 +1,16 @@
+/* paleta de prueba */
+:root{
+    --color1:#E5EDF1 ;
+    --color2: #2A2922;
+    --color3: #FFFFFF;
+    --color4: #96C2DB;
+}
+
 body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0px;
+    font-size: 25px;
 }
-
 
 
 
@@ -11,9 +19,9 @@ body {
 header {
     display: flex;
     flex-direction: column;
-    background-color: #ff7922;
+    background-color: #19465f;
     align-items: center;
-    height: 125px;
+    padding-bottom: 15px;
 }
 
 #logotipo-sesion {
@@ -38,53 +46,57 @@ header {
 
 #iniciar-sesion {
     color: #fff;
-    background-color: #522305;
+    background-color: var(--color4);
     border: 0px;
     border-radius: 5px;
     padding: 10px;
     margin-right: 3px;
+    font-size: 15px;
 }
 
 #iniciar-sesion:hover {
-    background-color: #612b08;
+    background-color: var(--color1);
     cursor: pointer;
+    font-size: 20px;
+    transition: 0.2s;
 }
 
 #registrarse {
     color: #ff7922;
-    background-color: #fff;
+    background-color: var(--color1);
     border: 0px;
     border-radius: 5px;
     padding: 10px;
+    font-size: 15px;
 }
 
 #registrarse:hover {
-    background-color: #ffeee4;
+    background-color: var(--color4);
     cursor: pointer;
+    font-size: 20px;
+    transition: 0.2s;
 }
 
 /* Barra de navegación */
 
+
+
 #barra-navegacion {
     display: flex;
+    column-gap: 45px;
+    list-style: none;
     padding: 0px;
-    margin: 0px;
-}
-
-.barra-navegacion-opciones {
-    display: block;
-    padding: 10px 15px;
 }
 
 .barra-navegacion-opciones a {
-    color: #522305;
-    text-decoration: none;
+    color: var(--color1);
     font-weight: bold;
+    text-decoration: none;
     padding: 15px 20px;
 }
 
 .barra-navegacion-opciones a:hover {
-    background-color: #e96612;
+    background-color: var(--color4);
     border-radius: 30px;
 }
 
