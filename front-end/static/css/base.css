@@ -1,16 +1,8 @@
-/* paleta de prueba */
-:root{
-    --color1:#E5EDF1 ;
-    --color2: #2A2922;
-    --color3: #FFFFFF;
-    --color4: #96C2DB;
-}
-
 body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0px;
-    font-size: 25px;
 }
+
 
 
 
@@ -19,9 +11,9 @@ body {
 header {
     display: flex;
     flex-direction: column;
-    background-color: #19465f;
+    background-color: #ff7922;
     align-items: center;
-    padding-bottom: 15px;
+    height: 125px;
 }
 
 #logotipo-sesion {
@@ -46,58 +38,179 @@ header {
 
 #iniciar-sesion {
     color: #fff;
-    background-color: var(--color4);
+    background-color: #522305;
     border: 0px;
     border-radius: 5px;
     padding: 10px;
     margin-right: 3px;
-    font-size: 15px;
 }
 
 #iniciar-sesion:hover {
-    background-color: var(--color1);
+    background-color: #612b08;
     cursor: pointer;
-    font-size: 20px;
-    transition: 0.2s;
 }
 
 #registrarse {
     color: #ff7922;
-    background-color: var(--color1);
+    background-color: #fff;
     border: 0px;
     border-radius: 5px;
     padding: 10px;
-    font-size: 15px;
 }
 
 #registrarse:hover {
-    background-color: var(--color4);
+    background-color: #ffeee4;
     cursor: pointer;
-    font-size: 20px;
-    transition: 0.2s;
 }
 
 /* Barra de navegación */
 
-
-
 #barra-navegacion {
     display: flex;
-    column-gap: 45px;
-    list-style: none;
     padding: 0px;
+    margin: 0px;
+}
+
+.barra-navegacion-opciones {
+    display: block;
+    padding: 10px 15px;
 }
 
 .barra-navegacion-opciones a {
-    color: var(--color1);
-    font-weight: bold;
+    color: #522305;
     text-decoration: none;
+    font-weight: bold;
     padding: 15px 20px;
 }
 
 .barra-navegacion-opciones a:hover {
-    background-color: var(--color4);
+    background-color: #e96612;
     border-radius: 30px;
+}
+
+
+
+
+/* DIALOG: MODAL LOGIN */
+
+#contenedor-modal-login {
+    background-color: #fff;
+    border: 0px;
+    border-radius: 5px;
+    padding: 0px;
+}
+
+#contenedor-modal-login::backdrop {
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+#modal-login {
+    display: flex;
+    flex-direction: column;
+    /* background-color: green; */
+    max-width: 400px;
+    padding: 35px;
+}
+
+/* Título y boton de cierre (X) */
+
+#titulo-boton-cerrar-modal-login {
+    display: flex;
+    justify-content: space-between;
+}
+
+#titulo-boton-cerrar-modal-login h2 {
+    color: #ff7229;
+    margin-top: 0px;
+    margin-bottom: 35px;
+}
+
+#boton-cerrar-modal-login {
+    background-color: #fff;
+    width: 32px;
+    height: 32px;
+    border: 0px;
+}
+
+#boton-cerrar-modal-login:hover {
+    background-color: #f1ebeb;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#boton-cerrar-modal-login div {
+    height: 16px;
+}
+
+/* Formulario de ingreso */
+
+#modal-login form {
+    display: flex;
+    flex-direction: column;
+    /* background-color: aqua; */
+}
+
+#modal-login form label {
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#modal-login form input {
+    width: 385px;
+    border: 0px;
+    border-radius: 5px;
+    outline: 1px solid #beb8b8;
+    padding: 8px;
+    margin-bottom: 20px;
+}
+
+#modal-login form input:hover {
+    outline: 2px solid #beb8b8;
+}
+
+#modal-login form input:focus {
+    outline: 3px solid #ff7229;
+}
+
+#boton-login {
+    color:#fff;
+    background-color: #ff7229;
+    align-self: center;
+    font-size: 13px;
+    font-weight: bold;
+    width: 75%;
+    border: 0px;
+    border-radius: 45px;
+    padding: 15px;
+    margin: 10px 0px;
+}
+
+#boton-login:hover {
+    background-color: #fd8332;
+    cursor: pointer;
+}
+
+/* Texto: ¿No tienes una cuenta? Registrarse */
+
+#sin-cuenta-modal-login {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#sin-cuenta-modal-login p {
+    margin: 0px;
+}
+
+#sin-cuenta-modal-login a {
+    color: #ff7229;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#sin-cuenta-modal-login a:hover {
+    color: #fd8332;
 }
 
 
