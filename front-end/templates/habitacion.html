@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='/styles/habitacion.css')}}">
+<script src="https://kit.fontawesome.com/61690ce991.js" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block body %}
+<div class="habitacion">
+    <div class="titulo">
+        <h3>Hotels.com</h3>
+        <h2>{{ nomHabitacion }}</h2>
+    </div>
+    
+    <div class="box">
+        
+        <div class="contenedor">
+            <div class="contenedorImg">
+                <div class="deslizador">
+                    <img id="img-0" src="{{url_for('static', filename='images/HabitacionDeLujo.jpg' )}}">
+                    <img id="img-1" src="{{url_for('static', filename='images/cocinaDeLujo.jpg' )}}">
+                    <img id="img-2" src="{{url_for('static', filename='images/banioLujoso.jpg' )}}">
+                    <img id="img-3" src="{{url_for('static', filename='images/livingLujo.jpg' )}}">
+                </div>
+                <div class="deslizadorNav">
+                    <a href="#img-0"></a>
+                    <a href="#img-1"></a>
+                    <a href="#img-2"></a>
+                    <a href="#img-3"></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="info">
+            info de la habitacion
+        </div>
+    </div>
+
+    <div class="otrasHab">
+        otras habitaciones
+    </div>
+</div>
+
+{% endblock %}
