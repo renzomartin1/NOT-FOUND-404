@@ -107,7 +107,6 @@ header {
 #modal-login {
     display: flex;
     flex-direction: column;
-    /* background-color: green; */
     max-width: 400px;
     padding: 35px;
 }
@@ -147,7 +146,6 @@ header {
 #modal-login form {
     display: flex;
     flex-direction: column;
-    /* background-color: aqua; */
 }
 
 #modal-login form label {
@@ -203,14 +201,14 @@ header {
     margin: 0px;
 }
 
-#sin-cuenta-modal-login a {
+#texto-register-modal-login {
     color: #ff7229;
-    text-decoration: none;
     font-weight: bold;
 }
 
-#sin-cuenta-modal-login a:hover {
+#texto-register-modal-login:hover {
     color: #fd8332;
+    cursor: pointer;
 }
 
 
@@ -232,7 +230,6 @@ header {
 #modal-register {
     display: flex;
     flex-direction: column;
-    /* background-color: green; */
     max-width: 400px;
     padding: 35px;
 }
@@ -272,7 +269,6 @@ header {
 #modal-register form {
     display: flex;
     flex-direction: column;
-    /* background-color: aqua; */
 }
 
 #modal-register form label {
@@ -342,14 +338,14 @@ header {
     margin: 0px;
 }
 
-#con-cuenta-modal-register a {
+#texto-login-modal-register {
     color: #ff7229;
-    text-decoration: none;
     font-weight: bold;
 }
 
-#con-cuenta-modal-register a:hover {
+#texto-login-modal-register:hover {
     color: #fd8332;
+    cursor: pointer;
 }
 
 

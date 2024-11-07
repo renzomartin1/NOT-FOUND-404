@@ -30,3 +30,19 @@ botonAbrirModalRegister.addEventListener("click", () => {
 botonCerrarModalRegister.addEventListener("click", () => {
     modalRegister.close()
 })
+
+
+
+
+const textoRegisterModalLogin = document.getElementById("texto-register-modal-login")
+const textoLoginModalRegister = document.getElementById("texto-login-modal-register")
+
+textoRegisterModalLogin.addEventListener("click", () => {
+    modalLogin.close()
+    modalRegister.showModal()
+})
+
+textoLoginModalRegister.addEventListener("click", () => {
+    modalRegister.close()
+    modalLogin.showModal()
+})
