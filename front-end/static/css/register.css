@@ -9,15 +9,17 @@
 #registro-apartado-form {
     display: flex;
     flex-direction: column;
-    width: 25%;
+    max-width: 400px;
     border: 1px solid #dad0d0;
-    border-radius: 20px;
+    border-radius: 10px;
     padding: 35px;
 }
 
 #registro-apartado-form h2 {
     color: #ff7229;
     align-self: center;
+    margin-top: 0px;
+    margin-bottom: 35px;
 }
 
 #registro-apartado-form form {
@@ -26,17 +28,22 @@
 }
 
 #registro-apartado-form form label {
-    font-size: 15px;
+    font-size: 13px;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
 #registro-apartado-form form input {
+    width: 385px;
     border: 0px;
-    border-radius: 10px;
+    border-radius: 5px;
     outline: 1px solid #dad0d0;
-    padding: 10px;
+    padding: 8px;
     margin-bottom: 20px;
+}
+
+#registro-apartado-form form input:hover {
+    outline: 2px solid #dad0d0;
 }
 
 #registro-apartado-form form input:focus {
@@ -47,8 +54,45 @@
     color:#fff;
     background-color: #ff7229;
     align-self: center;
-    width: 50%;
+    font-size: 13px;
+    font-weight: bold;
+    width: 75%;
     border: 0px;
     border-radius: 45px;
     padding: 15px;
+    margin: 10px 0px;
+}
+
+#registro-boton:hover {
+    background-color: #fd8332;
+    cursor: pointer;
+}
+
+#terminos-avisos {
+    color: #646161;
+    text-align: center;
+    font-size: 12px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+#terminos-avisos p {
+    margin: 0px;
+}
+
+#register-con-cuenta {
+    display: flex;
+    justify-content: center;
+    margin-top: 28px;
+}
+
+#register-con-cuenta p {
+    margin: 0px;
+}
+
+#register-con-cuenta p a {
+    color: #ff7229;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0px;
 }

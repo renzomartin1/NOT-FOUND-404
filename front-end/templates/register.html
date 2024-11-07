@@ -11,11 +11,9 @@
         <form>
             <label>Nombre</label>
             <input type="text">
-            <label>Legajo</label>
-            <input type="number">
-            <label>E-mail</label>
+            <label>Correo electrónico</label>
             <input type="email">
-            <label>Número</label>
+            <label>Número telefónico</label>
             <input type="number">
             <label>Contraseña</label>
             <input type="password">
@@ -23,6 +21,16 @@
             <input type="password">
             <button id="registro-boton" type="submit">Registrarse</button>
         </form>
+        <div id="terminos-avisos">
+            <p>
+                Al hacer clic en Registrarse, aceptas nuestros Términos de servicio y Avisos de privacidad.
+            </p>
+        </div>
+        <div id="register-con-cuenta">
+            <p>
+                ¿Ya tienes una cuenta? <a href="{{ url_for('login') }}">Inicia sesión</a>
+            </p>
+        </div>
     </div>
 </div>
 {% endblock %}
