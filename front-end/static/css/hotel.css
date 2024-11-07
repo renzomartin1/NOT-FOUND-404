@@ -1,0 +1,29 @@
+#hotel{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 600px;
+}
+#grilla{
+    display: grid;
+    grid-column: repeat(3, 1fr);
+    padding: 20px;
+}
+.texto-habitacion{
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #ff7922;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 7px 7px 3.5px 3.5px grey;
+}
+.imagen-habitacion{
+    width: 200px;
+    height: 200px;
+}
+.boton-habitacion{
+    border-color: red;
+    background-color: midnightblue;
+    border-radius: 10px;
+    width: 50px;
+    height: 30px;
+}
