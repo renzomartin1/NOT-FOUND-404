@@ -11,12 +11,17 @@
     {% block head %}{% endblock %}
 </head>
 <body>
+
+    <!-- HEADER: LOGOTIPO, BOTONES DE INGRESO/REGISTRO Y BARRA DE NAVEGACIÓN -->
+
     <header>
-        <div id="logotipo-sesion">
-            <a href="{{ url_for('home') }}"><img id="logotipo" src="{{ url_for('static', filename='images/logotipo.png') }}"></a>
-            <div id="sesion">
-                <button id="iniciar-sesion"><a href="{{ url_for('login') }}">Iniciar sesión</a></button>
-                <button id="registrarse"><a href="{{ url_for('register') }}">Registrarse</a></button>
+        <div id="contenedor-logotipo-botones-sesion-modales">
+            <div id="logotipo">
+                <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/logotipo.png') }}"></a>
+            </div>
+            <div id="botones-sesion-modales">
+                <button id="boton-abrir-modal-login">Iniciar sesión</button>
+                <button id="boton-abrir-modal-register">Registrarse</button>
             </div>
         </div>
         <nav>
@@ -31,9 +36,8 @@
         </nav>
     </header>
 
-    <!-- Modal Login -->
+    <!-- DIALOG: MODAL LOGIN -->
 
-    <button id="boton-abrir-modal-login">Abrir modal login</button>
     <dialog id="contenedor-modal-login">
         <div id="modal-login">
             <div id="titulo-boton-cerrar-modal-login">
@@ -41,16 +45,16 @@
                 <button id="boton-cerrar-modal-login">
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z">
                         </svg>
                     </div>
                 </button>
             </div>
             <form>
-                <label>Correo electrónico</label>
-                <input type="email">
-                <label>Contraseña</label>
-                <input type="password">
+                <label for="flemail">Correo electrónico</label>
+                <input id="flemail" type="email" name="flemail" required>
+                <label for="flpassword">Contraseña</label>
+                <input id="flpassword" type="password" name="flpassword" required>
                 <button id="boton-login" type="submit">Iniciar sesión</button>
             </form>
             <div id="sin-cuenta-modal-login">
@@ -61,9 +65,8 @@
         </div>
     </dialog>
 
-    <!-- Modal Register -->
+    <!-- DIALOG: MODAL REGISTER -->
 
-    <button id="boton-abrir-modal-register">Abrir modal register</button>
     <dialog id="contenedor-modal-register">
         <div id="modal-register">
             <div id="titulo-boton-cerrar-modal-register">
@@ -77,16 +80,16 @@
                 </button>
             </div>
             <form>
-                <label>Nombre</label>
-                <input type="text">
-                <label>Correo electrónico</label>
-                <input type="email">
-                <label>Número telefónico</label>
-                <input type="number">
-                <label>Contraseña</label>
-                <input type="password">
-                <label>Repetir contraseña</label>
-                <input type="password">
+                <label for="frname">Nombre</label>
+                <input id="frname" type="text" name="frname" required>
+                <label for="fremail">Correo electrónico</label>
+                <input id="fremail" type="email" name="fremail" required>
+                <label for="frnumber">Número telefónico</label>
+                <input id="frnumber" type="number" name="frnumber" required>
+                <label for="frpassword">Contraseña</label>
+                <input id="frpassword" type="password" name="frpassword" required>
+                <label for="frpasswordrepeat">Repetir contraseña</label>
+                <input id="frpasswordrepeat" type="password" name="frpasswordrepeat" required>
                 <button id="boton-register" type="submit">Registrarse</button>
             </form>
             <div id="terminos-avisos">
@@ -103,6 +106,8 @@
     </dialog>
 
     {% block body %}{% endblock %}
+
+    <!-- FOOTER: LÍNEA Y TEXTO DEL FOOTER -->
 
     <footer>
         <div id="linea-footer">
