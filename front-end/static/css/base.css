@@ -1,3 +1,11 @@
+/* paleta de prueba */
+:root{
+    --color1:#E5EDF1 ;
+    --color2: #2A2922;
+    --color3: #FFFFFF;
+    --color4: #96C2DB;
+}
+
 body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0px;
@@ -11,7 +19,7 @@ body {
 header {
     display: flex;
     flex-direction: column;
-    background-color: #ff7922;
+    background-color: var(--color1);
     align-items: center;
     padding-bottom: 15px;
 }
@@ -37,28 +45,35 @@ header {
 
 #boton-abrir-modal-login {
     color: #fff;
-    background-color: #522305;
+    background-color: var(--color4);
     border: 0px;
     border-radius: 5px;
     padding: 10px;
+    transition: 0.2s;
 }
 
 #boton-abrir-modal-login:hover {
-    background-color: #612b08;
+    background-color: #19465f;
     cursor: pointer;
+    font-size: 20px;
+    transition: 0.2s;
 }
 
 #boton-abrir-modal-register {
-    color: #ff7922;
-    background-color: #fff;
+    color: var(--color2);
+    background-color: var(--color3);
     border: 0px;
     border-radius: 5px;
     padding: 10px;
+    transition: 0.2s;
 }
 
 #boton-abrir-modal-register:hover {
-    background-color: #ffeee4;
+    background-color: #19465f;
     cursor: pointer;
+    color: var(--color3);
+    font-size: 20px;
+    transition: 0.2s;
 }
 
 /* Barra de navegación */
@@ -71,15 +86,19 @@ header {
 }
 
 .barra-navegacion-opciones a {
-    color: #522305;
+    color: var(--color2);
     font-weight: bold;
     text-decoration: none;
     padding: 15px 20px;
+    transition:0.2s;
+    border-radius: 30px;
 }
 
 .barra-navegacion-opciones a:hover {
-    background-color: #e96612;
+    background-color: var(--color4);
     border-radius: 30px;
+    font-size: 25px;
+    transition: 0.2s;
 }
 
 
@@ -88,7 +107,7 @@ header {
 /* DIALOG: MODAL LOGIN */
 
 #contenedor-modal-login {
-    background-color: #fff;
+    background-color: var(--color1);
     border: 0px;
     border-radius: 5px;
     padding: 0px;
@@ -113,20 +132,20 @@ header {
 }
 
 #titulo-boton-cerrar-modal-login h2 {
-    color: #ff7229;
+    color: #19465f;
     margin-top: 0px;
     margin-bottom: 35px;
 }
 
 #boton-cerrar-modal-login {
-    background-color: #fff;
+    background-color: var(--color1);
     width: 32px;
     height: 32px;
     border: 0px;
 }
 
 #boton-cerrar-modal-login:hover {
-    background-color: #f1ebeb;
+    background-color: #c1c1c1;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -137,9 +156,12 @@ header {
 
 /* Formulario de ingreso */
 
+
 #modal-login form {
     display: flex;
     flex-direction: column;
+    background-color: var(--color1);
+    
 }
 
 #modal-login form label {
@@ -162,12 +184,12 @@ header {
 }
 
 #modal-login form input:focus {
-    outline: 3px solid #ff7229;
+    outline: 3px solid var(--color4);
 }
 
 #boton-login {
     color:#fff;
-    background-color: #ff7229;
+    background-color: var(--color4);
     align-self: center;
     font-size: 13px;
     font-weight: bold;
@@ -179,7 +201,7 @@ header {
 }
 
 #boton-login:hover {
-    background-color: #fd8332;
+    background-color: #19465f;
     cursor: pointer;
 }
 
@@ -196,12 +218,12 @@ header {
 }
 
 #texto-register-modal-login {
-    color: #ff7229;
+    color: var(--color4);
     font-weight: bold;
 }
 
 #texto-register-modal-login:hover {
-    color: #fd8332;
+    color: #19465f;
     cursor: pointer;
 }
 
@@ -211,7 +233,7 @@ header {
 /* DIALOG: MODAL REGISTER */
 
 #contenedor-modal-register {
-    background-color: #fff;
+    background-color: var(--color1);
     border: 0px;
     border-radius: 5px;
     padding: 0px;
@@ -236,20 +258,20 @@ header {
 }
 
 #titulo-boton-cerrar-modal-register h2 {
-    color: #ff7229;
+    color: #19465f;
     margin-top: 0px;
     margin-bottom: 35px;
 }
 
 #boton-cerrar-modal-register {
-    background-color: #fff;
+    background-color: var(--color1);
     width: 32px;
     height: 32px;
     border: 0px;
 }
 
 #boton-cerrar-modal-register:hover {
-    background-color: #f1ebeb;
+    background-color: #c1c1c1;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -285,12 +307,12 @@ header {
 }
 
 #modal-register form input:focus {
-    outline: 3px solid #ff7229;
+    outline: 3px solid var(--color4);
 }
 
 #boton-register {
     color:#fff;
-    background-color: #ff7229;
+    background-color: var(--color4);
     align-self: center;
     font-size: 13px;
     font-weight: bold;
@@ -302,7 +324,7 @@ header {
 }
 
 #boton-register:hover {
-    background-color: #fd8332;
+    background-color: #19465f;
     cursor: pointer;
 }
 
@@ -333,12 +355,12 @@ header {
 }
 
 #texto-login-modal-register {
-    color: #ff7229;
+    color: var(--color4);
     font-weight: bold;
 }
 
 #texto-login-modal-register:hover {
-    color: #fd8332;
+    color: #19465f;
     cursor: pointer;
 }
 
@@ -350,7 +372,7 @@ header {
 footer {
     display: flex;
     flex-direction: column;
-    background-color: #f3f1ef;
+    background-color: var(--color1);
     align-items: center;
 }
 
