@@ -50,7 +50,7 @@ def home():
     return render_template("home.html", hoteles=hoteles)
 
 @app.route("/hotel")
-def hotel(hotel_id):
+def hotel():
     # url = "https://api.nombreapi.dev/hotel"
     # params = { 'id': hotel_id }
 
