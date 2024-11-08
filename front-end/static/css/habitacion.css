@@ -1,3 +1,4 @@
+
 /* estilo tarjeta de habitacion */
 
 .contenedor1{
@@ -9,42 +10,152 @@
     padding-top: 5px;
 }
 
-.titulo{
-    font-size: 20px;
+.sub-contenedor11{
+    margin-left: 25%;
+    width: 100%;
+    display: flex;
+}
+/* estilo tarjeta de habitacion */
+
+/* estilo otras habitaciones */
+
+#hotel{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    
+}
+
+.titulo2{
+    font-size: 30px;
     text-align: center;
     background-color: transparent;
     width: 40%;
     margin: 0 30%;
     color: #522305;
+    letter-spacing: 1px;
+}
+
+.contenedor2{
+    background-color: #eee;
+    box-shadow: 1px 1px 6px #000;
+    width: 80vw;
+    margin: 15px 10vw;
+    padding-top: 5px;
+
+}
+
+.otrasHab{
+    width: 90%;
+    height: 20%;
+    margin: 1% 5%;
+}
+
+#grilla{
+    background-color: #96C2DB;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    width: 65%;
+    height: 200px;
+    display: flex;
+}
+
+.grillaImg{
+    height: 90%;
+    max-width: 40%;
+    padding: 10px;
+    margin-right: 5%;
+}
+
+/* boton y texto otras habitaciones */
+
+.texto-habitacion{
+    color: #522305;
+}
+
+.boton-habitacion {
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    font-weight: bold;
+    color: #522305;
+    background-color: #eee;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.titulo{
+    font-size: 20px;
+    text-align: center;
+    background-color: transparent;
+    width: 50%;
+    color: #522305;
+}
+
+/* Estilo calificacion */
+
+.cajaRating{
+    width: 15%;
+    height: 5%;
+    margin-top: 80px;
+}
+
+.rating:not(:checked) > input {
+    position: absolute;
+    appearance: none;
+}
+
+.rating:not(:checked) > label {
+    float: right;
+    cursor: pointer;
+    font-size: 30px;
+    color: #666;
+}
+
+.rating:not(:checked) > label:before {
+    content: '★';
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+    color: #e58e09;
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: #ff9e0b;
+}
+
+.rating > input:checked ~ label {
+    color: #ffa723;
 }
 
 /* estilo de carrusel imagenes */
 
-.caja1{
+.sub-contenedor12{
     background-color: transparent;
     width: 100%;
-    height: 45%;
-    margin-top: 50px ;
-    margin-bottom: 7%;
+    height: 80%;
     display: flex;
+    margin-top: 10px;
+}
+
+.caja1{
+    width: 50%;
+    margin: 0 5%;
 }
 
 .caja2{
-    width: 30%;
+    width: 50%;
     height: 100%;
-    padding: 2%;
-    margin-right: 5%;
-    margin-top: 5%;
-}
-
-.contenedorALFA{
-    width: 60%;
-    margin: 0 5%;
 }
 
 .contenedorImg{
     position: relative;
-    width: 48rem;
+    width: 100%;
     margin: 0 auto;
 
 }
@@ -112,11 +223,10 @@
 /* estilo reserva */
 
 .reserva{
-    margin-top: 10%;
+    margin-top: 0;
     margin-left: 15%;
-    margin-right: 25%;
-    width: 50%;
-    height: 40%;
+    width: 60%;
+    height: 20%;
     border-top: 1px #522305 solid;
 }
 
@@ -126,7 +236,6 @@
 
 .tituloRes{
     margin-top: 5%;
-    margin-left: 5%;
     box-sizing: border-box;
     display: flex;
 }
@@ -145,6 +254,7 @@
     padding: 10px;
     font-weight: 700;
 }
+
 
 /* estilo otras habitaciones */
 
@@ -169,7 +279,7 @@
     background-color: #eee;
     box-shadow: 1px 1px 6px #000;
     width: 80vw;
-    margin: 15px 10vw;
+    margin: 70px 10vw;
     padding-top: 5px;
 
 }
