@@ -1,3 +1,10 @@
+:root{
+    --color1:#E5EDF1 ;
+    --color2: #2A2922;
+    --color3: #FFFFFF;
+    --color4: #96C2DB;
+}
+
 /* DIV: FORMULARIO DE CONTACTO */
 
 #contenedor-formulario-contacto {
@@ -18,7 +25,7 @@
 }
 
 #cuerpo-formulario-contacto h2 {
-    color: #ff7229;
+    color: #19465f;
     font-size: 30px;
     margin-top: 5px;
     margin-bottom: 29px;
@@ -67,12 +74,12 @@
 }
 
 #cuerpo-formulario-contacto form input:focus, #cuerpo-formulario-contacto form textarea:focus {
-    outline: 3px solid #ff7229;
+    outline: 3px solid color;
 }
 
 #boton-formulario-contacto {
     color:#fff;
-    background-color: #ff7229;
+    background-color: var(--color4);
     align-self: flex-end;
     font-size: 13px;
     font-weight: bold;
@@ -84,6 +91,6 @@
 }
 
 #boton-formulario-contacto:hover {
-    background-color: #fd8332;
+    background-color: #19465f;
     cursor: pointer;
 }
