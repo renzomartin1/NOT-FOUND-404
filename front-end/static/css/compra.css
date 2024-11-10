@@ -4,15 +4,6 @@
     box-sizing: border-box;
 }
 
-/*body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    height: 100vh;
-    padding: 20px;
-}*/
 
 .container {
     width: 100%;
@@ -20,6 +11,9 @@
     padding: 20px;
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    left: 100px;
+    margin: 10px;
 }
 
 h1 {
@@ -39,11 +33,25 @@ h1 {
     width: 48%;
 }
 
-.card, .ticket-card {
+.ticket-container {
+    position: relative;
+    top: 100px;
+}
+
+.credit-card {
+    position: relative;
+    top: 20px; 
+    margin-bottom: 20px ;
+}
+
+
+
+.card, .ticket-card, .credit-card {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   
 }
 
 .card h2, .ticket-card h2 {
