@@ -1,3 +1,5 @@
+-- Orquestador de la base de datos
+
 -- Crear base de datos
 CREATE DATABASE IF NOT EXISTS hospedajes;
 USE hospedajes;
