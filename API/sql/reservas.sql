@@ -1,4 +1,4 @@
-USE IDS_API;
+USE hospedajes;
 CREATE TABLE IF NOT EXISTS reservas(
     id INT NOT NULL AUTO_INCREMENT,
     id_reserva INT NOT NULL,
