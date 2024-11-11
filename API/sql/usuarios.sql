@@ -1,19 +1,16 @@
--- (para evitar errores si se vuelve a ejecutar el script (eliminar luego))
+-- Parte de la copia de seguridad por si queremos restablecer la base de datos "hospedajes".
 DROP TABLE IF EXISTS usuarios;
 
--- Crear la tabla usuarios
+-- Creación de la tabla "usuarios".
 CREATE TABLE usuarios (
-    usuario_id INT NOT NULL AUTO_INCREMENT,
+	usuario_id INT NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(50) NOT NULL,
     apellido VARCHAR(50) NOT NULL,
-    mail VARCHAR(100) NOT NULL,
-    contraseña VARCHAR(100) NOT NULL,
-    telefono INT NOT NULL,
-    reserva_id INT NOT NULL,
-    PRIMARY KEY (usuario_id),
-    FOREIGN KEY (reserva_id) REFERENCES reservas(reserva_id)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
+    email VARCHAR(100) NOT NULL,
+    contraseña VARCHAR(75) NOT NULL,
+    numero INT NOT NULL,
+    PRIMARY KEY (usuario_id)
 );
 
-ALTER TABLE usuarios AUTO_INCREMENT = 30000;
+-- Modificación de la tabla "usuarios" para que la columna "usuario_id" comience desde 10000 en adelante.
+ALTER TABLE usuarios AUTO_INCREMENT = 10000;
