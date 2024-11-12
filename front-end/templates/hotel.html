@@ -36,13 +36,14 @@
 <div id="hotel"> <!-- Datos habitaciones del hotel seleccionado -->
     {% for num, dato in datos.items() %}
         <div id="grilla">
-            <div class="texto-habitacion">
-                <img src="{{url_for('static', filename='images/perro.jpg')}}" class="imagen-habitacion" alt="habitaciones">
-                <h2 >{{dato["nombre"]}}</h2>
-                <p >Capacidad: {{dato["capacidad"]}}</p>
-                <p >Precio(por noche): {{dato["precio"]}}</p>
-                <a href=""><button class="boton-habitacion">Ver</button></a>
-            </div>
+            <a href="" class="enlaces">
+                <div class="texto-habitacion">
+                    <img src="{{url_for('static', filename='images/perro.jpg')}}" class="imagen-habitacion" alt="habitaciones">
+                    <h2>{{dato["nombre"]}}</h2>
+                    <p>Capacidad: {{dato["capacidad"]}}</p>
+                    <p>Precio(por noche): {{dato["precio"]}}</p>
+                </div>
+            </a>
         </div>
     {% endfor %}  
 </div>
