@@ -91,6 +91,29 @@ body {
     box-shadow: -60px 20px 10px 10px #69a4cc;
 }
 
+input[type="date"] {
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    font-weight: bold;
+    color: var(--color2);
+    background-color: var(--color3);
+    border: none;
+    border-radius: 0.5rem;
+    outline: none;
+    width: 29%;
+    border-width:1px ;
+    border-style:solid ;
+    border-color:light-dark(rgb(118, 118, 118));
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+}
+
+input[type="date"]:focus {
+    border-color: var(--color3);
+}
+
 .filter-button {
     padding: 0.625rem 1rem;
     font-size: 0.875rem;
