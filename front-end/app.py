@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -47,7 +48,9 @@ def home():
             ]
         }
     ]
-    return render_template("home.html", hoteles=hoteles)
+    fecha_actual = datetime.now().strftime("%Y-%m-%d")
+
+    return render_template("home.html", hoteles=hoteles, fecha_actual=fecha_actual)
 
 @app.route("/hotel")
 def hotel():
