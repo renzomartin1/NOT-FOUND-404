@@ -74,36 +74,6 @@ def obtener_usuario_por_id(usuario_id):
     }
     return jsonify(response), 200
 
-@app.route('/api/hoteles', methods=['GET'])
-def filtrar_hoteles():
-    try:
-        ubicacion = request.args.get('ubicacion')
-        cantidad_personas = request.args.get('cantidad_personas')
-
-        if cantidad_personas:
-            cantidad_personas = int(cantidad_personas)
-        else:
-            cantidad_personas = None  
-
-        result = querys.filtrar_hoteles(ubicacion, cantidad_personas)
-    
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
-
-    response = []
-    for row in result:
-        response.append({
-            'hotel_id': row[0],
-            'imagen_principal': row[1], 
-            'barrio': row[2],
-            'nombre': row[3],
-            'descripcion': row[4],
-            'direccion': row[5]
-        })
-
-    return jsonify(response), 200
-
 
 if __name__ == "__main__":
     app.run("127.0.0.1", port = PORT, debug = True)
