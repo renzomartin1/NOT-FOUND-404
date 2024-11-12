@@ -24,20 +24,33 @@ def get_all_reservas():
     return jsonify(response), 200
 
 
-@app.route('/api/usuarios', methods = ['GET'])
-def obtener_todos_los_usuarios():
+@app.route('/api/hoteles', methods=['GET'])
+def filtrar_hoteles():
     try:
-        result = querys.obtener_todos_los_usuarios()
+        fecha_entrada = request.args.get('fecha_entrada')
+        fecha_salida = request.args.get('fecha_salida')
+        cantidad_personas = request.args.get('cantidad_personas')
+
+        if cantidad_personas:
+            cantidad_personas = int(cantidad_personas)
+        else:
+            cantidad_personas = None  
+
+        result = querys.filtrar_hoteles(fecha_entrada,fecha_salida, cantidad_personas)
+    
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    
+
+
     response = []
     for row in result:
         response.append({
-            'nombre': row[0],
-            'apellido': row[1],
-            'email': row[2],
-            'numero': row[3]
+            'hotel_id': row[0],
+            'imagen_principal': row[1], 
+            'barrio': row[2],
+            'nombre': row[3],
+            'descripcion': row[4],
+            'direccion': row[5]
         })
 
     return jsonify(response), 200
