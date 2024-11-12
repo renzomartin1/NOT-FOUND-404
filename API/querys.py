@@ -14,10 +14,15 @@ QUERY_TODAS_LAS_RESERVAS = "SELECT id, id_reserva, id_habitacion, fecha_entrada,
 QUERY_FILTRAR_HOTELES = """
 SELECT h.hotel_id, h.imagen_principal, h.barrio, h.nombre, h.descripcion, h.direccion FROM hoteles h
 INNER JOIN habitaciones hab ON h.hotel_id = hab.hotel_id
-WHERE (h.ubicacion = :ubicacion OR :ubicacion IS NULL) AND hab.reservado = 0
+LEFT JOIN reservas res ON res.id_habitacion = hab.habitacion_id                        --El LEFT JOIN es para agarrar las habtiaciones que tienen reservas(para chequear si las fechas se solapan) como los que no
+WHERE (                                                                                --con el INNER JOIN me traeria solo las habitaciones que esten la tabla habitaciones y reservas
+    res.habitacion_id IS NULL OR  
+   NOT (res.fecha_entrada < :fecha_salida AND res.fecha_salida > :fecha_entrada)
+)
 AND (:cantidad_personas IS NULL OR hab.cantidad_personas = :cantidad_personas)
 GROUP BY h.hotel_id;
 """
+
 
 
 # string de conexión a la base de datos: mysql://usuario:password@host:puerto/nombre_schema
@@ -39,5 +44,5 @@ def obtener_usuario_by_id(usuario_id):
 def all_reservas():
     return run_query(QUERY_TODAS_LAS_RESERVAS).fetchall()
 
-def filtrar_hoteles(ubicacion, cantidad_personas):
-    return run_query(QUERY_FILTRAR_HOTELES, {"ubicacion":ubicacion, "cantidad_personas":cantidad_personas}).fetchall()
+def filtrar_hoteles(fecha_entrada, fecha_salida, cantidad_personas):
+    return run_query(QUERY_FILTRAR_HOTELES, {"fecha_entrada":fecha_entrada, "fecha_salida":fecha_salida, "cantidad_personas":cantidad_personas}).fetchall()
