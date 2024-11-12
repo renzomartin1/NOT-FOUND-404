@@ -8,8 +8,7 @@ CREATE TABLE habitaciones (
     nombre VARCHAR(50) NOT NULL,
     descripcion VARCHAR(200) NOT NULL,
     precio INT NOT NULL,
-    reservado BOOLEAN NOT NULL,
-    capacidad int(11) NOT NULL
+    capacidad int(11) NOT NULL,
     PRIMARY KEY (habitacion_id),
     FOREIGN KEY (hotel_id) REFERENCES hoteles(hotel_id)
         ON DELETE CASCADE
