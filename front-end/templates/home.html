@@ -7,13 +7,8 @@
 <div class="info">
 <div class="filtros">
     <form class="filter-form">
-        <!-- Select Dropdowns -->
-        <select class="custom-select">
-            <option value="ubicaciones">Ubicaciones</option>
-            {% for ubicacion in ubicaciones %}
-                <option value="{{ ubicacion }}">{{ ubicacion }}</option>
-            {% endfor %}
-        </select>
+        <input type="date" name="fecha_entrada" placeholder="Fecha de Entrada" min="{{ fecha_actual }}" required> 
+        <input type="date" name="fecha_salida" placeholder="Fecha de Salida" min="{{ fecha_actual }}" required>
         <select class="custom-select">
             <option value="-">Cantidad de personas</option>
             <option value="1">1</option>
