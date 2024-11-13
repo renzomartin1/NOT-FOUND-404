@@ -6,6 +6,7 @@ from sqlalchemy.exc import SQLAlchemyError
 # Usuarios
 QUERY_OBTENER_TODOS_LOS_USUARIOS = "SELECT nombre, apellido, email, numero FROM usuarios"
 QUERY_OBTENER_USUARIO_POR_ID = "SELECT nombre, apellido, email, numero FROM usuarios WHERE usuario_id = :usuario_id"
+QUERY_ELIMINAR_USUARIO = "DELETE FROM usuarios WHERE usuario_id = :usuario_id"
 
 # Reservas
 QUERY_TODAS_LAS_RESERVAS = "SELECT id, id_reserva, id_habitacion, fecha_entrada, fecha_salida FROM reservas"
@@ -24,7 +25,6 @@ GROUP BY h.hotel_id;
 """
 
 
-
 # string de conexión a la base de datos: mysql://usuario:password@host:puerto/nombre_schema
 # engine = create_engine("mysql://root:root@localhost:3308/IDS_API")
 engine = create_engine("mysql+mysqlconnector://renzo:123@localhost:3306/hospedajes")
@@ -40,6 +40,9 @@ def obtener_todos_los_usuarios():
 
 def obtener_usuario_by_id(usuario_id):
     return run_query(QUERY_OBTENER_USUARIO_POR_ID, { 'usuario_id': usuario_id }).fetchone()
+
+def eliminar_usuario(usuario_id):
+    return run_query(QUERY_ELIMINAR_USUARIO, { 'usuario_id': usuario_id })
 
 def all_reservas():
     return run_query(QUERY_TODAS_LAS_RESERVAS).fetchall()

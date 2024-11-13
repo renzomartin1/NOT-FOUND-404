@@ -55,6 +55,22 @@ def filtrar_hoteles():
 
     return jsonify(response), 200
 
+@app.route('/api/usuarios', methods = ['GET'])
+def obtener_todos_los_usuarios():
+    try:
+        result = querys.obtener_todos_los_usuarios()
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+    response = []
+    for row in result:
+        response.append({
+            'nombre': row[0],
+            'apellido': row[1],
+            'email': row[2],
+            'numero': row[3]
+        })
+    return jsonify(response), 200
 
 @app.route('/api/usuarios/<int:usuario_id>', methods = ['GET'])
 def obtener_usuario_por_id(usuario_id):
@@ -74,6 +90,19 @@ def obtener_usuario_por_id(usuario_id):
     }
     return jsonify(response), 200
 
+@app.route('/api/usuarios/<int:usuario_id>', methods = ['DELETE'])
+def eliminar_usuario_por_id(usuario_id):
+    try:
+        usuario_response = obtener_usuario_por_id(usuario_id)
+        if len(usuario_response) == 0:
+            return jsonify({ 'error': 'No se ha encontrado un usuario con el ID dado' })
+        
+        querys.eliminar_usuario(usuario_id)
+
+    except Exception as e:
+        return jsonify({ 'error': str(e) }), 500
+    
+    return usuario_response
 
 if __name__ == "__main__":
     app.run("127.0.0.1", port = PORT, debug = True)
