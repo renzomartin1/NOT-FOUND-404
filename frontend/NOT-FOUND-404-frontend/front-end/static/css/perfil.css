@@ -1,0 +1,233 @@
+:root {
+  --texto-primario-oscuro-color: #2d2d2d;
+  --texto-primario-claro-color: #4b4b4b;
+  --texto-secundario-color: #a1a1a1;
+  --contacto-boton-texto-color: #848484;
+  --contacto-boton-bg-color: #ababab;
+  --separador-color: #e5e5e5;
+}
+
+/* MAIN: PERFIL DE USUARIO, HOSPEDAJE ACTIVO,  */
+.contenedor-perfil-usuario {
+  display: flex;
+  flex-direction: column;
+  width: min(900px, calc(90% - 2rem));
+  margin: 2rem auto;
+}
+
+.contenedor-perfil-usuario > * + * {
+  margin-top: 2rem;
+}
+
+/* Encabezado del perfil de usuario */
+
+.perfil-usuario__encabezado {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  column-gap: 3rem;
+	row-gap: 1rem;
+  height: fit-content;
+  background-color: unset;
+  border-radius: 10px;
+}
+
+.perfil-usuario__avatar {
+  display: inline-block;
+  width: min(180px, 40%);
+  background: #848484;
+  border-radius: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+.perfil-usuario__avatar-img {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.perfil-usuario__etiqueta {
+  display: inline-block;
+  min-width: 400px;
+}
+
+.perfil-usuario__nombre-completo {
+  font-size: 2rem;
+  line-height: 0;
+  font-weight: bold;
+  color: var(--texto-primario-oscuro-color);
+}
+
+.perfil-usuario__hospedaje-dato,
+.perfil-usuario__dato {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.perfil-usuario__hospedaje-dato {
+  font-size: 0.6rem;
+  line-height: 1.4;
+  color: var(--texto-secundario-color);
+}
+
+.perfil-usuario__hospedaje-activo {
+  display: block;
+  font-size: 0.8rem;
+  color: rgb(50, 94, 190);
+}
+
+.perfil-usuario__informacion {
+  display: inline-flex;
+  flex-direction: column;
+  margin-top: 0.8rem;
+  gap: 1rem;
+}
+
+.perfil-usuario__dato {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.2;
+  background: none;
+  color: var(--texto-primario-oscuro-color);
+}
+
+.perfil-usuario__dato span {
+  display: block;
+  margin-top: 0.2rem;
+}
+
+.perfil-usuario__contactos {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin-top: 0.4rem;
+  gap: 0.8rem;
+}
+
+.perfil-usuario__contacto {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 1rem;
+  background: #ffffff;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--contacto-boton-texto-color);
+  border: 2px solid var(--contacto-boton-bg-color);
+  border-radius: 4px;
+  transition: filter 0.2s ease-in-out;
+}
+
+.perfil-usuario__contacto:hover {
+  filter: brightness(97%);
+}
+
+.perfil-usuario__contacto img {
+  width: 20px;
+  margin-right: 0.5rem;
+}
+
+/* Separador */
+
+.perfil-usuario__separador {
+  width: 100%;
+  height: 0.2rem;
+  background: var(--separador-color);
+  margin-top: 2rem;
+  margin-inline: 0;
+  border-radius: 20px;
+}
+
+/* Historial de reservas */
+.perfil-usuario__historial {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+}
+
+.perfil-usuario__historial-titulo {
+  width: 100%;
+  font-size: clamp(1rem, 1.8rem, 2rem);
+  font-weight: bold;
+  line-height: 0;
+  color: var(--texto-primario-oscuro-color);
+}
+
+/* Tarjeta que contiene la información sobre una reserva del usuario */
+
+.perfil-usuario__historial-reserva-contenedor {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+  border: 2px solid var(--texto-secundario-color);
+  border-radius: 8px;
+}
+
+/* Barra vertical a la izquierda del contenido */
+
+.perfil-usuario__historial-reserva-barra {
+  position: absolute;
+  display: inline-block;
+  width: 0.3rem;
+  height: calc(100% - 4rem);
+  border-radius: 20px;
+}
+
+.barra-estado--confirmado {
+  background: #1ea177;
+}
+
+.barra-estado--cancelado {
+  background: #d53d49;
+}
+
+/* Texto de la tarjeta */
+
+.perfil-usuario__historial-reserva-contenido {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.perfil-usuario__historial-hotel,
+.perfil-usuario__historial-datos-contenedor {
+  margin: 0 2rem;
+}
+
+.perfil-usuario__historial-hotel {
+  font-size: 1.2rem;
+  color: var(--texto-primario-oscuro-color);
+}
+
+/* Datos de la reserva */
+
+.perfil-usuario__historial-datos-contenedor {
+  display: inline-flex;
+  flex-wrap: wrap;
+  column-gap: 2rem;
+  row-gap: 1rem;
+  justify-content: space-between;
+}
+
+.perfil-usuario__historial-dato {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.perfil-usuario__historial-dato-titulo {
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--texto-primario-oscuro-color);
+}
+
+.perfil-usuario__historial-datos-contenedor span:not(.perfil-usuario__historial-dato-titulo) {
+  line-height: 1.4;
+  color: var(--texto-primario-claro-color);
+}

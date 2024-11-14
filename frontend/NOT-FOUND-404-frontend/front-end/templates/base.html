@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>Hotels.com | Sitio oficial</title>
+    {% endblock %}
+    <link rel="icon" href="{{ url_for('static', filename='images/icono.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    {% block head %}{% endblock %}
+</head>
+<body>
+
+    <!-- HEADER: LOGOTIPO, BOTONES DE INGRESO/REGISTRO Y BARRA DE NAVEGACIÓN -->
+
+    <header>
+        <div id="contenedor-logotipo-botones-sesion-modales">
+            <div id="logotipo">
+                <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/logotipo.png') }}"></a>
+            </div>
+            <div id="botones-sesion-modales">
+                <button id="boton-abrir-modal-login">Iniciar sesión</button>
+                <button id="boton-abrir-modal-register">Registrarse</button>
+            </div>
+        </div>
+        <nav>
+            <ul id="barra-navegacion">
+                <li class="barra-navegacion-opciones"><a href=#>Inicio</a></li>
+                <li class="barra-navegacion-opciones"><a href="https://www.fi.uba.ar">Página3</a></li>
+                <li class="barra-navegacion-opciones"><a href=#>Habitaciones</a></li>
+                <li class="barra-navegacion-opciones"><a href=#>Confirmar compra</a></li>
+                <li class="barra-navegacion-opciones"><a href=#>Sobre nosotros</a></li>
+                <li class="barra-navegacion-opciones"><a href=#>Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- DIALOG: MODAL LOGIN -->
+
+    <dialog id="contenedor-modal-login">
+        <div id="modal-login">
+            <div id="titulo-boton-cerrar-modal-login">
+                <h2>Iniciar sesión</h2>
+                <button id="boton-cerrar-modal-login">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z">
+                        </svg>
+                    </div>
+                </button>
+            </div>
+            <form>
+                <label for="flemail">Correo electrónico</label>
+                <input id="flemail" type="email" name="flemail" required>
+                <label for="flpassword">Contraseña</label>
+                <input id="flpassword" type="password" name="flpassword" required>
+                <button id="boton-login" type="submit">Iniciar sesión</button>
+            </form>
+            <div id="sin-cuenta-modal-login">
+                <p>
+                    ¿No tienes una cuenta? <span id="texto-register-modal-login">Registrarse</span>
+                </p>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- DIALOG: MODAL REGISTER -->
+
+    <dialog id="contenedor-modal-register">
+        <div id="modal-register">
+            <div id="titulo-boton-cerrar-modal-register">
+                <h2>Registrarse</h2>
+                <button id="boton-cerrar-modal-register">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z">
+                        </svg>
+                    </div>
+                </button>
+            </div>
+            <form>
+                <label for="frname">Nombre</label>
+                <input id="frname" type="text" name="frname" required>
+                <label for="fremail">Correo electrónico</label>
+                <input id="fremail" type="email" name="fremail" required>
+                <label for="frnumber">Número telefónico</label>
+                <input id="frnumber" type="number" name="frnumber" required>
+                <label for="frpassword">Contraseña</label>
+                <input id="frpassword" type="password" name="frpassword" required>
+                <label for="frpasswordrepeat">Repetir contraseña</label>
+                <input id="frpasswordrepeat" type="password" name="frpasswordrepeat" required>
+                <button id="boton-register" type="submit">Registrarse</button>
+            </form>
+            <div id="terminos-avisos">
+                <p>
+                    Al hacer clic en Registrarse, aceptas nuestros Términos de servicio y Avisos de privacidad.
+                </p>
+            </div>
+            <div id="con-cuenta-modal-register">
+                <p>
+                    ¿Ya tienes una cuenta? <span id="texto-login-modal-register">Inicia sesión</span>
+                </p>
+            </div>
+        </div>
+    </dialog>
+
+    {% block body %}{% endblock %}
+
+    <!-- FOOTER: LÍNEA Y TEXTO DEL FOOTER -->
+
+    <footer>
+        <div id="linea-footer">
+            <hr>
+        </div>
+        <div id="texto-footer">
+            <p>
+                Trabajo Práctico de IDS.
+            </p>
+            <p>
+                Not Found 404 - Grupo 17, 2024.
+            </p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/base.js') }}"></script>
+</body>
+</html>

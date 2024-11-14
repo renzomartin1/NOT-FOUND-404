@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/hotel.css') }}">
+{% endblock %}
+{% block body %}
+
+<div class="hotelSelec">
+
+    <div class="contenedor1">
+
+        <h2 class="titulo">{{ hotel.nombre }}</h2>
+
+        <div class="subContenedor">
+            <div class="caja1">
+                <div class="contenedorImg">
+                    <img src="{{url_for('static', filename= 'images/ejemploHotel/hotelLasLeguas.jpg' )}}">
+                </div>
+            </div>
+            <div class="caja2">
+                <p class="descripcionHotel">{{ hotel.descripcion }}</p>
+        
+            </div>
+        </div>
+
+        <h2 class="titulo">HABITACIONES</h2>
+
+        
+            <div class="filtros">
+                <form class="filter-form" method="GET">
+                    <input type="date" name="fecha_entrada" placeholder="Fecha de Entrada" min="{{ fecha_actual }}" required> 
+                    <input type="date" name="fecha_salida" placeholder="Fecha de Salida" min="{{ fecha_actual }}" required>
+                    <select class="custom-select" name="cantidad_personas">
+                        <option value="-">Cantidad de personas</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <button type="submit" class="filter-button">Filtrar</button>    
+                </form>
+            </div>
+        
+
+        <div class="habitaciones">
+            {% for habitacion in habitaciones %}
+                <div id="grilla">
+                    <div class="texto-habitacion">
+                        <img src="{{url_for('static', filename='images/ejemploHabitacion/habitacion2.jpg')}}" class="imagen-habitacion" alt="habitaciones">
+                        <h2 >{{habitacion.nombre}}</h2>
+                        <p >Capacidad: {{habitacion.capacidad}}</p>
+                        <p >Precio(por noche): {{habitacion.precio}}</p>
+                        <a href="{{url_for('habitacion', habitacion_id=habitacion.habitacion_id)}}"><button class="boton-habitacion">Ver</button></a>
+                    </div>
+                </div>
+            {% endfor %}  
+        </div>
+
+    </div>
+
+    <div class="contenedor2"></div>
+</div>
+
+{% endblock %}

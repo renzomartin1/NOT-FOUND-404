@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  <title>Perfil</title>
+{% endblock title %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css') }}">
+{% endblock head %}
+
+{% block body %}
+  <main class="contenedor-perfil-usuario">
+    <header class="perfil-usuario__encabezado">
+      <div class="perfil-usuario__avatar">
+        <img class="perfil-usuario__avatar-img" src="{{ url_for('static', filename='images/avatar-sample.jpg') }}" alt="#">
+      </div>
+      <section class="perfil-usuario__etiqueta">
+        <h1 class="perfil-usuario__nombre-completo">Julian M. Aguilar</h1>
+        <h2 class="perfil-usuario__hospedaje-dato">Actualmente alojado en: <span class="perfil-usuario__hospedaje-activo">Alvear Palace Hotel</span></h2>
+        <!-- <h2 class="perfil-usuario__hospedaje-dato">No tiene ninguna reserva activa en este momento.</h2> -->
+        <div class="perfil-usuario__informacion">
+          <p class="perfil-usuario__dato">
+            <b>Documento</b> <span class="perfil-usuario__documento">38456789</span>
+          </p>
+          <p class="perfil-usuario__dato">
+            <b>Se unió en</b> <span class="perfil-usuario__creacion">28/02/2020</span>
+          </p>
+          <div class="perfil-usuario__contactos">
+            <button class="perfil-usuario__contacto">
+              <img src="{{ url_for('static', filename='images/email-icono.svg') }}" alt="">
+              <span class="perfil-usuario__email">julian.aguilar@example.com</span>
+            </button>
+            <button class="perfil-usuario__contacto">
+              <img src="{{ url_for('static', filename='images/telefono-icono.svg') }}" alt="">
+              <span class="perfil-usuario__telefono">1234567890</span>
+            </button>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <div class="perfil-usuario__separador"></div>
+
+    <section class="perfil-usuario__historial">
+      <h2 class="perfil-usuario__historial-titulo">Historial de reservas</h2>
+
+      <article class="perfil-usuario__historial-reserva-contenedor">
+        <div class="perfil-usuario__historial-reserva-barra barra-estado--confirmado"></div>
+        
+        <div class="perfil-usuario__historial-reserva-contenido">
+          <h3 class="perfil-usuario__historial-hotel">Alvear Palace Hotel</h3>
+          <section class="perfil-usuario__historial-datos-contenedor">
+            <div class="perfil-usuario__historial-dato">
+              <span class="perfil-usuario__historial-dato-titulo">Fecha de la reserva</span>
+              <span class="perfil-usuario__historial-fecha">28/02/2020</span>
+            </div>
+            <div class="perfil-usuario__historial-dato">
+              <span class="perfil-usuario__historial-dato-titulo">Habitación</span>
+              <span class="perfil-usuario__historial-habitacion">8D</span>
+            </div>
+            <div class="perfil-usuario__historial-dato">
+              <span class="perfil-usuario__historial-dato-titulo">Estado</span>
+              <span class="perfil-usuario__historial-estado">Confirmada</span>
+            </div>
+          </section>
+        </div>
+      </article>
+
+      <article class="perfil-usuario__historial-reserva-contenedor">
+        <div class="perfil-usuario__historial-reserva-barra barra-estado--cancelado"></div>
+        
+        <div class="perfil-usuario__historial-reserva-contenido">
+          <h3 class="perfil-usuario__historial-hotel">Gran Hotel Argentino</h3>
+          <section class="perfil-usuario__historial-datos-contenedor">
+            <div class="perfil-usuario__historial-dato">
+              <span class="perfil-usuario__historial-dato-titulo">Fecha de la reserva</span>
+              <span class="perfil-usuario__historial-fecha">27/01/2020</span>
+            </div>
+            <div class="perfil-usuario__historial-dato">
+              <span class="perfil-usuario__historial-dato-titulo">Habitación</span>
+              <span class="perfil-usuario__historial-habitacion">2B</span>
+            </div>
+            <div class="perfil-usuario__historial-dato">
+              <span class="perfil-usuario__historial-dato-titulo">Estado</span>
+              <span class="perfil-usuario__historial-estado">Cancelada</span>
+            </div>
+          </section>
+        </div>
+      </article>
+
+      <article class="perfil-usuario__historial-reserva-contenedor">
+        <div class="perfil-usuario__historial-reserva-barra barra-estado--confirmado"></div>
+        
+        <div class="perfil-usuario__historial-reserva-contenido">
+          <h3 class="perfil-usuario__historial-hotel">Hotel Madero</h3>
+          <section class="perfil-usuario__historial-datos-contenedor">
+            <div class="perfil-usuario__historial-dato">
+              <span class="perfil-usuario__historial-dato-titulo">Fecha de la reserva</span>
+              <span class="perfil-usuario__historial-fecha">08/04/2019</span>
+            </div>
+            <div class="perfil-usuario__historial-dato">
+              <span class="perfil-usuario__historial-dato-titulo">Habitación</span>
+              <span class="perfil-usuario__historial-habitacion">11C</span>
+            </div>
+            <div class="perfil-usuario__historial-dato">
+              <span class="perfil-usuario__historial-dato-titulo">Estado</span>
+              <span class="perfil-usuario__historial-estado">Confirmada</span>
+            </div>
+          </section>
+        </div>
+      </article>
+    </section>
+  </main>
+{% endblock %}

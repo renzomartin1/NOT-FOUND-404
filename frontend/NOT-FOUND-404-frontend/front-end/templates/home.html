@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/contacto.css') }}">
+{% endblock %}
+{% block body %}
+<div class="info">
+<div class="filtros">
+    <form class="filter-form" method="GET">
+        <input type="date" name="fecha_entrada" placeholder="Fecha de Entrada" min="{{ fecha_actual }}" required> 
+        <input type="date" name="fecha_salida" placeholder="Fecha de Salida" min="{{ fecha_actual }}" required>
+        <select class="custom-select" name="cantidad_personas">
+            <option value="-">Cantidad de personas</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <button type="submit" class="filter-button">Filtrar</button>    
+    </form>
+</div>
+<div class="hotels">
+    {% for hotel in hoteles %}
+        <div class="hotel">
+            <div class="hotel-image">
+                <img src='{{hotel.imagen_principal}}' class="hotel-img">
+            </div>
+            <div class="hotel-info">
+                <h2 class="hotel-name">{{ hotel.nombre }}</h2>
+                <p class="hotel-location">{{ hotel.barrio }}</p>
+                <p class="hotel-description">{{ hotel.descripcion }}</p>
+                <button class="viewmore-button" data-url="{{ url_for('hotel', hotel_id=hotel.hotel_id, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida, cantidad_personas=cantidad_personas) }}">Ver más</button>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+</div>
+<hr id="linea-separacion"></hr>
+
+<div id="contenedor-formulario-contacto">
+    <div id="cuerpo-formulario-contacto">
+        <h2>Contacto</h2>
+        <form>
+            <div id="datos-personales-formulario-contacto">
+                <label for="fcname">Nombre</label>
+                <input id="fcname" type="text" name="fcname" required>
+                <label for="fcemail">Correo electrónico</label>
+                <input id="fcemail" type="email" name="fcemail" required>
+                <label for="fcnumber">Número telefónico</label>
+                <input id="fcnumber" type="number" name="fcnumber" required>
+                <label for="fcmotive">Motivo</label>
+                <input id="fcmotive" type="text" name="fcmotive" required>
+            </div>
+            <div id="mensaje-boton-formulario-contacto">
+                <label for="fcmessage">Mensaje</label>
+                <textarea id="fcmessage" name="fcmessage" required></textarea>
+                <button id="boton-formulario-contacto" type="submit">ENVIAR</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/home.js') }}"></script>
+
+{% endblock %}
