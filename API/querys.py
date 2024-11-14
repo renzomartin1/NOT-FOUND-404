@@ -14,6 +14,9 @@ QUERY_RESERVA_BY_USUARIO_ID = "SELECT id, reserva_id FROM reservaciones WHERE us
 
 
 # Hoteles
+QUERY_OBTENER_TODOS_LOS_HOTELES = "SELECT nombre, barrio, direccion, descripcion, servicios, telefono, email, imagen_principal, puntuacion FROM hoteles"
+QUERY_OBTENER_HOTELES_POR_ID = "SELECT nombre, barrio, direccion, descripcion, servicios, telefono, email, imagen_principal, puntuacion FROM hotele_id = :hotel_id"
+
 QUERY_FILTRAR_HOTELES = """
 SELECT h.hotel_id, h.imagen_principal, h.barrio, h.nombre, h.descripcion, h.direccion FROM hoteles h
 INNER JOIN habitaciones hab ON h.hotel_id = hab.hotel_id
@@ -55,3 +58,9 @@ def reserva_by_usuario_id(usuario_id):
 
 def filtrar_hoteles(fecha_entrada, fecha_salida, cantidad_personas):
     return run_query(QUERY_FILTRAR_HOTELES, {"fecha_entrada":fecha_entrada, "fecha_salida":fecha_salida, "cantidad_personas":cantidad_personas}).fetchall()
+
+def filtrar_hoteles(fecha_entrada, fecha_salida, cantidad_personas):#ademasa obtiene todos los hoteles
+    return run_query(QUERY_FILTRAR_HOTELES, {"fecha_entrada":fecha_entrada, "fecha_salida":fecha_salida, "cantidad_personas":cantidad_personas}).fetchall()
+    
+def obtener_hotel_by_id(hotel_id):
+    return run_query(QUERY_OBTENER_HOTEL_POR_ID, { 'hotel_id': hotel_id }).fetchone()
