@@ -74,6 +74,29 @@ def filtrar_hoteles():
 
     return jsonify(response), 200
 
+@app.route('api/hoteles/<int:hotel_id>', methods= ['GET'])
+def obtener_hotel_by_id(hotel_id):
+    try:
+        result = querys.obtener_hotel_by_id(hotel_id)
+    except Exception as e:
+        return jsonify({ 'error': str(e) }), 404
+    
+    if result is None:
+        return jsonify({ 'error': 'No se ha encontrado un hotel con el ID dado' })
+    
+    response = {
+        'nombre' : result[0],
+        'barrio' : result[1],
+        'direccion' : result[2],
+        'descripcion' : result[3],
+        'servicios' : result[4],
+        'telefono' : result[5],
+        'email' : result[6],
+        'imagen_principal' : result[7],
+        'puntuacion' : result[8]
+    }
+    return jsonify(response), 200
+    
 @app.route('/api/usuarios', methods = ['GET'])
 def obtener_todos_los_usuarios():
     try:
