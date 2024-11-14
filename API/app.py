@@ -15,10 +15,12 @@ def get_all_reservas():
     for row in result:
         response.append({
             'id': row[0], 
-            'id_reserva': row[1],
-            'id_habitacion': row[2], 
-            'fecha_entrada': row[3], 
-            'fecha_salida': row[4]
+            'reserva_id':row[1],
+            'usuario_id': row[2],
+            'hotel_id': row[3], 
+            'habitacion_id':row[4],
+            'fecha_entrada': row[5], 
+            'fecha_salida': row[6]
         })
 
     return jsonify(response), 200

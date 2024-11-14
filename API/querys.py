@@ -9,7 +9,7 @@ QUERY_OBTENER_USUARIO_POR_ID = "SELECT nombre, apellido, email, numero FROM usua
 QUERY_ELIMINAR_USUARIO = "DELETE FROM usuarios WHERE usuario_id = :usuario_id"
 
 # Reservas
-QUERY_TODAS_LAS_RESERVAS = "SELECT id, id_reserva, id_habitacion, fecha_entrada, fecha_salida FROM reservas"
+QUERY_TODAS_LAS_RESERVAS = "SELECT id, reserva_id, usuario_id, hotel_id, habitacion_id, fecha_entrada, fecha_salida FROM reservaciones"
 
 # Hoteles
 QUERY_FILTRAR_HOTELES = """
@@ -27,7 +27,7 @@ GROUP BY h.hotel_id;
 
 # string de conexión a la base de datos: mysql://usuario:password@host:puerto/nombre_schema
 # engine = create_engine("mysql://root:root@localhost:3308/IDS_API")
-engine = create_engine("mysql+mysqlconnector://renzo:123@localhost:3306/hospedajes")
+engine = create_engine("mysql+mysqlconnector://root:algo2@localhost:3306/hospedajes")
 
 def run_query(query, parameters = None):
     with engine.connect() as conn:
@@ -43,9 +43,10 @@ def obtener_usuario_by_id(usuario_id):
 
 def eliminar_usuario(usuario_id):
     return run_query(QUERY_ELIMINAR_USUARIO, { 'usuario_id': usuario_id })
-
+#-----------------------Reservas-------------------------------------------------------------------
 def all_reservas():
     return run_query(QUERY_TODAS_LAS_RESERVAS).fetchall()
+#------------------------Fin Reservas-------------------------------------------------------------------
 
 def filtrar_hoteles(fecha_entrada, fecha_salida, cantidad_personas):
     return run_query(QUERY_FILTRAR_HOTELES, {"fecha_entrada":fecha_entrada, "fecha_salida":fecha_salida, "cantidad_personas":cantidad_personas}).fetchall()
