@@ -4,6 +4,8 @@ import querys
 app = Flask(__name__)
 PORT = 5000
 
+
+#-------------------------------- inicio reservaciones ------------------------------------------------
 @app.route('/api/reservas', methods = ['GET'])
 def get_all_reservas():
     try:
@@ -24,6 +26,21 @@ def get_all_reservas():
         })
 
     return jsonify(response), 200
+
+@app.route('/api/reservas/<int:usuario_id>', methods=['GET'])
+def reserva_by_usuario_id(usuario_id):
+    try:
+        result = querys.reserva_by_usuario_id(usuario_id)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+    if len(result) == 0:
+        return jsonify({'error': 'No se encontró la reserva'}), 404 # Not found
+
+    result = result[0]
+    return jsonify({'id': result[0], 'reserva_id': result[1]}), 200
+
+#------------------------------------------- fin reservaciones--------------------------------------------
 
 
 @app.route('/api/hoteles', methods=['GET'])

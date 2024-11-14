@@ -10,6 +10,8 @@ QUERY_ELIMINAR_USUARIO = "DELETE FROM usuarios WHERE usuario_id = :usuario_id"
 
 # Reservas
 QUERY_TODAS_LAS_RESERVAS = "SELECT id, reserva_id, usuario_id, hotel_id, habitacion_id, fecha_entrada, fecha_salida FROM reservaciones"
+QUERY_RESERVA_BY_USUARIO_ID = "SELECT id, reserva_id FROM reservaciones WHERE usuario_id = :usuario_id"
+
 
 # Hoteles
 QUERY_FILTRAR_HOTELES = """
@@ -46,6 +48,9 @@ def eliminar_usuario(usuario_id):
 #-----------------------Reservas-------------------------------------------------------------------
 def all_reservas():
     return run_query(QUERY_TODAS_LAS_RESERVAS).fetchall()
+
+def reserva_by_usuario_id(usuario_id):
+    return run_query(QUERY_RESERVA_BY_USUARIO_ID, {'usuario_id': usuario_id}).fetchall()
 #------------------------Fin Reservas-------------------------------------------------------------------
 
 def filtrar_hoteles(fecha_entrada, fecha_salida, cantidad_personas):

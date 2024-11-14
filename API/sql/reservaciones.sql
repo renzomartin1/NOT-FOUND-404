@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS reservaciones(
     habitacion_id VARCHAR(100),
     fecha_entrada DATE NOT NULL,
     fecha_salida DATE NOT NULL,
-    PRIMARY KEY (id, reserva_id)
+    PRIMARY KEY (id)
 );
 
 INSERT INTO reservaciones (reserva_id, usuario_id, hotel_id, habitacion_id, fecha_entrada, fecha_salida)
