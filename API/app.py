@@ -2,8 +2,10 @@ from flask import Flask, jsonify, request
 import querys
 
 app = Flask(__name__)
+PORT = 5000
 
-#------------------------------------------- inicio reservaciones ----------------------------------------------
+
+#-------------------------------- inicio reservaciones ------------------------------------------------
 @app.route('/api/reservas', methods = ['GET'])
 def get_all_reservas():
     try:
@@ -13,14 +15,13 @@ def get_all_reservas():
 
     response = []
     for row in result:
-        response.append({
-            'id': row[0], 
-            'reserva_id':row[1],
-            'usuario_id': row[2],
-            'hotel_id': row[3], 
-            'habitacion_id':row[4],
-            'fecha_entrada': row[5], 
-            'fecha_salida': row[6]
+        response.append({ 
+            'reserva_id':row[0],
+            'usuario_id': row[1],
+            'hotel_id': row[2], 
+            'habitacion_id':row[3],
+            'fecha_entrada': row[4], 
+            'fecha_salida': row[5]
         })
 
     return jsonify(response), 200
@@ -33,14 +34,14 @@ def reserva_by_usuario_id(usuario_id):
         return jsonify({'error': str(e)}), 500
 
     if len(result) == 0:
-        return jsonify({'error': 'No se encontró la reserva'}), 404
+        return jsonify({'error': 'No se encontró la reserva'}), 404 # Not found
 
     result = result[0]
-    return jsonify({'id': result[0], 'reserva_id': result[1]}), 200
+    return jsonify({'reserva_id': result[0]}), 200
 
-#------------------------------------------- fin reservaciones --------------------------------------------
+#------------------------------------------- fin reservaciones--------------------------------------------
 
-#------------------------------------------- inicio hoteles ----------------------------------------------
+
 @app.route('/api/hoteles', methods=['GET'])
 def filtrar_hoteles():
     
@@ -61,13 +62,12 @@ def filtrar_hoteles():
 
     response = []
     for row in result:
-        print(row)
         response.append({
             'hotel_id': row[0],
-            'nombre': row[2],
-            'barrio': row[1],
+            'nombre': row[1],
+            'barrio': row[2],
             'direccion': row[4],
-            'descripcion': row[3]
+            'descripcion': row[5]
         })
 
     return jsonify(response), 200
@@ -81,7 +81,7 @@ def obtener_hotel_by_id(hotel_id):
     try:
         result_hotel = querys.obtener_hotel_by_id(hotel_id)
         result_habitaciones = querys.filtrar_habitaciones(hotel_id, fecha_entrada, fecha_salida, cantidad_personas)
-
+        
     except Exception as e:
         return jsonify({'error': str(e)}), 404
     
@@ -99,6 +99,7 @@ def obtener_hotel_by_id(hotel_id):
         'servicios': result_hotel[5],
         'telefono': result_hotel[6],
         'email': result_hotel[7]
+        
     }
 
     response_habitaciones = []
@@ -114,9 +115,9 @@ def obtener_hotel_by_id(hotel_id):
 
     return jsonify({'hotel': response_hotel, 'habitaciones': response_habitaciones}), 200
 
-#------------------------------------------- fin hoteles --------------------------------------------
 
-#------------------------------------------- inicio habitaciones --------------------------------------------
+
+
 @app.route('/api/habitacion/<int:habitacion_id>', methods = ['GET'])
 def habitacion_by_id(habitacion_id):   
     try:
@@ -138,9 +139,6 @@ def habitacion_by_id(habitacion_id):
 
     return jsonify(response), 200
 
-#------------------------------------------- fin habitaciones --------------------------------------------
-
-#------------------------------------------- inicio usuarios --------------------------------------------
     
 @app.route('/api/usuarios', methods = ['GET'])
 def obtener_todos_los_usuarios():
@@ -183,6 +181,7 @@ def eliminar_usuario_por_id(usuario_id):
     if not usuario_data:
         return jsonify({'error': 'No se ha encontrado un usuario con el ID dado'}), 404
 
+    # Eliminar usuario
     querys.eliminar_usuario(usuario_id)
     response = {
         'nombre': usuario_data[0],
@@ -192,7 +191,8 @@ def eliminar_usuario_por_id(usuario_id):
     }
     return jsonify(response), 200
 
-#------------------------------------------- fin usuarios --------------------------------------------
+
+
 
 if __name__ == "__main__":
-    app.run("127.0.0.1", port = 5000, debug = True)
+    app.run("127.0.0.1", port = PORT, debug = True)
