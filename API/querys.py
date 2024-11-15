@@ -14,25 +14,45 @@ QUERY_RESERVA_BY_USUARIO_ID = "SELECT id, reserva_id FROM reservaciones WHERE us
 
 
 # Hoteles
-QUERY_OBTENER_TODOS_LOS_HOTELES = "SELECT nombre, barrio, direccion, descripcion, servicios, telefono, email, imagen_principal, puntuacion FROM hoteles"
-QUERY_OBTENER_HOTELES_POR_ID = "SELECT nombre, barrio, direccion, descripcion, servicios, telefono, email, imagen_principal, puntuacion FROM hotele_id = :hotel_id"
+QUERY_OBTENER_TODOS_LOS_HOTELES = "SELECT * FROM hoteles"
+QUERY_OBTENER_HOTELES_POR_ID = "SELECT * FROM hoteles WHERE hotel_id = :hotel_id"
 
 QUERY_FILTRAR_HOTELES = """
-SELECT h.hotel_id, h.imagen_principal, h.barrio, h.nombre, h.descripcion, h.direccion FROM hoteles h
+SELECT h.hotel_id, h.barrio, h.nombre, h.descripcion, h.direccion FROM hoteles h
 INNER JOIN habitaciones hab ON h.hotel_id = hab.hotel_id
-LEFT JOIN reservas res ON res.id_habitacion = hab.habitacion_id                        --El LEFT JOIN es para agarrar las habtiaciones que tienen reservas(para chequear si las fechas se solapan) como los que no
-WHERE (                                                                                --con el INNER JOIN me traeria solo las habitaciones que esten la tabla habitaciones y reservas
+LEFT JOIN reservaciones res ON res.habitacion_id = hab.habitacion_id                         
+WHERE (                                                                                
     res.habitacion_id IS NULL OR  
-   NOT (res.fecha_entrada < :fecha_salida AND res.fecha_salida > :fecha_entrada)
+    NOT (res.fecha_entrada < :fecha_salida AND res.fecha_salida > :fecha_entrada)
 )
-AND (:cantidad_personas IS NULL OR hab.cantidad_personas = :cantidad_personas)
-GROUP BY h.hotel_id;
+AND (:cantidad_personas IS NULL OR hab.capacidad = :cantidad_personas)
+GROUP BY h.hotel_id, h.barrio, h.nombre, h.descripcion, h.direccion;
 """
+
+#HABITACIONES
+QUERY_FILTRAR_HABITACIONES = """
+SELECT hab.habitacion_id, hab.hotel_id, hab.nombre, hab.descripcion, hab.precio, hab.capacidad 
+FROM habitaciones hab
+INNER JOIN hoteles ON :hotel_id = hab.hotel_id
+LEFT JOIN reservaciones res ON res.habitacion_id = hab.habitacion_id
+WHERE :hotel_id = :hotel_id 
+AND (:habitacion_id IS NULL OR hab.habitacion_id != :habitacion_id)
+AND (
+    res.habitacion_id IS NULL OR  
+    NOT (res.fecha_entrada < :fecha_salida AND res.fecha_salida > :fecha_entrada)
+)
+AND (:cantidad_personas IS NULL OR hab.capacidad >= :cantidad_personas)
+GROUP BY hab.habitacion_id, hab.hotel_id, hab.nombre, hab.descripcion, hab.precio, hab.capacidad;
+"""
+
+
+QUERY_HABITACION_BY_ID = "SELECT hab.habitacion_id, hab.hotel_id, hab.nombre, hab.descripcion, hab.precio, hab.capacidad FROM habitaciones hab WHERE hab.habitacion_id = :habitacion_id"
+
 
 
 # string de conexión a la base de datos: mysql://usuario:password@host:puerto/nombre_schema
 # engine = create_engine("mysql://root:root@localhost:3308/IDS_API")
-engine = create_engine("mysql+mysqlconnector://root:algo2@localhost:3306/hospedajes")
+engine = create_engine("mysql+mysqlconnector://root:@localhost:3306/tpbd")
 
 def run_query(query, parameters = None):
     with engine.connect() as conn:
@@ -59,8 +79,15 @@ def reserva_by_usuario_id(usuario_id):
 def filtrar_hoteles(fecha_entrada, fecha_salida, cantidad_personas):
     return run_query(QUERY_FILTRAR_HOTELES, {"fecha_entrada":fecha_entrada, "fecha_salida":fecha_salida, "cantidad_personas":cantidad_personas}).fetchall()
 
-def filtrar_hoteles(fecha_entrada, fecha_salida, cantidad_personas):#ademasa obtiene todos los hoteles
-    return run_query(QUERY_FILTRAR_HOTELES, {"fecha_entrada":fecha_entrada, "fecha_salida":fecha_salida, "cantidad_personas":cantidad_personas}).fetchall()
-    
 def obtener_hotel_by_id(hotel_id):
-    return run_query(QUERY_OBTENER_HOTEL_POR_ID, { 'hotel_id': hotel_id }).fetchone()
+    return run_query(QUERY_OBTENER_HOTELES_POR_ID, { 'hotel_id': hotel_id }).fetchone()
+
+def obtener_todos_los_hoteles(): 
+    return run_query(QUERY_OBTENER_TODOS_LOS_HOTELES).fetchall()
+
+#------------------------Habitaciones-------------------------------------------------------------------
+def filtrar_habitaciones(hotel_id, habitacion_id, fecha_entrada, fecha_salida, cantidad_personas):
+    return run_query(QUERY_FILTRAR_HABITACIONES, {"hotel_id":hotel_id, "habitacion_id":habitacion_id, "fecha_entrada":fecha_entrada, "fecha_salida":fecha_salida, "cantidad_personas":cantidad_personas}).fetchall()
+
+def obtener_habitacion_by_id(habitacion_id):
+    return run_query(QUERY_HABITACION_BY_ID, { 'habitacion_id': habitacion_id }).fetchone()
