@@ -15,14 +15,13 @@ def get_all_reservas():
 
     response = []
     for row in result:
-        response.append({
-            'id': row[0], 
-            'reserva_id':row[1],
-            'usuario_id': row[2],
-            'hotel_id': row[3], 
-            'habitacion_id':row[4],
-            'fecha_entrada': row[5], 
-            'fecha_salida': row[6]
+        response.append({ 
+            'reserva_id':row[0],
+            'usuario_id': row[1],
+            'hotel_id': row[2], 
+            'habitacion_id':row[3],
+            'fecha_entrada': row[4], 
+            'fecha_salida': row[5]
         })
 
     return jsonify(response), 200
@@ -38,7 +37,7 @@ def reserva_by_usuario_id(usuario_id):
         return jsonify({'error': 'No se encontró la reserva'}), 404 # Not found
 
     result = result[0]
-    return jsonify({'id': result[0], 'reserva_id': result[1]}), 200
+    return jsonify({'reserva_id': result[0]}), 200
 
 #------------------------------------------- fin reservaciones--------------------------------------------
 
@@ -65,11 +64,10 @@ def filtrar_hoteles():
     for row in result:
         response.append({
             'hotel_id': row[0],
-            'imagen_principal': row[1], 
+            'nombre': row[1],
             'barrio': row[2],
-            'nombre': row[3],
-            'descripcion': row[4],
-            'direccion': row[5]
+            'direccion': row[4],
+            'descripcion': row[5]
         })
 
     return jsonify(response), 200
@@ -82,7 +80,7 @@ def obtener_hotel_by_id(hotel_id):
 
     try:
         result_hotel = querys.obtener_hotel_by_id(hotel_id)
-        result_habitaciones = querys.obtener_todas_las_habitaciones_del_hotel(hotel_id, fecha_entrada, fecha_salida, cantidad_personas)
+        result_habitaciones = querys.filtrar_habitaciones(hotel_id, fecha_entrada, fecha_salida, cantidad_personas)
         
     except Exception as e:
         return jsonify({'error': str(e)}), 404
@@ -94,15 +92,14 @@ def obtener_hotel_by_id(hotel_id):
         return jsonify({'error': 'No se ha encontrado una habitación para el hotel dado'})
     
     response_hotel = {
-        'nombre': result_hotel[0],
-        'barrio': result_hotel[1],
-        'direccion': result_hotel[2],
-        'descripcion': result_hotel[3],
-        'servicios': result_hotel[4],
-        'telefono': result_hotel[5],
-        'email': result_hotel[6],
-        'imagen_principal': result_hotel[7],
-        'puntuacion': result_hotel[8]
+        'nombre': result_hotel[1],
+        'barrio': result_hotel[2],
+        'direccion': result_hotel[3],
+        'descripcion': result_hotel[4],
+        'servicios': result_hotel[5],
+        'telefono': result_hotel[6],
+        'email': result_hotel[7]
+        
     }
 
     response_habitaciones = []
