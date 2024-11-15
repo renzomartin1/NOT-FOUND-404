@@ -15,14 +15,13 @@ def get_all_reservas():
 
     response = []
     for row in result:
-        response.append({
-            'id': row[0], 
-            'reserva_id':row[1],
-            'usuario_id': row[2],
-            'hotel_id': row[3], 
-            'habitacion_id':row[4],
-            'fecha_entrada': row[5], 
-            'fecha_salida': row[6]
+        response.append({ 
+            'reserva_id':row[0],
+            'usuario_id': row[1],
+            'hotel_id': row[2], 
+            'habitacion_id':row[3],
+            'fecha_entrada': row[4], 
+            'fecha_salida': row[5]
         })
 
     return jsonify(response), 200
@@ -38,7 +37,9 @@ def reserva_by_usuario_id(usuario_id):
         return jsonify({'error': 'No se encontró la reserva'}), 404 # Not found
 
     result = result[0]
-    return jsonify({'id': result[0], 'reserva_id': result[1]}), 200
+    return jsonify({'reserva_id': result[0]}), 200
+
+#------------------------------------------- fin reservaciones--------------------------------------------
 
 #------------------------------------------- fin reservaciones--------------------------------------------
 
@@ -63,13 +64,12 @@ def filtrar_hoteles():
 
     response = []
     for row in result:
-        print(row)
         response.append({
             'hotel_id': row[0],
-            'nombre': row[2],
-            'barrio': row[1],
+            'nombre': row[1],
+            'barrio': row[2],
             'direccion': row[4],
-            'descripcion': row[3]
+            'descripcion': row[5]
         })
 
     return jsonify(response), 200
@@ -101,6 +101,7 @@ def obtener_hotel_by_id(hotel_id):
         'servicios': result_hotel[5],
         'telefono': result_hotel[6],
         'email': result_hotel[7]
+        
     }
 
     response_habitaciones = []

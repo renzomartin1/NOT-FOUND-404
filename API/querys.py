@@ -9,8 +9,8 @@ QUERY_OBTENER_USUARIO_POR_ID = "SELECT nombre, apellido, email, numero FROM usua
 QUERY_ELIMINAR_USUARIO = "DELETE FROM usuarios WHERE usuario_id = :usuario_id"
 
 # Reservas
-QUERY_TODAS_LAS_RESERVAS = "SELECT id, reserva_id, usuario_id, hotel_id, habitacion_id, fecha_entrada, fecha_salida FROM reservaciones"
-QUERY_RESERVA_BY_USUARIO_ID = "SELECT id, reserva_id FROM reservaciones WHERE usuario_id = :usuario_id"
+QUERY_TODAS_LAS_RESERVAS = "SELECT reserva_id, usuario_id, hotel_id, habitacion_id, fecha_entrada, fecha_salida FROM reservaciones"
+QUERY_RESERVA_BY_USUARIO_ID = "SELECT reserva_id FROM reservaciones WHERE usuario_id = :usuario_id"
 
 
 # Hoteles
@@ -57,7 +57,7 @@ engine = create_engine("mysql+mysqlconnector://root:@localhost:3306/tpbd")
 def run_query(query, parameters = None):
     with engine.connect() as conn:
         result = conn.execute(text(query), parameters)
-        conn.commit()
+        conn.close()
     return result
 
 def obtener_todos_los_usuarios():
