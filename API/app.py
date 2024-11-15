@@ -2,10 +2,8 @@ from flask import Flask, jsonify, request
 import querys
 
 app = Flask(__name__)
-PORT = 5000
 
-
-#-------------------------------- inicio reservaciones ------------------------------------------------
+#------------------------------------------- inicio reservaciones ----------------------------------------------
 @app.route('/api/reservas', methods = ['GET'])
 def get_all_reservas():
     try:
@@ -35,26 +33,26 @@ def reserva_by_usuario_id(usuario_id):
         return jsonify({'error': str(e)}), 500
 
     if len(result) == 0:
-        return jsonify({'error': 'No se encontró la reserva'}), 404 # Not found
+        return jsonify({'error': 'No se encontró la reserva'}), 404
 
     result = result[0]
     return jsonify({'id': result[0], 'reserva_id': result[1]}), 200
 
-#------------------------------------------- fin reservaciones--------------------------------------------
+#------------------------------------------- fin reservaciones --------------------------------------------
 
-
+#------------------------------------------- inicio hoteles ----------------------------------------------
 @app.route('/api/hoteles', methods=['GET'])
 def filtrar_hoteles():
+    
+    fecha_entrada = request.args.get('fecha_entrada')
+    fecha_salida = request.args.get('fecha_salida')
+    cantidad_personas = request.args.get('cantidad_personas')
+    
+    if cantidad_personas:
+        cantidad_personas = int(cantidad_personas)
+    else:
+        cantidad_personas = None  
     try:
-        fecha_entrada = request.args.get('fecha_entrada')
-        fecha_salida = request.args.get('fecha_salida')
-        cantidad_personas = request.args.get('cantidad_personas')
-
-        if cantidad_personas:
-            cantidad_personas = int(cantidad_personas)
-        else:
-            cantidad_personas = None  
-
         result = querys.filtrar_hoteles(fecha_entrada,fecha_salida, cantidad_personas)
     
     except Exception as e:
@@ -63,39 +61,86 @@ def filtrar_hoteles():
 
     response = []
     for row in result:
+        print(row)
         response.append({
             'hotel_id': row[0],
-            'imagen_principal': row[1], 
-            'barrio': row[2],
-            'nombre': row[3],
-            'descripcion': row[4],
-            'direccion': row[5]
+            'nombre': row[2],
+            'barrio': row[1],
+            'direccion': row[4],
+            'descripcion': row[3]
         })
 
     return jsonify(response), 200
 
-@app.route('api/hoteles/<int:hotel_id>', methods= ['GET'])
+@app.route('/api/hoteles/<int:hotel_id>', methods=['GET'])
 def obtener_hotel_by_id(hotel_id):
+    fecha_entrada = request.args.get('fecha_entrada')
+    fecha_salida = request.args.get('fecha_salida')
+    cantidad_personas = request.args.get('cantidad_personas')
+
     try:
-        result = querys.obtener_hotel_by_id(hotel_id)
+        result_hotel = querys.obtener_hotel_by_id(hotel_id)
+        result_habitaciones = querys.filtrar_habitaciones(hotel_id, fecha_entrada, fecha_salida, cantidad_personas)
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 404
+    
+    if not result_hotel:
+        return jsonify({'error': 'No se ha encontrado un hotel con el ID dado'})
+    
+    if not result_habitaciones:
+        return jsonify({'error': 'No se ha encontrado una habitación para el hotel dado'})
+    
+    response_hotel = {
+        'nombre': result_hotel[1],
+        'barrio': result_hotel[2],
+        'direccion': result_hotel[3],
+        'descripcion': result_hotel[4],
+        'servicios': result_hotel[5],
+        'telefono': result_hotel[6],
+        'email': result_hotel[7]
+    }
+
+    response_habitaciones = []
+    for row in result_habitaciones:
+        response_habitaciones.append({
+            'habitacion_id': row[0],
+            'hotel_id': row[1],
+            'nombre': row[2],
+            'descripcion': row[3],
+            'precio': row[4],
+            'capacidad': row[5]
+        })
+
+    return jsonify({'hotel': response_hotel, 'habitaciones': response_habitaciones}), 200
+
+#------------------------------------------- fin hoteles --------------------------------------------
+
+#------------------------------------------- inicio habitaciones --------------------------------------------
+@app.route('/api/habitacion/<int:habitacion_id>', methods = ['GET'])
+def habitacion_by_id(habitacion_id):   
+    try:
+        result = querys.obtener_habitacion_by_id(habitacion_id)
     except Exception as e:
         return jsonify({ 'error': str(e) }), 404
     
     if result is None:
-        return jsonify({ 'error': 'No se ha encontrado un hotel con el ID dado' })
+        return jsonify({ 'error': 'No se ha encontrado una habitacion con el ID dado' }), 404
     
     response = {
-        'nombre' : result[0],
-        'barrio' : result[1],
-        'direccion' : result[2],
+        'habitacion_id' : result[0],
+        'hotel_id' : result[1],
+        'nombre' : result[2],
         'descripcion' : result[3],
-        'servicios' : result[4],
-        'telefono' : result[5],
-        'email' : result[6],
-        'imagen_principal' : result[7],
-        'puntuacion' : result[8]
+        'precio' : result[4],
+        'capacidad' : result[5]
     }
+
     return jsonify(response), 200
+
+#------------------------------------------- fin habitaciones --------------------------------------------
+
+#------------------------------------------- inicio usuarios --------------------------------------------
     
 @app.route('/api/usuarios', methods = ['GET'])
 def obtener_todos_los_usuarios():
@@ -134,17 +179,20 @@ def obtener_usuario_por_id(usuario_id):
 
 @app.route('/api/usuarios/<int:usuario_id>', methods = ['DELETE'])
 def eliminar_usuario_por_id(usuario_id):
-    try:
-        usuario_response = obtener_usuario_por_id(usuario_id)
-        if len(usuario_response) == 0:
-            return jsonify({ 'error': 'No se ha encontrado un usuario con el ID dado' })
-        
-        querys.eliminar_usuario(usuario_id)
+    usuario_data = querys.obtener_usuario_by_id(usuario_id)
+    if not usuario_data:
+        return jsonify({'error': 'No se ha encontrado un usuario con el ID dado'}), 404
 
-    except Exception as e:
-        return jsonify({ 'error': str(e) }), 500
-    
-    return usuario_response
+    querys.eliminar_usuario(usuario_id)
+    response = {
+        'nombre': usuario_data[0],
+        'apellido': usuario_data[1],
+        'email': usuario_data[2],
+        'numero': usuario_data[3]
+    }
+    return jsonify(response), 200
+
+#------------------------------------------- fin usuarios --------------------------------------------
 
 if __name__ == "__main__":
-    app.run("127.0.0.1", port = PORT, debug = True)
+    app.run("127.0.0.1", port = 5000, debug = True)
