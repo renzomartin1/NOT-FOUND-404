@@ -8,11 +8,11 @@ CREATE TABLE IF NOT EXISTS reservaciones (
     fecha_entrada DATE NOT NULL,
     fecha_salida DATE NOT NULL,
     PRIMARY KEY (reserva_id),
-    FOREIGN KEY (hotel_id) REFERENCES hoteles(hotel_id),
+    FOREIGN KEY (hotel_id) REFERENCES hoteles(hotel_id)
+            ON DELETE CASCADE
+			ON UPDATE CASCADE,
     FOREIGN KEY (habitacion_id) REFERENCES habitaciones(habitacion_id)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE
 );
-
-INSERT INTO reservaciones (usuario_id, hotel_id, habitacion_id, fecha_entrada, fecha_salida)
-VALUES (2001,02,'9-B','2024-2-23 00:00:00','2024-3-23 00:00:00');
-INSERT INTO reservaciones (usuario_id, hotel_id, habitacion_id, fecha_entrada, fecha_salida)
-VALUES (2002,07,'17-A','2024-3-23 00:00:00', '2024-4-23 00:00:00');
+ALTER TABLE reservaciones AUTO_INCREMENT = 40000;
