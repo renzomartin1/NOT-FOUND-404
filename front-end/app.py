@@ -66,7 +66,6 @@ def hotel(hotel_id, fecha_entrada=None, fecha_salida=None, cantidad_personas=Non
     fecha_actual = datetime.now().strftime("%Y-%m-%d")
     return render_template("hotel.html", hotel=hotel, habitaciones=habitaciones, fecha_actual=fecha_actual)
 
-
 @app.route("/habitacion/<int:habitacion_id>")
 def habitacion(habitacion_id):
     fecha_entrada = request.args.get("fecha_entrada")
@@ -85,6 +84,17 @@ def habitacion(habitacion_id):
 @app.route("/confirmacion-compra")
 def comprar():
     return render_template("confirmacion_compra.html")
+
+
+@app.route("/perfil/<int:usuario_id>")
+def perfil(usuario_id):
+    try:
+        response = requests.get(f"{API_URL}/usuarios/{usuario_id}")
+        response.raise_for_status()
+        usuario_datos = response.json()
+    except requests.exceptions.RequestException as e:
+        return jsonify({ 'error': str(e) }), 500
+    return render_template("perfil.html", usuario_datos = usuario_datos)
 
 
 @app.errorhandler(404)      #manejo de errores
