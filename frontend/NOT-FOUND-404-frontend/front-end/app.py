@@ -32,6 +32,16 @@ def home():
 
     return render_template("home.html", hoteles=hoteles, fecha_actual=fecha_actual, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida, cantidad_personas=cantidad_personas)
 
+@app.route("/perfil/<int:usuario_id>")
+def perfil(usuario_id):
+    try:
+        response = requests.get(f"{API_URL}/usuarios/{usuario_id}")
+        response.raise_for_status()
+        usuario_datos = response.json()
+    except requests.exceptions.RequestException as e:
+        return jsonify({ 'error': str(e) }), 500
+
+    return render_template("perfil.html", usuario_datos = usuario_datos)
 
 @app.route("/hotel/<int:hotel_id>")
 def hotel(hotel_id, fecha_entrada=None, fecha_salida=None, cantidad_personas=None): 
@@ -91,4 +101,4 @@ def sobre_nosotros():
     return render_template("sobre_nosotros.html")
 
 if __name__ == "__main__":
-    app.run(debug = True, port = 5001)
+    app.run(debug = True, port = 8080)
