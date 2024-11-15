@@ -6,10 +6,10 @@
 {% block body %}
 <div class="info">
 <div class="filtros">
-    <form class="filter-form">
+    <form class="filter-form" method="GET">
         <input type="date" name="fecha_entrada" placeholder="Fecha de Entrada" min="{{ fecha_actual }}" required> 
         <input type="date" name="fecha_salida" placeholder="Fecha de Salida" min="{{ fecha_actual }}" required>
-        <select class="custom-select">
+        <select class="custom-select" name="cantidad_personas">
             <option value="-">Cantidad de personas</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -30,7 +30,7 @@
                 <h2 class="hotel-name">{{ hotel.nombre }}</h2>
                 <p class="hotel-location">{{ hotel.barrio }}</p>
                 <p class="hotel-description">{{ hotel.descripcion }}</p>
-                <button class="viewmore-button" data-url="{{ url_for('hotel', hotel_id=hotel.hotel_id) }}">Ver más</button>
+                <button class="viewmore-button" data-url="{{ url_for('hotel', hotel_id=hotel.hotel_id, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida, cantidad_personas=cantidad_personas) }}">Ver más</button>
             </div>
         </div>
     {% endfor %}
