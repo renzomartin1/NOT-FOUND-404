@@ -58,7 +58,7 @@ engine = create_engine("mysql+mysqlconnector://root:algo2@localhost:3306/hospeda
 def run_query(query, parameters = None):
     with engine.connect() as conn:
         result = conn.execute(text(query), parameters)
-        conn.commit()
+        conn.close()
     return result
 
 def obtener_todos_los_usuarios():
