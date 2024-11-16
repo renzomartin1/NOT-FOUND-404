@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from sqlalchemy.exc import SQLAlchemyError
 import querys
 
 
