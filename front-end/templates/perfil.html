@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  <title>Perfil</title>
+  <title>{{ usuario_datos.nombre }} {{ usuario_datos.apellido }} - Perfil</title>
 {% endblock title %}
 
 {% block head %}
@@ -12,27 +12,21 @@
   <main class="contenedor-perfil-usuario">
     <header class="perfil-usuario__encabezado">
       <div class="perfil-usuario__avatar">
-        <img class="perfil-usuario__avatar-img" src="{{ url_for('static', filename='images/avatar-sample.jpg') }}" alt="#">
+        <img class="perfil-usuario__avatar-img" src="{{ url_for('static', filename='images/foto-de-perfil.jpg') }}" alt="#">
       </div>
+
       <section class="perfil-usuario__etiqueta">
-        <h1 class="perfil-usuario__nombre-completo">Julian M. Aguilar</h1>
-        <h2 class="perfil-usuario__hospedaje-dato">Actualmente alojado en: <span class="perfil-usuario__hospedaje-activo">Alvear Palace Hotel</span></h2>
-        <!-- <h2 class="perfil-usuario__hospedaje-dato">No tiene ninguna reserva activa en este momento.</h2> -->
+        <h1 class="perfil-usuario__nombre-completo">{{ usuario_datos.nombre }} {{ usuario_datos.apellido }}</h1>
+
         <div class="perfil-usuario__informacion">
-          <p class="perfil-usuario__dato">
-            <b>Documento</b> <span class="perfil-usuario__documento">38456789</span>
-          </p>
-          <p class="perfil-usuario__dato">
-            <b>Se unió en</b> <span class="perfil-usuario__creacion">28/02/2020</span>
-          </p>
           <div class="perfil-usuario__contactos">
             <button class="perfil-usuario__contacto">
               <img src="{{ url_for('static', filename='images/email-icono.svg') }}" alt="">
-              <span class="perfil-usuario__email">julian.aguilar@example.com</span>
+              <span class="perfil-usuario__email">{{ usuario_datos.email }}</span>
             </button>
             <button class="perfil-usuario__contacto">
               <img src="{{ url_for('static', filename='images/telefono-icono.svg') }}" alt="">
-              <span class="perfil-usuario__telefono">1234567890</span>
+              <span class="perfil-usuario__telefono">{{ usuario_datos.nombre }}</span>
             </button>
           </div>
         </div>
