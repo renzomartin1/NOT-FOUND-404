@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 import querys
 
+
 app = Flask(__name__)
 PORT = 5000
 
@@ -121,23 +122,34 @@ def obtener_hotel_by_id(hotel_id):
 @app.route('/api/habitacion/<int:habitacion_id>', methods = ['GET'])
 def habitacion_by_id(habitacion_id):   
     try:
-        result = querys.obtener_habitacion_by_id(habitacion_id)
+        result_habitacion = querys.obtener_habitacion_by_id(habitacion_id)
+        result_otras_habitaciones = querys.filtrar_habitaciones(hotel_id=result_habitacion[1], habitacion_id=habitacion_id, fecha_entrada=None, fecha_salida=None, cantidad_personas=None)
     except Exception as e:
         return jsonify({ 'error': str(e) }), 404
     
-    if result is None:
+    if result_habitacion is None or result_otras_habitaciones is None:
         return jsonify({ 'error': 'No se ha encontrado una habitacion con el ID dado' }), 404
     
-    response = {
-        'habitacion_id' : result[0],
-        'hotel_id' : result[1],
-        'nombre' : result[2],
-        'descripcion' : result[3],
-        'precio' : result[4],
-        'capacidad' : result[5]
+    response_habitacion = {
+        'habitacion_id' : result_habitacion[0],
+        'hotel_id' : result_habitacion[1],
+        'nombre' : result_habitacion[2],
+        'descripcion' : result_habitacion[3],
+        'precio' : result_habitacion[4],
+        'capacidad' : result_habitacion[5]
     }
+    response_otras_habitaciones = []
+    for row in result_otras_habitaciones:
+        response_otras_habitaciones.append({
+            'habitacion_id': row[0],
+            'hotel_id': row[1],
+            'nombre': row[2],
+            'descripcion': row[3],
+            'precio': row[4],
+            'capacidad': row[5]
+        })
 
-    return jsonify(response), 200
+    return jsonify({'habitacion': response_habitacion, 'otras_habitaciones': response_otras_habitaciones}), 200
 
     
 @app.route('/api/usuarios', methods = ['GET'])
