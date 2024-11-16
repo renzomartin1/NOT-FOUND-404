@@ -242,24 +242,24 @@ def usuarios_register():
 
 @app.route("/api/usuarios/login", methods = ["POST"])
 def usuarios_login():
-    login = request.get_json()
-    query_verificacion = f"SELECT contraseña FROM usuarios WHERE email = '{login["email"]}';"
+    datos_login = request.get_json()
+    query_verificacion = "SELECT contraseña FROM usuarios WHERE email = :email;"
 
     try:
-        resultado_query_verificacion = querys.run_query(query_verificacion)
+        resultado_query_verificacion = querys.run_query(query_verificacion, datos_login)
     except SQLAlchemyError as error:
         return jsonify({"error": str(error)}), 500
 
     fila = resultado_query_verificacion.fetchone()
 
     if fila == None:
-        return jsonify({"error": "El usuario no existe."}), 404
+        return jsonify({"error": "No hay ningún usuario asociado a este correo electrónico."}), 404
 
-    elif login["contraseña"] != fila.contraseña:
-        return jsonify({"error": "Contraseña incorrecta."}), 400
+    elif datos_login["contraseña"] != fila.contraseña:
+        return jsonify({"error": "La contraseña es incorrecta."}), 400
 
     else:
-        return jsonify({"success": "Inicio de sesión exitoso."}), 200
+        return jsonify({"success": "Has iniciado sesión correctamente."}), 200
 
 
 if __name__ == "__main__":
