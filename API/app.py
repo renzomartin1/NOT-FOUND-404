@@ -240,5 +240,27 @@ def usuarios_register():
         return jsonify({"error": "E-mail y número no disponibles (v2)."}), 400
 
 
+@app.route("/api/usuarios/login", methods = ["POST"])
+def usuarios_login():
+    login = request.get_json()
+    query_verificacion = f"SELECT contraseña FROM usuarios WHERE email = '{login["email"]}';"
+
+    try:
+        resultado_query_verificacion = querys.run_query(query_verificacion)
+    except SQLAlchemyError as error:
+        return jsonify({"error": str(error)}), 500
+
+    fila = resultado_query_verificacion.fetchone()
+
+    if fila == None:
+        return jsonify({"error": "El usuario no existe."}), 404
+
+    elif login["contraseña"] != fila.contraseña:
+        return jsonify({"error": "Contraseña incorrecta."}), 400
+
+    else:
+        return jsonify({"success": "Inicio de sesión exitoso."}), 200
+
+
 if __name__ == "__main__":
     app.run("127.0.0.1", port = PORT, debug = True)
