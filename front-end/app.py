@@ -71,7 +71,7 @@ def habitacion(habitacion_id):
     fecha_entrada = request.args.get("fecha_entrada")
     fecha_salida = request.args.get("fecha_salida")
     try:
-        response = requests.get(API_URL + 'habitacion/' + str(habitacion_id))
+        response = requests.get(API_URL + '/habitacion/' + str(habitacion_id))
         response.raise_for_status()
         result = response.json()
         habitacion = result['habitacion']
