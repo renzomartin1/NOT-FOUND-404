@@ -50,8 +50,8 @@ QUERY_HABITACION_BY_ID = "SELECT hab.habitacion_id, hab.hotel_id, hab.nombre, ha
 
 
 # string de conexión a la base de datos: mysql://usuario:password@host:puerto/nombre_schema
-# engine = create_engine("mysql://root:root@localhost:3308/IDS_API")
-engine = create_engine("mysql+mysqlconnector://root:@localhost:3306/tpbd")
+# engine = create_engine("mysql://'usuario':'contraseña'@localhost:'puerto'/'nombre_db'")
+engine = create_engine("mysql+mysqlconnector://root:@localhost:3306/hospedajes")
 
 def run_query(query, parameters = None):
     with engine.connect() as conn:
