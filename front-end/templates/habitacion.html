@@ -10,8 +10,7 @@
 <div class="contenedor1">
     <div class="sub-contenedor11">
         <div class="titulo">
-            <h3>{{ nomHotel }}</h3>
-            <h2>{{ nomHabitacion }}</h2>
+            <h2>{{ habitacion.nombre }}</h2>
         </div>
         <div class="cajaRating">
             <div class="rating">
@@ -51,7 +50,7 @@
         <div class="caja2">
             <div class="info">
                 <p>Una habitacion de lujo con el mas alto servicio que ofrece este hotel, las mejores resenas de altos criticos Argentinos y de todas partes del mundo</p>
-                <p>Precio (por noche): {{precio}}</p>
+                <p>Precio (por noche): {{habitacion.precio}}</p>
             </div>
             <div class="reserva">
                 <h3 class="tituloRes">En que fechas vas a visitarnos?</h3>
@@ -70,13 +69,13 @@
     <div class="otrasHab">
         <p class="titulo2">OTRAS HABITACIONES</p>
         <div id="hotel"> <!-- Datos habitaciones del hotel seleccionado -->
-            {% for num, dato in datos.items() %}
+            {% for habitacion in otras_habitaciones %}
                 <div id="grilla">
                     <img class="grillaImg" src="{{url_for('static', filename='images/ejemploHabitacion/habitacion2.jpg')}}" class="imagen-habitacion" alt="habitaciones">
                     <div class="texto-habitacion">
-                        <h2 >{{dato["nombre"]}}</h2>
-                        <p >Capacidad: {{dato["capacidad"]}}</p>
-                        <p >Precio(por noche): {{dato["precio"]}}</p>
+                        <h2 >{{habitacion.nombre}}</h2>
+                        <p >Capacidad: {{habitacion.capacidad}}</p>
+                        <p >Precio(por noche): {{habitacion.precio}}</p>
                         <a href=""><button class="boton-habitacion">Ver</button></a>
                     </div>
                 </div>
