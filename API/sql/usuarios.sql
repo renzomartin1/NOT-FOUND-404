@@ -8,7 +8,7 @@ CREATE TABLE usuarios (
     apellido VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL,
     contraseña VARCHAR(75) NOT NULL,
-    numero INT NOT NULL,
+    telefono INT NOT NULL,
     PRIMARY KEY (usuario_id)
 );
 

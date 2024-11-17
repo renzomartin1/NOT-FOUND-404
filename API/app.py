@@ -229,16 +229,16 @@ def usuarios_register():
         fila = resultado_query_verificacion.fetchone()
 
         if datos_register["email"] == fila.email and datos_register["numero"] == fila.numero:
-            return jsonify({"error": "El correo electrónico y el número telefónico ya se encuentran registrados."}), 400
+            return jsonify({"error": "El correo electrónico o el número telefónico ya se encuentran registrados."}), 400
 
         elif datos_register["email"] == fila.email:
-            return jsonify({"error": "El correo electrónico ya se encuentra registrado."}), 400
+            return jsonify({"error": "El correo electrónico o el número telefónico ya se encuentran registrados."}), 400
 
         elif datos_register["numero"] == fila.numero:
-            return jsonify({"error": "El número telefónico ya se encuentra registrado."}), 400
+            return jsonify({"error": "El correo electrónico o el número telefónico ya se encuentran registrados."}), 400
 
     elif resultado_query_verificacion.rowcount == 2:
-        return jsonify({"error": "El correo electrónico y el número telefónico ya se encuentran registrados."}), 400
+        return jsonify({"error": "El correo electrónico o el número telefónico ya se encuentran registrados."}), 400
 
 
 @app.route("/api/usuarios/login", methods = ["POST"])
