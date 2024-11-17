@@ -17,7 +17,7 @@ QUERY_OBTENER_TODOS_LOS_HOTELES = "SELECT * FROM hoteles"
 QUERY_OBTENER_HOTELES_POR_ID = "SELECT * FROM hoteles WHERE hotel_id = :hotel_id"
 
 QUERY_FILTRAR_HOTELES = """
-SELECT h.hotel_id, h.barrio, h.nombre, h.descripcion, h.direccion FROM hoteles h
+SELECT h.hotel_id, h.nombre, h.barrio, h.direccion, h.descripcion FROM hoteles h
 INNER JOIN habitaciones hab ON h.hotel_id = hab.hotel_id
 LEFT JOIN reservaciones res ON res.habitacion_id = hab.habitacion_id                         
 WHERE (                                                                                
@@ -25,7 +25,7 @@ WHERE (
     NOT (res.fecha_entrada < :fecha_salida AND res.fecha_salida > :fecha_entrada)
 )
 AND (:cantidad_personas IS NULL OR hab.capacidad = :cantidad_personas)
-GROUP BY h.hotel_id, h.barrio, h.nombre, h.descripcion, h.direccion;
+GROUP BY h.hotel_id, h.nombre, h.barrio, h.direccion, h.descripcion;
 """
 
 #HABITACIONES
