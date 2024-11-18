@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 from sqlalchemy import text
+import os
 
 # Usuarios
 QUERY_OBTENER_TODOS_LOS_USUARIOS = "SELECT nombre, apellido, email, numero FROM usuarios"
@@ -48,10 +49,13 @@ GROUP BY hab.habitacion_id, hab.hotel_id, hab.nombre, hab.descripcion, hab.preci
 QUERY_HABITACION_BY_ID = "SELECT hab.habitacion_id, hab.hotel_id, hab.nombre, hab.descripcion, hab.precio, hab.capacidad FROM habitaciones hab WHERE hab.habitacion_id = :habitacion_id"
 
 
+# credenciales
+db_username = os.getenv('MYSQL_USERNAME')
+db_password = os.getenv('MYSQL_PASSWORD')
 
 # string de conexión a la base de datos: mysql://usuario:password@host:puerto/nombre_schema
 # engine = create_engine("mysql://'usuario':'contraseña'@localhost:'puerto'/'nombre_db'")
-engine = create_engine("mysql+mysqlconnector://root:@localhost:3306/hospedajes")
+engine = create_engine(f"mysql+mysqlconnector://{db_username}:{db_password}@localhost:3306/hospedajes")
 
 def run_query(query, parameters = None):
     with engine.connect() as conn:
