@@ -57,6 +57,7 @@ def filtrar_hoteles():
         cantidad_personas = None  
     try:
         result = querys.filtrar_hoteles(fecha_entrada,fecha_salida, cantidad_personas)
+        print(result)
     
     except Exception as e:
         return jsonify({'error': str(e)}), 500
@@ -68,8 +69,8 @@ def filtrar_hoteles():
             'hotel_id': row[0],
             'nombre': row[1],
             'barrio': row[2],
-            'direccion': row[4],
-            'descripcion': row[5]
+            'direccion': row[3],
+            'descripcion': row[4]
         })
 
     return jsonify(response), 200
@@ -80,9 +81,10 @@ def obtener_hotel_by_id(hotel_id):
     fecha_salida = request.args.get('fecha_salida')
     cantidad_personas = request.args.get('cantidad_personas')
 
+
     try:
         result_hotel = querys.obtener_hotel_by_id(hotel_id)
-        result_habitaciones = querys.filtrar_habitaciones(hotel_id, fecha_entrada, fecha_salida, cantidad_personas)
+        result_habitaciones = querys.filtrar_habitaciones(hotel_id, None, fecha_entrada, fecha_salida, cantidad_personas)
         
     except Exception as e:
         return jsonify({'error': str(e)}), 404
@@ -114,6 +116,7 @@ def obtener_hotel_by_id(hotel_id):
             'precio': row[4],
             'capacidad': row[5]
         })
+    print (response_habitaciones)
 
     return jsonify({'hotel': response_hotel, 'habitaciones': response_habitaciones}), 200
 
@@ -229,16 +232,16 @@ def usuarios_register():
         fila = resultado_query_verificacion.fetchone()
 
         if datos_register["email"] == fila.email and datos_register["numero"] == fila.numero:
-            return jsonify({"error": "El correo electrónico o el número telefónico ya se encuentran registrados."}), 400
+            return jsonify({"error": "El correo electrónico y el número telefónico ya se encuentran registrados."}), 400
 
         elif datos_register["email"] == fila.email:
-            return jsonify({"error": "El correo electrónico o el número telefónico ya se encuentran registrados."}), 400
+            return jsonify({"error": "El correo electrónico ya se encuentra registrado."}), 400
 
         elif datos_register["numero"] == fila.numero:
-            return jsonify({"error": "El correo electrónico o el número telefónico ya se encuentran registrados."}), 400
+            return jsonify({"error": "El número telefónico ya se encuentra registrado."}), 400
 
     elif resultado_query_verificacion.rowcount == 2:
-        return jsonify({"error": "El correo electrónico o el número telefónico ya se encuentran registrados."}), 400
+        return jsonify({"error": "El correo electrónico y el número telefónico ya se encuentran registrados."}), 400
 
 
 @app.route("/api/usuarios/login", methods = ["POST"])
