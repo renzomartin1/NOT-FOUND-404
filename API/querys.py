@@ -26,7 +26,7 @@ WHERE (
     NOT (res.fecha_entrada < :fecha_salida AND res.fecha_salida > :fecha_entrada)
 )
 AND (:cantidad_personas IS NULL OR hab.capacidad = :cantidad_personas)
-GROUP BY h.hotel_id, h.nombre, h.barrio, h.direccion, h.descripcion;
+GROUP BY h.hotel_id, h.barrio, h.nombre, h.descripcion, h.direccion;
 """
 
 #HABITACIONES
