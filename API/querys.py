@@ -1,11 +1,12 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 from sqlalchemy import text
+from sqlalchemy.exc import SQLAlchemyError
 import os
 
 # Usuarios
-QUERY_OBTENER_TODOS_LOS_USUARIOS = "SELECT nombre, apellido, email, numero FROM usuarios"
-QUERY_OBTENER_USUARIO_POR_ID = "SELECT nombre, apellido, email, numero FROM usuarios WHERE usuario_id = :usuario_id"
+QUERY_OBTENER_TODOS_LOS_USUARIOS = "SELECT nombre, apellido, email, telefono FROM usuarios"
+QUERY_OBTENER_USUARIO_POR_ID = "SELECT nombre, apellido, email, telefono FROM usuarios WHERE usuario_id = :usuario_id"
 QUERY_ELIMINAR_USUARIO = "DELETE FROM usuarios WHERE usuario_id = :usuario_id"
 
 # Reservas
@@ -59,9 +60,14 @@ engine = create_engine(f"mysql+mysqlconnector://{db_username}:{db_password}@loca
 
 def run_query(query, parameters = None):
     with engine.connect() as conn:
-        result = conn.execute(text(query), parameters)
-        conn.close()
-    return result
+        try:
+            result = conn.execute(text(query), parameters)
+            conn.commit()
+            conn.close()
+            return result
+        except SQLAlchemyError as e:
+            conn.rollback()
+            raise e
 
 def obtener_todos_los_usuarios():
     return run_query(QUERY_OBTENER_TODOS_LOS_USUARIOS).fetchall()

@@ -169,43 +169,45 @@ def obtener_todos_los_usuarios():
             'nombre': row[0],
             'apellido': row[1],
             'email': row[2],
-            'numero': row[3]
+            'telefono': row[3]
         })
     return jsonify(response), 200
+
 
 @app.route('/api/usuarios/<int:usuario_id>', methods = ['GET'])
 def obtener_usuario_por_id(usuario_id):
     try:
         result = querys.obtener_usuario_by_id(usuario_id)
     except Exception as e:
-        return jsonify({ 'error': str(e) }), 404
+        return jsonify({ 'error': str(e) }), 500
     
     if result is None:
-        return jsonify({ 'error': 'No se ha encontrado un usuario con el ID dado' })
+        return jsonify({ 'error': 'No se ha encontrado un usuario con el ID dado' }), 404
     
     response = {
         'nombre': result[0],
         'apellido': result[1],
         'email': result[2],
-        'numero': result[3]
+        'telefono': result[3]
     }
     return jsonify(response), 200
+
 
 @app.route('/api/usuarios/<int:usuario_id>', methods = ['DELETE'])
-def eliminar_usuario_por_id(usuario_id):
-    usuario_data = querys.obtener_usuario_by_id(usuario_id)
-    if not usuario_data:
-        return jsonify({'error': 'No se ha encontrado un usuario con el ID dado'}), 404
-
-    # Eliminar usuario
-    querys.eliminar_usuario(usuario_id)
-    response = {
-        'nombre': usuario_data[0],
-        'apellido': usuario_data[1],
-        'email': usuario_data[2],
-        'numero': usuario_data[3]
-    }
-    return jsonify(response), 200
+def eliminar_usuario_por_id(usuario_id):    
+    try:
+        usuario_data = querys.obtener_usuario_by_id(usuario_id)
+        if not usuario_data:
+            return jsonify({ 'error': 'No se ha encontrado un usuario con el ID dado' }), 404
+    except Exception as e:
+        return jsonify({ 'error': str(e) }), 500
+    
+    try:
+        querys.eliminar_usuario(usuario_id)
+    except Exception as e:
+        return jsonify({ 'error': 'Hubo un error en el servidor intentando eliminar el usuario' }), 500
+    
+    return jsonify({ 'message': 'El usuario ha sido eliminado con éxito' }), 200
 
 
 @app.route("/api/usuarios/register", methods = ["POST"])
