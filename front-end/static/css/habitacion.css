@@ -321,3 +321,17 @@
     border-radius: 0.5rem;
     cursor: pointer;
 }
+
+
+/*Enlace con estilo de boton que te lleva a hacer la reserva*/
+  
+#enlace-boton {
+display: inline-block;
+padding: 10px 20px;
+font-size: 16px;
+background-color:  #96C2DB;
+color: #522305;
+text-decoration: none; /* Elimina el subrayado del enlace */
+border-radius: 5px;
+cursor: pointer;
+}
