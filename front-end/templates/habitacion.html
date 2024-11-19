@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/habitacion.css')}}">
+{% endblock %}
+
+{% block body %}
+
+<!-- Titulo de habitacion -->
+<div class="contenedor1">
+    <div class="sub-contenedor11">
+        <div class="titulo">
+            <h2>{{ habitacion.nombre }}</h2>
+        </div>
+        <div class="cajaRating">
+            <div class="rating">
+                <input value="5" name="rate" id="star5" type="radio">
+                <label title="text" for="star5"></label>
+                <input value="4" name="rate" id="star4" type="radio">
+                <label title="text" for="star4"></label>
+                <input value="3" name="rate" id="star3" type="radio" checked="">
+                <label title="text" for="star3"></label>
+                <input value="2" name="rate" id="star2" type="radio">
+                <label title="text" for="star2"></label>
+                <input value="1" name="rate" id="star1" type="radio">
+                <label title="text" for="star1"></label>
+            </div>
+        </div>
+    </div>
+    <!-- Caja contenedora de "carrusel" de imagenes -->
+    <div class="sub-contenedor12">
+        
+        <div class="caja1">
+            <div class="contenedorImg">
+                <div class="deslizador">
+                    <img id="img-0" src="{{url_for('static', filename='images/ejemploHabitacion/habitacion1.jpg' )}}">
+                    <img id="img-1" src="{{url_for('static', filename='images/ejemploHabitacion/cocinaDeLujo.jpg' )}}">
+                    <img id="img-2" src="{{url_for('static', filename='images/ejemploHabitacion/banioLujoso.jpg' )}}">
+                    <img id="img-3" src="{{url_for('static', filename='images/ejemploHabitacion/livingLujo.jpg' )}}">
+                </div>
+                <div class="deslizadorNav">
+                    <a href="#img-0"></a>
+                    <a href="#img-1"></a>
+                    <a href="#img-2"></a>
+                    <a href="#img-3"></a>
+                </div>
+            </div>
+        </div>
+        <!-- Caja contenedora de descripcion de habitacion y fechas de reserva -->
+        <div class="caja2">
+            <div class="info">
+                <p>Una habitacion de lujo con el mas alto servicio que ofrece este hotel, las mejores resenas de altos criticos Argentinos y de todas partes del mundo</p>
+                <p>Precio (por noche): {{habitacion.precio}}</p>
+            </div>
+            <div class="reserva">
+                <h3 class="tituloRes">En que fechas vas a visitarnos?</h3>
+                <form class="formRes">
+                    <input class="fecha" type="date">
+                    <input class="fecha" type="date">
+                </form>
+            </div>
+            <button class="boton">HAZ TU RESERVA</button>
+        </div>
+    </div>
+</div>
+
+<!-- Contenedor de "Otras Habitaciones" -->
+<div class="contenedor2">
+    <div class="otrasHab">
+        <p class="titulo2">OTRAS HABITACIONES</p>
+        <div id="hotel"> <!-- Datos habitaciones del hotel seleccionado -->
+            {% for habitacion in otras_habitaciones %}
+                <div id="grilla">
+                    <img class="grillaImg" src="{{url_for('static', filename='images/ejemploHabitacion/habitacion2.jpg')}}" class="imagen-habitacion" alt="habitaciones">
+                    <div class="texto-habitacion">
+                        <h2 >{{habitacion.nombre}}</h2>
+                        <p >Capacidad: {{habitacion.capacidad}}</p>
+                        <p >Precio(por noche): {{habitacion.precio}}</p>
+                        <a href=""><button class="boton-habitacion">Ver</button></a>
+                    </div>
+                </div>
+            {% endfor %}  
+        </div>
+    </div>
+</div>
+
+{% endblock %}

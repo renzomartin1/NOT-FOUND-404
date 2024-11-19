@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/contacto.css') }}">
+{% endblock %}
+
+{% block body %}
+<div id="contenedor-formulario-contacto">
+    <div id="cuerpo-formulario-contacto">
+        <h2>Contacto</h2>
+        <form>
+            <div id="datos-personales-formulario-contacto">
+                <label for="fcname">Nombre</label>
+                <input id="fcname" type="text" name="fcname" required>
+                <label for="fcemail">Correo electrónico</label>
+                <input id="fcemail" type="email" name="fcemail" required>
+                <label for="fcnumber">Número telefónico</label>
+                <input id="fcnumber" type="number" name="fcnumber" required>
+                <label for="fcmotive">Motivo</label>
+                <input id="fcmotive" type="text" name="fcmotive" required>
+            </div>
+            <div id="mensaje-boton-formulario-contacto">
+                <label for="fcmessage">Mensaje</label>
+                <textarea id="fcmessage" name="fcmessage" required></textarea>
+                <button id="boton-formulario-contacto" type="submit">ENVIAR</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

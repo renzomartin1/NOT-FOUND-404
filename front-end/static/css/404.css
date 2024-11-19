@@ -1,0 +1,14 @@
+#container{
+    background-color: rgba(171, 223, 240, 0.856);
+}
+#grilla{
+    display: grid;
+    margin-left: 20%;
+    grid-template-columns: repeat(3, 1fr);
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+.imagen-404{
+    width: 300px;
+    height: 300px;
+}
