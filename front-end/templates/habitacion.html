@@ -59,7 +59,7 @@
                     <input class="fecha" type="date">
                 </form>
             </div>
-            <a id="enlace-boton" href="{{ url_for('comprar') }}">HAZ TU RESERVA</a>
+            <a id="enlace-boton" href="{{ url_for('comprar', nombre=habitacion.nombre, precio=habitacion.precio)}}">HAZ TU RESERVA</a>
 
         </div>
     </div>
