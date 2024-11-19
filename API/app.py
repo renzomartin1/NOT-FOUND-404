@@ -76,7 +76,7 @@ def filtrar_hoteles():
     return jsonify(response), 200
 
 @app.route('/api/hoteles/<int:hotel_id>', methods=['GET'])
-def obtener_hotel_by_id(hotel_id):
+def obtener_hotel_by_id(hotel_id):  #hotel_by_id_y_habitaciones_hotel
     fecha_entrada = request.args.get('fecha_entrada')
     fecha_salida = request.args.get('fecha_salida')
     cantidad_personas = request.args.get('cantidad_personas')
@@ -124,7 +124,7 @@ def obtener_hotel_by_id(hotel_id):
 
 
 @app.route('/api/habitacion/<int:habitacion_id>', methods = ['GET'])
-def habitacion_by_id(habitacion_id):   
+def habitacion_by_id(habitacion_id):   #habitacion_by_id_y_otras_habitaciones
     try:
         result_habitacion = querys.obtener_habitacion_by_id(habitacion_id)
         result_otras_habitaciones = querys.filtrar_habitaciones(hotel_id=result_habitacion[1], habitacion_id=habitacion_id, fecha_entrada=None, fecha_salida=None, cantidad_personas=None)
