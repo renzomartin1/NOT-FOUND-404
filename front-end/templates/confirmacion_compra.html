@@ -13,7 +13,7 @@
     <div class="container">
         <h1>Reserva de Hotel</h1>
         
-        <div class="form-and-ticket">
+        <div class="form-and-card">
             <!-- Formulario de Información del Comprador -->
             <div class="form-container">
                 <div class="card">
@@ -35,31 +35,12 @@
                             <label for="phone">Teléfono:</label>
                             <input type="tel" id="phone" name="phone" required>
                         </div>
-                        <button type="submit">Reservar</button>
+                    
                     </form>
                 </div>
             </div>
 
-            <!-- Ticket de Compra -->
-            <div class="ticket-container">
-                <div class="ticket-card">
-                    <h2>Ticket de Compra</h2>
-                    <div class="ticket-item">
-                        <span>Subtotal:</span>
-                        <span id="subtotal">₡0.00</span>
-                    </div>
-                    <div class="ticket-item">
-                        <span>Impuesto (13%):</span>
-                        <span id="tax">₡0.00</span>
-                    </div>
-                    <div class="ticket-item">
-                        <span>Total:</span>
-                        <span id="total">₡0.00</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+           
         <!-- Información de la Tarjeta de Crédito -->
         <div class="credit-card">
             <h2>Detalles de Pago</h2>
@@ -83,8 +64,30 @@
                 <button type="submit">Realizar Pago</button>
             </form>
         </div>
+
     </div>
 
+
+    
+      <!-- Ticket de Compra -->
+        <div class="ticket-container">
+            <div class="ticket-card">
+                <h2>Ticket de Compra</h2>
+                <div class="ticket-item">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">₡0.00</span>
+                </div>
+                <div class="ticket-item">
+                    <span>Impuesto (13%):</span>
+                    <span id="tax">₡0.00</span>
+                </div>
+                <div class="ticket-item">
+                    <span>Total:</span>
+                    <span id="total">₡0.00</span>
+                </div>
+            </div>
+        </div>
+         
     <script src="{{url_for('static', filename='js/compra.js')}}"></script>
 
 {% endblock %}
