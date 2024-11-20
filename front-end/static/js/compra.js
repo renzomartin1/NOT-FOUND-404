@@ -1,3 +1,5 @@
+
+/*
 // Variables globales
 const subtotal = 200; // Ejemplo de precio del hotel
 const taxRate = 0.13; // 13% de impuesto
@@ -28,10 +30,10 @@ document.getElementById('buyer-info-form').addEventListener('submit', function(e
 
     // Actualizar el ticket de compra
     updateTicket();
-});
+});*/
 
 // Validar la información de la tarjeta de crédito antes de realizar el pago
-document.getElementById('payment-form').addEventListener('submit', function(event) {
+/*document.getElementById('payment-form').addEventListener('submit', function(event) {
     event.preventDefault(); // Evita que el formulario se envíe de manera predeterminada
 
     const cardNumber = document.getElementById('card-number').value;
@@ -47,4 +49,4 @@ document.getElementById('payment-form').addEventListener('submit', function(even
 
     // Aquí podrías hacer una solicitud a una API de pago (esto es solo un ejemplo)
     alert('Pago procesado con éxito. ¡Gracias por tu compra!');
-});
+});*/

@@ -18,7 +18,7 @@
         <div class="form-container">
             <div class="card">
                 <h2>Info del Comprador</h2>
-                <form id="buyer-info-form" >
+                <form id="buyer-info-form" action=# method="POST">
                     <div class="input-group">
                         <label for="first-name">Nombre:</label>
                         <input type="text" id="first-name" name="first-name" required>
@@ -35,6 +35,8 @@
                         <label for="phone">Teléfono:</label>
                         <input type="tel" id="phone" name="phone" required>
                     </div>
+
+                    <button type="submit" name="form-submit" value="form-reserva">Reservar </button>
                 </form>
             </div>
         </div>
@@ -42,7 +44,7 @@
         <!-- Segunda fila de formularios -->
         <div class="credit-card">
             <h2>Detalles de Pago</h2>
-            <form id="payment-form">
+            <form id="payment-form" method="POST">
                 <div class="input-group">
                     <label for="card-number">Número de tarjeta:</label>
                     <input type="text" id="card-number" name="card-number" placeholder="1234 5678 9012 3456" required>
@@ -59,7 +61,7 @@
                     <label for="cardholder-name">Nombre del titular:</label>
                     <input type="text" id="cardholder-name" name="cardholder-name" required>
                 </div>
-                <button type="submit">Realizar Pago </button>
+                <button type="submit" name="form-submit" value="form-pago">Realizar Pago </button>
             </form>
         </div>
     </div>
