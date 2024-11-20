@@ -7,7 +7,7 @@ app = Flask(__name__)
 PORT = 5000
 
 
-#-------------------------------- inicio reservaciones ------------------------------------------------
+#------------------------------------------- inicio reservaciones --------------------------------------------
 @app.route('/api/reservas', methods = ['GET'])
 def get_all_reservas():
     try:
@@ -60,9 +60,9 @@ def reserva_by_usuario_id(usuario_id):
     result = result[0]
     return jsonify({'reserva_id': result[0]}), 200
 
-#------------------------------------------- fin reservaciones--------------------------------------------
+#------------------------------------------- fin reservaciones --------------------------------------------
 
-
+#------------------------------------------- inicio hoteles -----------------------------------------------
 @app.route('/api/hoteles', methods=['GET'])
 def filtrar_hoteles():
     
@@ -140,7 +140,9 @@ def obtener_hotel_by_id(hotel_id):  #hotel_by_id_y_habitaciones_hotel
 
     return jsonify({'hotel': response_hotel, 'habitaciones': response_habitaciones}), 200
 
+#------------------------------------------- fin hoteles -------------------------------------------------------
 
+#------------------------------------------- inicio habitaciones -----------------------------------------------
 @app.route('/api/habitacion/<int:habitacion_id>', methods = ['GET'])
 def habitacion_by_id(habitacion_id):   #habitacion_by_id_y_otras_habitaciones
     try:
@@ -179,7 +181,9 @@ def habitacion_by_id(habitacion_id):   #habitacion_by_id_y_otras_habitaciones
 
     return jsonify({'habitacion': response_habitacion, 'otras_habitaciones': response_otras_habitaciones, 'hotel': response_hotel}), 200
 
+#------------------------------------------- fin habitaciones -----------------------------------------------
 
+#------------------------------------------- inicio usuarios ------------------------------------------------
 @app.route('/api/usuarios', methods = ['GET'])
 def obtener_todos_los_usuarios():
     try:
@@ -291,6 +295,7 @@ def usuarios_login():
     else:
         return jsonify({"success": "Has iniciado sesión correctamente."}), 200
     
+#------------------------------------------- fin usuarios ------------------------------------------------
 
 if __name__ == "__main__":
     app.run("127.0.0.1", port = PORT, debug = True)
