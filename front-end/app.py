@@ -75,14 +75,30 @@ def habitacion(habitacion_id):
         response.raise_for_status()
         result = response.json()
         habitacion = result['habitacion']
+        hotel = result['hotel']
         otras_habitaciones = result['otras_habitaciones']
     except requests.exceptions.RequestException as e:
         return jsonify({'error': str(e)}), 500
     
-    return render_template("habitacion.html", habitacion=habitacion, otras_habitaciones=otras_habitaciones, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida)
-@app.route("/confirmacion-compra")
-def comprar():
-    return render_template("confirmacion_compra.html")
+    return render_template("habitacion.html", habitacion=habitacion, otras_habitaciones=otras_habitaciones, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida, hotel=hotel)
+
+
+@app.route("/confirmacion_compra/<int:habitacion_id>")
+def comprar(habitacion_id):
+    fecha_entrada = request.args.get("fecha_entrada")
+    fecha_salida = request.args.get("fecha_salida")
+
+    try:
+        response = requests.get(API_URL + '/habitacion/' + str(habitacion_id))
+        response.raise_for_status()
+        result = response.json()
+        habitacion = result['habitacion']
+        hotel = result['hotel']
+    except requests.exceptions.RequestException as e:
+        return jsonify({'error': str(e)}), 500
+    
+    return render_template("confirmacion_compra.html", habitacion=habitacion, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida, hotel=hotel)
+
 
 
 @app.route("/perfil/<int:usuario_id>")

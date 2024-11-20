@@ -1,11 +1,18 @@
+:root{
+    --color1:#E5EDF1 ;
+    --color2: #2A2922;
+    --color3: #FFFFFF;
+    --color4: #96C2DB;
+}
+
 
 /* estilo tarjeta de habitacion */
 
 .contenedor1{
     background-color: #eee;
     box-shadow: 1px 1px 6px #000;
-    width: 80vw;
-    height: 70vh;
+    width: auto;
+    height: auto;
     margin: 15px 10vw;
     padding-top: 5px;
 }
@@ -13,82 +20,6 @@
 .sub-contenedor11{
     margin-left: 30%;
     display: flex;
-}
-/* estilo tarjeta de habitacion */
-
-/* estilo otras habitaciones */
-
-#hotel{
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    
-}
-
-.titulo2{
-    font-size: 30px;
-    text-align: center;
-    background-color: transparent;
-    width: 40%;
-    margin: 0 30%;
-    color: #522305;
-    letter-spacing: 1px;
-}
-
-.contenedor2{
-    background-color: #eee;
-    box-shadow: 1px 1px 6px #000;
-    width: 80vw;
-    margin: 15px 10vw;
-    padding-top: 5px;
-
-}
-
-.otrasHab{
-    width: 90%;
-    height: 20%;
-    margin: 1% 5%;
-}
-
-#grilla{
-    background-color: #96C2DB;
-    border-radius: 0.5rem;
-    margin: 1rem 0;
-    width: 65%;
-    height: 200px;
-    display: flex;
-}
-
-.grillaImg{
-    height: 90%;
-    max-width: 40%;
-    padding: 10px;
-    margin-right: 5%;
-}
-
-/* boton y texto otras habitaciones */
-
-.texto-habitacion{
-    color: #522305;
-}
-
-.boton-habitacion {
-    padding: 0.625rem 1rem;
-    font-size: 0.875rem;
-    font-weight: bold;
-    color: #522305;
-    background-color: #eee;
-    border: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
-}
-
-.titulo{
-    font-size: 20px;
-    text-align: center;
-    background-color: transparent;
-    width: 50%;
-    color: #522305;
 }
 
 /* Estilo calificacion */
@@ -217,41 +148,69 @@
     /* margin-top: 5%; */
     margin-left: 15%;
     margin-right: 25%;
+    font-family:'montserrat', sans-serif;
 }
 
 /* estilo reserva */
 
-.reserva{
-    margin-top: 0;
-    margin-left: 15%;
-    width: 60%;
-    height: 20%;
-    border-top: 1px #522305 solid;
-}
-
-.formRes{
-    margin: 5%;
-}
-
 .tituloRes{
-    margin-top: 5%;
-    box-sizing: border-box;
+    font-family: 'montserrat', sans-serif;
+    text-align: center;
+    font-size: 20px;
+}
+
+.filter-form {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 85%;
+    padding: 20px 20px 20px 20px;
+    border-radius: 50px;
+    box-shadow: 0 10px 8px rgba(0, 0, 0, 0.1);
+    background-color: var(--color4);
+    margin-bottom: 10%;
+    margin-right:10%;
+    
 }
 
-.fecha{
-    padding: 0.5px;
-    background-color: #96C2DB;
-    color: #522305;
-}
-
-.boton{
-    margin-left: 25%;
+input[type="date"] {
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    font-weight: bold;
+    color: var(--color2);
+    background-color: var(--color3);
+    border: none;
     border-radius: 0.5rem;
-    background-color: #96C2DB;
-    color: #522305;
-    padding: 10px;
-    font-weight: 700;
+    outline: none;
+    width: 29%;
+    border-width:1px ;
+    border-style:solid ;
+    border-color:light-dark(rgb(118, 118, 118));
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+}
+
+input[type="date"]:focus {
+    border-color: var(--color3);
+}
+
+.filter-button {
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    font-weight: bold;
+    color: var(--color2);
+    background-color: var(--color3);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.filter-button:hover {
+    color:var(--color1);
+    background-color: #19465f;
 }
 
 
@@ -272,6 +231,10 @@
     margin: 0 30%;
     color: #522305;
     letter-spacing: 1px;
+    margin-bottom: 25px;
+    margin-top: 25px;
+    font-weight: bold;
+    font-family:'montserrat', sans-serif;
 }
 
 .contenedor2{
@@ -279,6 +242,84 @@
     box-shadow: 1px 1px 6px #000;
     width: 80vw;
     margin: 70px 10vw;
+    padding-top: 5px;
+
+}
+
+.otrasHab{
+    width: 90%;
+    height: 20%;
+    margin: 1% 5%;
+}
+
+#grilla{
+    background-color: #96C2DB;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    width: 75%;
+    height: 200px;
+    display: flex;
+    box-shadow: #000 1px 1px 6px;
+}
+
+.grillaImg{
+    height: 100%;
+    max-width: 40%;
+    padding: 0px;
+    margin-right: 5%;
+}
+
+/* boton y texto otras habitaciones */
+
+.texto-habitacion{
+    color: #522305;
+    font-family:'montserrat', sans-serif;
+}
+
+.boton-habitacion {
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    font-weight: bold;
+    color: #522305;
+    background-color: var(--color1);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.boton-habitacion:hover {
+    color:var(--color1);
+    background-color: #19465f;
+    font-size: 20px;
+    transition: 0.2s;
+}
+
+/* estilo otras habitaciones */
+
+#hotel{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    
+}
+
+.titulo2{
+    font-size: 30px;
+    text-align: center;
+    background-color: transparent;
+    width: 40%;
+    margin: 0 30%;
+    color: #522305;
+    letter-spacing: 1px;
+    font-family:'montserrat', sans-serif;
+}
+
+.contenedor2{
+    background-color: #eee;
+    box-shadow: 1px 1px 6px #000;
+    width: 80vw;
+    margin: 15px 10vw;
     padding-top: 5px;
 
 }
@@ -309,6 +350,7 @@
 
 .texto-habitacion{
     color: #522305;
+    font-family:'montserrat', sans-serif;
 }
 
 .boton-habitacion {
@@ -322,16 +364,12 @@
     cursor: pointer;
 }
 
-
-/*Enlace con estilo de boton que te lleva a hacer la reserva*/
-  
-#enlace-boton {
-display: inline-block;
-padding: 10px 20px;
-font-size: 16px;
-background-color:  #96C2DB;
-color: #522305;
-text-decoration: none; /* Elimina el subrayado del enlace */
-border-radius: 5px;
-cursor: pointer;
+.titulo{
+    font-size: 20px;
+    text-align: center;
+    background-color: transparent;
+    width: 50%;
+    color: #522305;
+    font-family:'montserrat', sans-serif;
 }
+

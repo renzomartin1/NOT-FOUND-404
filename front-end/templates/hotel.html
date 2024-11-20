@@ -12,14 +12,25 @@
 
         <div class="subContenedor">
             <div class="caja1">
+                
                 <div class="contenedorImg">
-                    {% for img in range(4) %}
-                    <img src="{{url_for('static', filename= 'images/{{id_hotel}}/imagen{img}.jpg' )}}">
-                    {% endfor %}
+                    <div class="deslizador">
+                        {% for i in range(6) %}
+                        <img id="img-{{i}}" src="{{ url_for('static', filename='images/hoteles/' + hotel.nombre + '/imagen' + (i|string) + '.jpg') }}">
+                        {% endfor %}
+                    </div>
+                    <div class="deslizadorNav">
+                        {% for i in range(6) %}
+                        <a href="#img-{{i}}"></a>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
             <div class="caja2">
-                <p class="descripcionHotel">{{ hotel.descripcion }}</p>
+                <div class="caja21">
+                    <p class="descripcionHotel">{{ hotel.descripcion }}</p>
+                    <p class="descripcionHotel">SERVICIOS: {{ hotel.servicios }}</p>
+                </div>
             </div>
         </div>
 
@@ -47,7 +58,7 @@
             {% for habitacion in habitaciones %}
                 <div id="grilla">
                     <div class="texto-habitacion">
-                        <img src="{{url_for('static', filename='images/ejemploHabitacion/habitacion2.jpg')}}" class="imagen-habitacion" alt="habitaciones">
+                        <img src="{{ url_for('static', filename='images/hoteles/' + hotel.nombre + '/' + habitacion.nombre + '/imagen0.jpg') }}" class="imagen-habitacion" alt="habitaciones">
                         <h2 >{{habitacion.nombre}}</h2>
                         <p >Capacidad: {{habitacion.capacidad}}</p>
                         <p >Precio(por noche): {{habitacion.precio}}</p>

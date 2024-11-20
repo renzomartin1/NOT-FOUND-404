@@ -22,7 +22,7 @@ h1 {
     margin-bottom: 50px;
 }
 
-.form-and-card {
+.form-and-card, .room-and-ticket {
     display: flex;
     gap: 20px; /* Espacio entre los formularios */
     justify-content: space-between;
@@ -43,7 +43,7 @@ h1 {
 }
 
 
-.ticket-container {
+.ticket-container, .room-container {
     display: flex;
     justify-content: center;    
     align-items: center;        
@@ -53,7 +53,7 @@ h1 {
 
 
 
-.credit-card, .ticket-card, .form-container{
+.credit-card, .ticket-card, .form-container, .room-container, .room-data{
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
