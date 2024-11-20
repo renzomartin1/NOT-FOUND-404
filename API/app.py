@@ -28,6 +28,25 @@ def get_all_reservas():
 
     return jsonify(response), 200
 
+@app.route('/api/reservas', methods = ['POST'])
+def crear_reservas():
+    try:
+        data = request.get_json()
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+    if not data:
+        return jsonify({'error': 'No data provided'}), 400
+    
+    usuario_id = data.get('usuario_id')
+    hotel_id = data.get('hotel_id')
+    habitacion_id = data.get('habitacion_id')
+    fecha_entrada = data.get('fecha_inicio')
+    fecha_salida = data.get('fecha_fin')
+    querys.registrar_reserva({'usuario_id':usuario_id, 'hotel_id':hotel_id, 'habitacion_id':habitacion_id, 'fecha_entrada':fecha_entrada, 'fecha_salida':fecha_salida})
+
+    return jsonify(), 201
+
 @app.route('/api/reservas/<int:usuario_id>', methods=['GET'])
 def reserva_by_usuario_id(usuario_id):
     try:
@@ -70,7 +89,8 @@ def filtrar_hoteles():
             'nombre': row[1],
             'barrio': row[2],
             'direccion': row[3],
-            'descripcion': row[4]
+            'descripcion': row[4],
+            'servicios': row[5]
         })
 
     return jsonify(response), 200
@@ -121,41 +141,9 @@ def obtener_hotel_by_id(hotel_id):  #hotel_by_id_y_habitaciones_hotel
     return jsonify({'hotel': response_hotel, 'habitaciones': response_habitaciones}), 200
 
 
+#ENDOPOINT HABITACIONES
 
 
-@app.route('/api/habitacion/<int:habitacion_id>', methods = ['GET'])
-def habitacion_by_id(habitacion_id):   #habitacion_by_id_y_otras_habitaciones
-    try:
-        result_habitacion = querys.obtener_habitacion_by_id(habitacion_id)
-        result_otras_habitaciones = querys.filtrar_habitaciones(hotel_id=result_habitacion[1], habitacion_id=habitacion_id, fecha_entrada=None, fecha_salida=None, cantidad_personas=None)
-    except Exception as e:
-        return jsonify({ 'error': str(e) }), 404
-    
-    if result_habitacion is None or result_otras_habitaciones is None:
-        return jsonify({ 'error': 'No se ha encontrado una habitacion con el ID dado' }), 404
-    
-    response_habitacion = {
-        'habitacion_id' : result_habitacion[0],
-        'hotel_id' : result_habitacion[1],
-        'nombre' : result_habitacion[2],
-        'descripcion' : result_habitacion[3],
-        'precio' : result_habitacion[4],
-        'capacidad' : result_habitacion[5]
-    }
-    response_otras_habitaciones = []
-    for row in result_otras_habitaciones:
-        response_otras_habitaciones.append({
-            'habitacion_id': row[0],
-            'hotel_id': row[1],
-            'nombre': row[2],
-            'descripcion': row[3],
-            'precio': row[4],
-            'capacidad': row[5]
-        })
-
-    return jsonify({'habitacion': response_habitacion, 'otras_habitaciones': response_otras_habitaciones}), 200
-
-    
 @app.route('/api/usuarios', methods = ['GET'])
 def obtener_todos_los_usuarios():
     try:
@@ -234,16 +222,16 @@ def usuarios_register():
         fila = resultado_query_verificacion.fetchone()
 
         if datos_register["email"] == fila.email and datos_register["numero"] == fila.numero:
-            return jsonify({"error": "El correo electrónico y el número telefónico ya se encuentran registrados."}), 400
+            return jsonify({"error": "El correo electrónico o el número telefónico ya se encuentran registrados."}), 400
 
         elif datos_register["email"] == fila.email:
-            return jsonify({"error": "El correo electrónico ya se encuentra registrado."}), 400
+            return jsonify({"error": "El correo electrónico o el número telefónico ya se encuentran registrados."}), 400
 
         elif datos_register["numero"] == fila.numero:
-            return jsonify({"error": "El número telefónico ya se encuentra registrado."}), 400
+            return jsonify({"error": "El correo electrónico o el número telefónico ya se encuentran registrados."}), 400
 
     elif resultado_query_verificacion.rowcount == 2:
-        return jsonify({"error": "El correo electrónico y el número telefónico ya se encuentran registrados."}), 400
+        return jsonify({"error": "El correo electrónico o el número telefónico ya se encuentran registrados."}), 400
 
 
 @app.route("/api/usuarios/login", methods = ["POST"])
@@ -266,7 +254,7 @@ def usuarios_login():
 
     else:
         return jsonify({"success": "Has iniciado sesión correctamente."}), 200
-
+    
 
 if __name__ == "__main__":
     app.run("127.0.0.1", port = PORT, debug = True)
