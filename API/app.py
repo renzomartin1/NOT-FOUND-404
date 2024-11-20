@@ -141,7 +141,43 @@ def obtener_hotel_by_id(hotel_id):  #hotel_by_id_y_habitaciones_hotel
     return jsonify({'hotel': response_hotel, 'habitaciones': response_habitaciones}), 200
 
 
-#ENDOPOINT HABITACIONES
+@app.route('/api/habitacion/<int:habitacion_id>', methods = ['GET'])
+def habitacion_by_id(habitacion_id):   #habitacion_by_id_y_otras_habitaciones
+    try:
+        result_habitacion = querys.obtener_habitacion_by_id(habitacion_id)
+        result_otras_habitaciones = querys.filtrar_habitaciones(hotel_id=result_habitacion[1], habitacion_id=habitacion_id, fecha_entrada=None, fecha_salida=None, cantidad_personas=None)
+        result_hotel = querys.obtener_hotel_by_id(hotel_id=result_habitacion[1])
+    except Exception as e:
+        return jsonify({ 'error': str(e) }), 404
+    
+    if result_habitacion is None or result_otras_habitaciones is None:
+        return jsonify({ 'error': 'No se ha encontrado una habitacion con el ID dado' }), 404
+    
+    response_hotel = {
+        'hotel_id' : result_hotel[0],
+        'hotel_nombre' : result_hotel[1]
+    }
+
+    response_habitacion = {
+        'habitacion_id' : result_habitacion[0],
+        'hotel_id' : result_habitacion[1],
+        'nombre' : result_habitacion[2],
+        'descripcion' : result_habitacion[3],
+        'precio' : result_habitacion[4],
+        'capacidad' : result_habitacion[5]
+    }
+    response_otras_habitaciones = []
+    for row in result_otras_habitaciones:
+        response_otras_habitaciones.append({
+            'habitacion_id': row[0],
+            'hotel_id': row[1],
+            'nombre': row[2],
+            'descripcion': row[3],
+            'precio': row[4],
+            'capacidad': row[5]
+        })
+
+    return jsonify({'habitacion': response_habitacion, 'otras_habitaciones': response_otras_habitaciones, 'hotel': response_hotel}), 200
 
 
 @app.route('/api/usuarios', methods = ['GET'])
