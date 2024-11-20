@@ -68,21 +68,21 @@
 
 
     
-        <!-- Ticket de Compra -->
-        <div class="ticket-container">
+         <!-- Ticket de Compra -->
+         <div class="ticket-container">
             <div class="ticket-card">
                 <h2>Ticket de Compra</h2>
             <div class="ticket-item">
                 <span>Subtotal:</span>
-                <span id="subtotal">${{precio}}</span>
+                <span id="subtotal">${{habitacion.precio}}</span>
             </div>
             <div class="ticket-item">
                 <span>Impuesto (13%):</span>
-                <span id="tax">${{ (precio/100)*0.13}}</span>
+                <span id="tax">${{ (habitacion.precio/100)*0.13}}</span>
             </div>
             <div class="ticket-item">
                 <span>Total:</span>
-                <span id="total">$ {{ (precio + (precio/100)*0.13) }}</span>
+                <span id="total">$ {{ (habitacion.precio + (habitacion.precio/100)*0.13) }}</span>
             </div>
         </div>   
 
