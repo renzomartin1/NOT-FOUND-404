@@ -75,12 +75,12 @@ def habitacion(habitacion_id):
         response.raise_for_status()
         result = response.json()
         habitacion = result['habitacion']
+        hotel = result['hotel']
         otras_habitaciones = result['otras_habitaciones']
     except requests.exceptions.RequestException as e:
         return jsonify({'error': str(e)}), 500
     
-    return render_template("habitacion.html", habitacion=habitacion, otras_habitaciones=otras_habitaciones, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida)
-
+    return render_template("habitacion.html", habitacion=habitacion, otras_habitaciones=otras_habitaciones, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida, hotel=hotel)
 
 
 @app.route("/confirmacion_compra/<int:habitacion_id>")
