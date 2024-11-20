@@ -12,6 +12,11 @@ QUERY_ELIMINAR_USUARIO = "DELETE FROM usuarios WHERE usuario_id = :usuario_id"
 # Reservas
 QUERY_TODAS_LAS_RESERVAS = "SELECT reserva_id, usuario_id, hotel_id, habitacion_id, fecha_entrada, fecha_salida FROM reservaciones"
 QUERY_RESERVA_BY_USUARIO_ID = "SELECT reserva_id FROM reservaciones WHERE usuario_id = :usuario_id"
+QUERY_REGISTRAR_RESERVA = """
+INSERT INTO reservaciones(reserva_id, usuario_id, hotel_id, habitacion_id, fecha_entrada, fecha_salida)
+VALUES
+(:reserva_id, :usuario_id, :hotel_id, :habitacion_id, :fecha_entrada, :fecha_salida);
+"""
 
 
 # Hoteles
@@ -19,7 +24,7 @@ QUERY_OBTENER_TODOS_LOS_HOTELES = "SELECT * FROM hoteles"
 QUERY_OBTENER_HOTELES_POR_ID = "SELECT * FROM hoteles WHERE hotel_id = :hotel_id"
 
 QUERY_FILTRAR_HOTELES = """
-SELECT h.hotel_id, h.nombre, h.barrio, h.direccion, h.descripcion FROM hoteles h
+SELECT h.hotel_id, h.nombre, h.barrio, h.direccion, h.descripcion, h.servicios FROM hoteles h
 INNER JOIN habitaciones hab ON h.hotel_id = hab.hotel_id
 LEFT JOIN reservaciones res ON res.habitacion_id = hab.habitacion_id                         
 WHERE (                                                                                
@@ -50,13 +55,14 @@ GROUP BY hab.habitacion_id, hab.hotel_id, hab.nombre, hab.descripcion, hab.preci
 QUERY_HABITACION_BY_ID = "SELECT hab.habitacion_id, hab.hotel_id, hab.nombre, hab.descripcion, hab.precio, hab.capacidad FROM habitaciones hab WHERE hab.habitacion_id = :habitacion_id"
 
 
+
 # credenciales
 db_username = os.getenv('MYSQL_USERNAME')
 db_password = os.getenv('MYSQL_PASSWORD')
 
 # string de conexión a la base de datos: mysql://usuario:password@host:puerto/nombre_schema
 # engine = create_engine("mysql://'usuario':'contraseña'@localhost:'puerto'/'nombre_db'")
-engine = create_engine(f"mysql+mysqlconnector://{db_username}:{db_password}@localhost:3306/hospedajes")
+engine = create_engine(f"mysql+mysqlconnector://root:root@localhost:3306/hospedajes")
 
 def run_query(query, parameters = None):
     with engine.connect() as conn:
@@ -80,6 +86,9 @@ def eliminar_usuario(usuario_id):
 #-----------------------Reservas-------------------------------------------------------------------
 def all_reservas():
     return run_query(QUERY_TODAS_LAS_RESERVAS).fetchall()
+
+def registrar_reserva():
+    return run_query(QUERY_REGISTRAR_RESERVA)
 
 def reserva_by_usuario_id(usuario_id):
     return run_query(QUERY_RESERVA_BY_USUARIO_ID, {'usuario_id': usuario_id}).fetchall()
