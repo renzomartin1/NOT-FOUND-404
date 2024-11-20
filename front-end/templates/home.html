@@ -24,7 +24,7 @@
     {% for hotel in hoteles %}
         <div class="hotel">
             <div class="hotel-image">
-                <img src='{{hotel.imagen_principal}}' class="hotel-img">
+                <img src='{{ url_for("static", filename="images/hoteles/"+ hotel.nombre + "/principal.jpg") }}' class="hotel-img">
             </div>
             <div class="hotel-info">
                 <h2 class="hotel-name">{{ hotel.nombre }}</h2>
