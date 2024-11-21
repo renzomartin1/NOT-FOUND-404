@@ -5,6 +5,11 @@
 {% endblock %}
 {% block body %}
 <div class="info">
+    <div class="hoteliscoPresentacion">
+        <div class="opaco">
+            <img class="hoteliscoIMG" src="{{url_for('static', filename='images/obeliscoBlanco.png')}}">
+        </div>
+    </div>
 <div class="filtros">
     <form class="filter-form" method="GET">
         <input type="date" name="fecha_entrada" placeholder="Fecha de Entrada" min="{{ fecha_actual }}" required> 
@@ -37,6 +42,11 @@
 </div>
 </div>
 <hr id="linea-separacion"></hr>
+<div class="hoteliscoPresentacion">
+    <div class="opaco">
+        <img class="hoteliscoIMG" src="{{url_for('static', filename='images/logo1blanco.png')}}">
+    </div>
+</div>
 
 <div id="contenedor-formulario-contacto">
     <div id="cuerpo-formulario-contacto">
