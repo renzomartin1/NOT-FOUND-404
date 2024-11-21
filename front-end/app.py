@@ -5,7 +5,7 @@ import requests
 PORT = 5001
 app = Flask(__name__)
 
-API_URL = 'http://127.0.0.1:5000/api'
+API_URL = 'http://127.0.0.1:5005/api'
 
 @app.route("/")
 def home():
@@ -103,13 +103,82 @@ def comprar(habitacion_id):
 
 @app.route("/perfil/<int:usuario_id>")
 def perfil(usuario_id):
+    dias_ES = {
+        'Sunday': 'Domingo',
+        'Monday': 'Lunes',
+        'Tuesday': 'Martes',
+        'Wednesday': 'Miércoles',
+        'Thursday': 'Jueves',
+        'Friday': 'Viernes',
+        'Saturday': 'Sábado'
+    }
+
+    meses_ES = {
+        'January': 'Enero',
+        'February': 'Febrero',
+        'March': 'Marzo',
+        'April': 'Abril',
+        'May': 'Mayo',
+        'June': 'Junio',
+        'July': 'Julio',
+        'August': 'Agosto',
+        'September': 'Septiembre',
+        'October': 'Octubre',
+        'November': 'Noviembre',
+        'December': 'Diciembre'
+    }
     try:
-        response = requests.get(f"{API_URL}/usuarios/{usuario_id}")
-        response.raise_for_status()
-        usuario_datos = response.json()
+        usuario_response = requests.get(f"{API_URL}/usuarios/{usuario_id}")
+        reservas_response = requests.get(f"{API_URL}/reservas/{usuario_id}")
+
+        usuario_response.raise_for_status()
+        reservas_response.raise_for_status()
+
+        usuario_datos = usuario_response.json()
+        reservas_datos = reservas_response.json()
+
+        reservas_historial = []
+        for reserva in reservas_datos:
+            hotel_id = reserva['hotel_id']
+            habitacion_id = reserva['habitacion_id']
+
+            habitacion_response = requests.get(f"{API_URL}/habitacion/{habitacion_id}")
+            habitacion_response.raise_for_status()
+            habitacion_datos = habitacion_response.json()['habitacion']
+
+            hotel_response = requests.get(f"{API_URL}/hoteles/{hotel_id}")
+            hotel_response.raise_for_status()
+            hotel_datos = hotel_response.json()['hotel']
+
+            fecha_entrada = str(reserva['fecha_entrada'])
+            fecha_salida = str(reserva['fecha_salida'])
+
+            fecha_entrada_dt = datetime.strptime(fecha_entrada[:-4], '%a, %d %b %Y %H:%M:%S')
+            fecha_salida_dt = datetime.strptime(fecha_salida[:-4], '%a, %d %b %Y %H:%M:%S')
+
+            dia_nombre_entrada = fecha_entrada_dt.strftime('%A')
+            dia_numero_entrada = fecha_entrada_dt.day
+            mes_entrada = fecha_entrada_dt.strftime('%B')
+            año_entrada = fecha_entrada_dt.year
+
+            dia_nombre_salida = fecha_salida_dt.strftime('%A')
+            dia_numero_salida = fecha_salida_dt.day
+            mes_salida = fecha_salida_dt.strftime('%B')
+            año_salida = fecha_salida_dt.year
+
+            fecha_entrada_formateada = f"{dias_ES[dia_nombre_entrada]}, {dia_numero_entrada} de {meses_ES[mes_entrada]} {año_entrada}"
+            fecha_salida_formateada = f"{dias_ES[dia_nombre_salida]}, {dia_numero_salida} de {meses_ES[mes_salida]} {año_salida}"
+
+            reservas_historial.append({
+                'fecha_entrada': fecha_entrada_formateada,
+                'fecha_salida': fecha_salida_formateada,
+                'hotel_nombre': hotel_datos['nombre'],
+                'habitacion_nombre': habitacion_datos['nombre']
+            })
     except requests.exceptions.RequestException as e:
         return jsonify({ 'error': str(e) }), 500
-    return render_template("perfil.html", usuario_datos = usuario_datos)
+    
+    return render_template("perfil.html", usuario_datos = usuario_datos, reservas_historial = reservas_historial)
 
 
 @app.errorhandler(404)      #manejo de errores
