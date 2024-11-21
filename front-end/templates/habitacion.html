@@ -70,12 +70,12 @@
         <div id="hotel"> <!-- Datos habitaciones del hotel seleccionado -->
             {% for habitacion in otras_habitaciones %}
                 <div id="grilla">
-                    <img class="grillaImg" src="{{url_for('static', filename='images/ejemploHabitacion/habitacion2.jpg')}}" class="imagen-habitacion" alt="habitaciones">
+                    <img class="grillaImg" src="{{ url_for('static', filename='images/hoteles/' + hotel.hotel_nombre + '/' + habitacion.nombre + '/imagen0.jpg') }}" class="imagen-habitacion" alt="habitaciones">
                     <div class="texto-habitacion">
                         <h2 >{{habitacion.nombre}}</h2>
                         <p >Capacidad: {{habitacion.capacidad}}</p>
                         <p >Precio(por noche): {{habitacion.precio}}</p>
-                        <a href=""><button class="boton-habitacion">Ver</button></a>
+                        <a href="{{url_for('habitacion', habitacion_id=habitacion.habitacion_id)}}"><button class="boton-habitacion">Ver</button></a>
                     </div>
                 </div>
             {% endfor %}  
