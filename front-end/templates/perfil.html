@@ -38,71 +38,25 @@
     <section class="perfil-usuario__historial">
       <h2 class="perfil-usuario__historial-titulo">Historial de reservas</h2>
 
+      {% for reserva in reservas_historial %}
       <article class="perfil-usuario__historial-reserva-contenedor">
-        <div class="perfil-usuario__historial-reserva-barra barra-estado--confirmado"></div>
+        <div class="perfil-usuario__historial-reserva-barra"></div>
         
         <div class="perfil-usuario__historial-reserva-contenido">
-          <h3 class="perfil-usuario__historial-hotel">Alvear Palace Hotel</h3>
+          <h3 class="perfil-usuario__historial-hotel">{{ reserva.hotel_nombre }}</h3>
           <section class="perfil-usuario__historial-datos-contenedor">
             <div class="perfil-usuario__historial-dato">
-              <span class="perfil-usuario__historial-dato-titulo">Fecha de la reserva</span>
-              <span class="perfil-usuario__historial-fecha">28/02/2020</span>
+              <span class="perfil-usuario__historial-dato-titulo">Duración</span>
+              <span class="perfil-usuario__historial-fecha">{{ reserva.fecha_entrada }} hasta {{ reserva.fecha_salida }}</span>
             </div>
             <div class="perfil-usuario__historial-dato">
               <span class="perfil-usuario__historial-dato-titulo">Habitación</span>
-              <span class="perfil-usuario__historial-habitacion">8D</span>
-            </div>
-            <div class="perfil-usuario__historial-dato">
-              <span class="perfil-usuario__historial-dato-titulo">Estado</span>
-              <span class="perfil-usuario__historial-estado">Confirmada</span>
+              <span class="perfil-usuario__historial-habitacion">{{ reserva.habitacion_nombre }}</span>
             </div>
           </section>
         </div>
       </article>
-
-      <article class="perfil-usuario__historial-reserva-contenedor">
-        <div class="perfil-usuario__historial-reserva-barra barra-estado--cancelado"></div>
-        
-        <div class="perfil-usuario__historial-reserva-contenido">
-          <h3 class="perfil-usuario__historial-hotel">Gran Hotel Argentino</h3>
-          <section class="perfil-usuario__historial-datos-contenedor">
-            <div class="perfil-usuario__historial-dato">
-              <span class="perfil-usuario__historial-dato-titulo">Fecha de la reserva</span>
-              <span class="perfil-usuario__historial-fecha">27/01/2020</span>
-            </div>
-            <div class="perfil-usuario__historial-dato">
-              <span class="perfil-usuario__historial-dato-titulo">Habitación</span>
-              <span class="perfil-usuario__historial-habitacion">2B</span>
-            </div>
-            <div class="perfil-usuario__historial-dato">
-              <span class="perfil-usuario__historial-dato-titulo">Estado</span>
-              <span class="perfil-usuario__historial-estado">Cancelada</span>
-            </div>
-          </section>
-        </div>
-      </article>
-
-      <article class="perfil-usuario__historial-reserva-contenedor">
-        <div class="perfil-usuario__historial-reserva-barra barra-estado--confirmado"></div>
-        
-        <div class="perfil-usuario__historial-reserva-contenido">
-          <h3 class="perfil-usuario__historial-hotel">Hotel Madero</h3>
-          <section class="perfil-usuario__historial-datos-contenedor">
-            <div class="perfil-usuario__historial-dato">
-              <span class="perfil-usuario__historial-dato-titulo">Fecha de la reserva</span>
-              <span class="perfil-usuario__historial-fecha">08/04/2019</span>
-            </div>
-            <div class="perfil-usuario__historial-dato">
-              <span class="perfil-usuario__historial-dato-titulo">Habitación</span>
-              <span class="perfil-usuario__historial-habitacion">11C</span>
-            </div>
-            <div class="perfil-usuario__historial-dato">
-              <span class="perfil-usuario__historial-dato-titulo">Estado</span>
-              <span class="perfil-usuario__historial-estado">Confirmada</span>
-            </div>
-          </section>
-        </div>
-      </article>
+      {% endfor %}
     </section>
   </main>
 {% endblock %}
