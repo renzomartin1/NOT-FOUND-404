@@ -11,7 +11,7 @@ QUERY_ELIMINAR_USUARIO = "DELETE FROM usuarios WHERE usuario_id = :usuario_id"
 
 # Reservas
 QUERY_TODAS_LAS_RESERVAS = "SELECT reserva_id, usuario_id, hotel_id, habitacion_id, fecha_entrada, fecha_salida FROM reservaciones"
-QUERY_RESERVA_BY_USUARIO_ID = "SELECT reserva_id FROM reservaciones WHERE usuario_id = :usuario_id"
+QUERY_RESERVA_BY_USUARIO_ID = "SELECT reserva_id, hotel_id, habitacion_id, fecha_entrada, fecha_salida FROM reservaciones WHERE usuario_id = :usuario_id"
 QUERY_REGISTRAR_RESERVA = """
 INSERT INTO reservaciones(usuario_id, hotel_id, habitacion_id, fecha_entrada, fecha_salida)
 VALUES
@@ -56,14 +56,13 @@ GROUP BY hab.habitacion_id, hab.hotel_id, hab.nombre, hab.descripcion, hab.preci
 QUERY_HABITACION_BY_ID = "SELECT hab.habitacion_id, hab.hotel_id, hab.nombre, hab.descripcion, hab.precio, hab.capacidad FROM habitaciones hab WHERE hab.habitacion_id = :habitacion_id"
 
 
-
 # credenciales
 db_username = os.getenv('MYSQL_USERNAME')
 db_password = os.getenv('MYSQL_PASSWORD')
 
 # string de conexión a la base de datos: mysql://usuario:password@host:puerto/nombre_schema
 # engine = create_engine("mysql://'usuario':'contraseña'@localhost:'puerto'/'nombre_db'")
-engine = create_engine(f"mysql+mysqlconnector://root:root@localhost:3306/hospedajes")
+engine = create_engine(f"mysql+mysqlconnector://{db_username}:{db_password}@localhost:3306/hospedajes")
 
 def run_query(query, parameters = None):
     with engine.connect() as conn:

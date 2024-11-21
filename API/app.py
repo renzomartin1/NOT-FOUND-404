@@ -49,10 +49,18 @@ def reserva_by_usuario_id(usuario_id):
         return jsonify({'error': str(e)}), 500
 
     if len(result) == 0:
-        return jsonify({'error': 'No se encontró la reserva'}), 404 # Not found
+        return jsonify({'error': 'No se encontró la reserva'}), 404
 
-    result = result[0]
-    return jsonify({'reserva_id': result[0]}), 200
+    response = []
+    for row in result:
+        response.append({
+            'reserva_id': row[0],
+            'hotel_id': row[1],
+            'habitacion_id': row[2], 
+            'fecha_entrada': row[3], 
+            'fecha_salida': row[4]
+        })
+    return jsonify(response), 200
 
 #------------------------------------------- fin reservaciones --------------------------------------------
 
