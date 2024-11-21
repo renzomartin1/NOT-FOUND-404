@@ -44,7 +44,6 @@
                 </div>
             </div>
             </div>
-        </div>
         <!-- Caja contenedora de descripcion de habitacion y fechas de reserva -->
         <div class="caja2">
             <div class="info">
@@ -53,11 +52,12 @@
             </div>
             <div class="reserva">
                 <h3 class="tituloRes">En que fechas vas a visitarnos?</h3>
-                <form class="filter-form" method="GET">
+                <form class="filter-form" method="GET" action="{{ url_for('comprar', habitacion_id=habitacion.habitacion_id) }}">
                     <input type="date" name="fecha_entrada" placeholder="Fecha de Entrada" min="{{ fecha_actual }}" required> 
                     <input type="date" name="fecha_salida" placeholder="Fecha de Salida" min="{{ fecha_actual }}" required>
+                    <button class="filter-button" type="submit">Reservar</button>
                 </form>
-                <a href="{{url_for('comprar', habitacion_id=habitacion.habitacion_id)}}"><button class="filter-button">Reservar</button></a>
+            
             </div>
         </div>
     </div>
