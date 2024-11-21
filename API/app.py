@@ -4,8 +4,7 @@ import querys
 
 
 app = Flask(__name__)
-PORT = 5000
-
+PORT = 5005
 
 #------------------------------------------- inicio reservaciones --------------------------------------------
 @app.route('/api/reservas', methods = ['GET'])
@@ -36,16 +35,11 @@ def crear_reservas():
         return jsonify({'error': str(e)}), 500
 
     if not data:
-        return jsonify({'error': 'No data provided'}), 400
-    
-    usuario_id = data.get('usuario_id')
-    hotel_id = data.get('hotel_id')
-    habitacion_id = data.get('habitacion_id')
-    fecha_entrada = data.get('fecha_inicio')
-    fecha_salida = data.get('fecha_fin')
-    querys.registrar_reserva({'usuario_id':usuario_id, 'hotel_id':hotel_id, 'habitacion_id':habitacion_id, 'fecha_entrada':fecha_entrada, 'fecha_salida':fecha_salida})
+        return jsonify({'error': 'no se ha proporcionado ninguna informacion'}), 400
 
-    return jsonify(), 201
+    querys.registrar_reserva(data)
+
+    return jsonify(data), 201
 
 @app.route('/api/reservas/<int:usuario_id>', methods=['GET'])
 def reserva_by_usuario_id(usuario_id):

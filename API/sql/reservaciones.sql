@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS reservaciones (
     habitacion_id INT NOT NULL,
     fecha_entrada DATE NOT NULL,
     fecha_salida DATE NOT NULL,
+    servicios_contratados VARCHAR(200),
     PRIMARY KEY (reserva_id),
     FOREIGN KEY (hotel_id) REFERENCES hoteles(hotel_id)
         	ON DELETE CASCADE

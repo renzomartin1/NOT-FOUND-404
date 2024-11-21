@@ -13,9 +13,9 @@ QUERY_ELIMINAR_USUARIO = "DELETE FROM usuarios WHERE usuario_id = :usuario_id"
 QUERY_TODAS_LAS_RESERVAS = "SELECT reserva_id, usuario_id, hotel_id, habitacion_id, fecha_entrada, fecha_salida FROM reservaciones"
 QUERY_RESERVA_BY_USUARIO_ID = "SELECT reserva_id FROM reservaciones WHERE usuario_id = :usuario_id"
 QUERY_REGISTRAR_RESERVA = """
-INSERT INTO reservaciones(reserva_id, usuario_id, hotel_id, habitacion_id, fecha_entrada, fecha_salida)
+INSERT INTO reservaciones(usuario_id, hotel_id, habitacion_id, fecha_entrada, fecha_salida)
 VALUES
-(:reserva_id, :usuario_id, :hotel_id, :habitacion_id, :fecha_entrada, :fecha_salida);
+(:usuario_id, :hotel_id, :habitacion_id, :fecha_entrada, :fecha_salida);
 """
 
 
@@ -44,7 +44,8 @@ LEFT JOIN reservaciones res ON res.habitacion_id = hab.habitacion_id
 WHERE :hotel_id = :hotel_id 
 AND (:habitacion_id IS NULL OR hab.habitacion_id != :habitacion_id)
 AND (
-    res.habitacion_id IS NULL OR  
+    (:fecha_entrada IS NULL AND :fecha_salida IS NULL) OR
+    res.habitacion_id IS NULL OR
     NOT (res.fecha_entrada < :fecha_salida AND res.fecha_salida > :fecha_entrada)
 )
 AND (:cantidad_personas IS NULL OR hab.capacidad >= :cantidad_personas)
@@ -88,7 +89,7 @@ def all_reservas():
     return run_query(QUERY_TODAS_LAS_RESERVAS).fetchall()
 
 def registrar_reserva():
-    return run_query(QUERY_REGISTRAR_RESERVA)
+    return run_query(QUERY_REGISTRAR_RESERVA, data)
 
 def reserva_by_usuario_id(usuario_id):
     return run_query(QUERY_RESERVA_BY_USUARIO_ID, {'usuario_id': usuario_id}).fetchall()
