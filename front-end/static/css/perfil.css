@@ -140,6 +140,11 @@
   margin-right: 0.5rem;
 }
 
+.texto-copiado-notif {
+  font-size: 0.7rem;
+  color: var(--contacto-boton-texto-color);
+}
+
 /* Separador */
 
 .perfil-usuario__separador {
