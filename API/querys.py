@@ -44,7 +44,8 @@ LEFT JOIN reservaciones res ON res.habitacion_id = hab.habitacion_id
 WHERE :hotel_id = :hotel_id 
 AND (:habitacion_id IS NULL OR hab.habitacion_id != :habitacion_id)
 AND (
-    res.habitacion_id IS NULL OR  
+    (:fecha_entrada IS NULL AND :fecha_salida IS NULL) OR
+    res.habitacion_id IS NULL OR
     NOT (res.fecha_entrada < :fecha_salida AND res.fecha_salida > :fecha_entrada)
 )
 AND (:cantidad_personas IS NULL OR hab.capacidad >= :cantidad_personas)
