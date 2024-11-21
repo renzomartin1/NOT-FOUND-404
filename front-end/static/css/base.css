@@ -33,8 +33,9 @@ header {
 }
 
 #logotipo a img {
-    width: 192px;
-    height: 66px;
+    margin-top: 10px;
+    width: 180px;
+    height: 100px;
 }
 
 #botones-sesion-modales {
