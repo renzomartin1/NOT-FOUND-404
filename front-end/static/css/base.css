@@ -14,7 +14,7 @@ body {
 
 
 
-/* HEADER: LOGOTIPO, BOTONES DE INGRESO/REGISTRO Y BARRA DE NAVEGACIÓN */
+/* HEADER: LOGOTIPO, BOTONES DE INICIAR SESIÓN O VER MI PERFIL Y REGISTRARSE O CERRAR SESIÓN, Y BARRA DE NAVEGACIÓN */
 
 header {
     display: flex;
@@ -24,9 +24,9 @@ header {
     padding-bottom: 15px;
 }
 
-/* Logotipo y botones de ingreso/registro */
+/* Logotipo */
 
-#contenedor-logotipo-botones-sesion-modales {
+#contenedor-logotipo-botones-sesion {
     display: flex;
     justify-content: space-between;
     width: 55%;
@@ -38,11 +38,15 @@ header {
     height: 100px;
 }
 
-#botones-sesion-modales {
+/* Contenedor de los botones de sesión */
+
+#botones-sesion {
     display: flex;
     align-items: center;
     column-gap: 10px;
 }
+
+/* Si no se inicio sesión; botones de iniciar sesión y registrarse */
 
 #boton-abrir-modal-login {
     color: #fff;
@@ -75,6 +79,37 @@ header {
     color: var(--color3);
     font-size: 20px;
     transition: 0.2s;
+}
+
+/* Si se inicio sesión; botones de ver mi perfil y cerrar sesión */
+
+#boton-ver-mi-perfil {
+    color: #fff;
+    background-color: var(--color4);
+    font-size: 13px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#boton-ver-mi-perfil:hover {
+    background-color: #19465f;
+}
+
+#boton-cerrar-sesion {
+    color: var(--color2);
+    background-color: var(--color3);
+    font-size: 13px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#boton-cerrar-sesion:hover {
+    color: var(--color3);
+    background-color: #19465f;
 }
 
 /* Barra de navegación */
@@ -234,7 +269,7 @@ header {
     cursor: pointer;
 }
 
-/* Texto: ¿No tienes una cuenta? Registrarse */
+/* Texto: ¿No tienes una cuenta? Registrate */
 
 #sin-cuenta-modal-login {
     display: flex;

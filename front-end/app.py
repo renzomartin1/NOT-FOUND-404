@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, session
+from flask import Flask, render_template, jsonify, request, session, redirect, url_for
 from datetime import datetime
 import requests
 
@@ -96,6 +96,12 @@ def home():
 
     return render_template("home.html", hoteles=hoteles, fecha_actual=fecha_actual, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida, cantidad_personas=cantidad_personas,
     forzar_modal_register = forzar_modal_register, forzar_modal_login = forzar_modal_login, error_modal_register = error_modal_register, error_modal_login = error_modal_login, success_modal_login = success_modal_login)
+
+
+@app.route("/logout")
+def logout():
+    session.pop("usuario_id")
+    return redirect(url_for("home"))
 
 
 @app.route("/hotel/<int:hotel_id>")

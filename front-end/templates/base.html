@@ -15,21 +15,27 @@
 </head>
 <body>
 
-    <!-- HEADER: LOGOTIPO, BOTONES DE INGRESO/REGISTRO Y BARRA DE NAVEGACIÓN -->
+    <!-- HEADER: LOGOTIPO, BOTONES DE INICIAR SESIÓN O VER MI PERFIL Y REGISTRARSE O CERRAR SESIÓN, Y BARRA DE NAVEGACIÓN -->
     <header>
-        <div id="contenedor-logotipo-botones-sesion-modales">
+        <div id="contenedor-logotipo-botones-sesion">
             <div id="logotipo">
                 <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/logo2azul.png') }}"></a>
             </div>
-            <div id="botones-sesion-modales">
+            <div id="botones-sesion">
+
+                {% if "usuario_id" not in session %}
                 <button id="boton-abrir-modal-login">Iniciar sesión</button>
                 <button id="boton-abrir-modal-register">Registrarse</button>
+                {% else %}
+                <a id="boton-ver-mi-perfil" href="{{ url_for('perfil', usuario_id=session['usuario_id']) }}">Ver mi perfil</a>
+                <a id="boton-cerrar-sesion" href="{{ url_for('logout') }}">Cerrar sesión</a>
+                {% endif %}
+
             </div>
         </div>
         <nav>
             <ul id="barra-navegacion">
                 <li class="barra-navegacion-opciones"><a href="{{ url_for('home') }}">Inicio</a></li>
-                <li class="barra-navegacion-opciones"><a href=#>Perfil</a></li>
                 <li class="barra-navegacion-opciones"><a href="{{ url_for('contacto') }}">Contacto</a></li>
                 <li class="barra-navegacion-opciones"><a href="{{ url_for('sobre_nosotros') }}">Sobre nosotros</a></li>
             </ul>
