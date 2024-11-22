@@ -29,7 +29,12 @@
             <div class="caja2">
                 <div class="caja21">
                     <p class="descripcionHotel">{{ hotel.descripcion }}</p>
-                    <p class="descripcionHotel">SERVICIOS: {{ hotel.servicios }}</p>
+                    <p class="descripcionHotel">SERVICIOS:</p>
+                    <ul class="Servicios">
+                        {% for servicio in hotel.servicios %}
+                        <li>{{ servicio }}</li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
         </div>
@@ -74,5 +79,3 @@
 </div>
 
 {% endblock %}
-
-
