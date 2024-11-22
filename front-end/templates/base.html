@@ -80,17 +80,25 @@
                     </div>
                 </button>
             </div>
-            <form>
-                <label for="frname">Nombre</label>
-                <input id="frname" type="text" name="frname" required>
-                <label for="fremail">Correo electrónico</label>
-                <input id="fremail" type="email" name="fremail" required>
-                <label for="frnumber">Número telefónico</label>
-                <input id="frnumber" type="number" name="frnumber" required>
-                <label for="frpassword">Contraseña</label>
-                <input id="frpassword" type="password" name="frpassword" required>
-                <label for="frpasswordrepeat">Repetir contraseña</label>
-                <input id="frpasswordrepeat" type="password" name="frpasswordrepeat" required>
+            <form action="{{ url_for('home') }}" method="post">
+                <label for="fr-nombre">Nombre</label>
+                <input id="fr-nombre" type="text" name="fr-nombre" required>
+
+                <label for="fr-apellido">Apellido</label>
+                <input id="fr-apellido" type="text" name="fr-apellido" required>
+
+                <label for="fr-email">Correo electrónico</label>
+                <input id="fr-email" type="email" name="fr-email" required>
+
+                <label for="fr-telefono">Número telefónico</label>
+                <input id="fr-telefono" type="number" name="fr-telefono" required>
+
+                <label for="fr-contraseña">Contraseña</label>
+                <input id="fr-contraseña" type="password" name="fr-contraseña" required>
+
+                <label for="fr-repetir-contraseña">Repetir contraseña</label>
+                <input id="fr-repetir-contraseña" type="password" name="fr-repetir-contraseña" required>
+
                 <button id="boton-register" type="submit">Registrarse</button>
             </form>
             <div id="terminos-avisos">
