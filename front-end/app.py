@@ -1,11 +1,13 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, session
 from datetime import datetime
 import requests
 
-PORT = 5001
-app = Flask(__name__)
-
 API_URL = 'http://127.0.0.1:5005/api'
+PORT = 5001
+
+app = Flask(__name__)
+app.secret_key = "Not-Found-404-Grupo-17"
+
 
 @app.route("/", methods = ["GET", "POST"])
 def home():
@@ -35,11 +37,12 @@ def home():
     fecha_actual = datetime.now().strftime("%Y-%m-%d")
 
 
-    # Sistema de registro
+    # Sistema de registro e ingreso
 
     forzar_modal_register = False
     forzar_modal_login = False
     error_modal_register = ""
+    error_modal_login = ""
     success_modal_login = ""
 
     if request.method == "POST":
@@ -72,9 +75,27 @@ def home():
                     forzar_modal_register = True
                     error_modal_register = json_api["error"]
 
+        elif len(request.form) == 2:
+
+            datos_login = {
+                "email": request.form.get("fl-email"),
+                "contraseña": request.form.get("fl-contraseña")
+            }
+
+            respuesta_api = requests.post(f"{API_URL}/usuarios/login", json = datos_login)
+
+            if respuesta_api.status_code == 400 or respuesta_api.status_code == 404:
+                json_api = respuesta_api.json()
+                forzar_modal_login = True
+                error_modal_login = json_api["error"]
+
+            elif respuesta_api.status_code == 200:
+                json_api = respuesta_api.json()
+                session["usuario_id"] = json_api["usuario_id"]
+
 
     return render_template("home.html", hoteles=hoteles, fecha_actual=fecha_actual, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida, cantidad_personas=cantidad_personas,
-    forzar_modal_register = forzar_modal_register, forzar_modal_login = forzar_modal_login, error_modal_register = error_modal_register, success_modal_login = success_modal_login)
+    forzar_modal_register = forzar_modal_register, forzar_modal_login = forzar_modal_login, error_modal_register = error_modal_register, error_modal_login = error_modal_login, success_modal_login = success_modal_login)
 
 
 @app.route("/hotel/<int:hotel_id>")
@@ -101,13 +122,11 @@ def hotel(hotel_id, fecha_entrada=None, fecha_salida=None, cantidad_personas=Non
         result = response.json()
         hotel = result["hotel"]
         habitaciones = result["habitaciones"]
-        hotel["servicios"] = hotel["servicios"].split(", ")
-        
     except requests.exceptions.RequestException as e:
         return jsonify({ 'error': str(e) }), 500
     
     fecha_actual = datetime.now().strftime("%Y-%m-%d")
-    return render_template("hotel.html", hotel=hotel, habitaciones=habitaciones, fecha_actual=fecha_actual)ual)
+    return render_template("hotel.html", hotel=hotel, habitaciones=habitaciones, fecha_actual=fecha_actual)
 
 @app.route("/habitacion/<int:habitacion_id>")
 def habitacion(habitacion_id):
