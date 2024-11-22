@@ -58,16 +58,18 @@
                     </div>
                 </button>
             </div>
-            <form>
-                <label for="flemail">Correo electrónico</label>
-                <input id="flemail" type="email" name="flemail" required>
-                <label for="flpassword">Contraseña</label>
-                <input id="flpassword" type="password" name="flpassword" required>
+            <form action="{{ url_for('home') }}" method="post">
+                <label for="fl-email">Correo electrónico</label>
+                <input id="fl-email" type="email" name="fl-email" required>
+
+                <label for="fl-contraseña">Contraseña</label>
+                <input id="fl-contraseña" type="password" name="fl-contraseña" required>
+
                 <button id="boton-login" type="submit">Iniciar sesión</button>
             </form>
             <div id="sin-cuenta-modal-login">
                 <p>
-                    ¿No tienes una cuenta? <span id="texto-register-modal-login">Registrarse</span>
+                    ¿No tienes una cuenta? <span id="texto-register-modal-login">Registrate</span>
                 </p>
             </div>
         </div>
