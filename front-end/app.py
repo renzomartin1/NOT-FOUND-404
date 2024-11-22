@@ -101,11 +101,13 @@ def hotel(hotel_id, fecha_entrada=None, fecha_salida=None, cantidad_personas=Non
         result = response.json()
         hotel = result["hotel"]
         habitaciones = result["habitaciones"]
+        hotel["servicios"] = hotel["servicios"].split(", ")
+        
     except requests.exceptions.RequestException as e:
         return jsonify({ 'error': str(e) }), 500
     
     fecha_actual = datetime.now().strftime("%Y-%m-%d")
-    return render_template("hotel.html", hotel=hotel, habitaciones=habitaciones, fecha_actual=fecha_actual)
+    return render_template("hotel.html", hotel=hotel, habitaciones=habitaciones, fecha_actual=fecha_actual)ual)
 
 @app.route("/habitacion/<int:habitacion_id>")
 def habitacion(habitacion_id):
