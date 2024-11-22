@@ -122,6 +122,7 @@ def hotel(hotel_id, fecha_entrada=None, fecha_salida=None, cantidad_personas=Non
         result = response.json()
         hotel = result["hotel"]
         habitaciones = result["habitaciones"]
+        hotel["servicios"] = hotel["servicios"].split(", ")
     except requests.exceptions.RequestException as e:
         return jsonify({ 'error': str(e) }), 500
     
