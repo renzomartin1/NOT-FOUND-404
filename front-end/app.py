@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 API_URL = 'http://127.0.0.1:5005/api'
 
-@app.route("/")
+@app.route("/", methods = ["GET", "POST"])
 def home():
     fecha_entrada = request.args.get("fecha_entrada")
     fecha_salida = request.args.get("fecha_salida")
@@ -33,7 +33,48 @@ def home():
         return jsonify({ 'error': str(e) }), 500
         
     fecha_actual = datetime.now().strftime("%Y-%m-%d")
-    return render_template("home.html", hoteles=hoteles, fecha_actual=fecha_actual, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida, cantidad_personas=cantidad_personas)
+
+
+    # Sistema de registro
+
+    forzar_modal_register = False
+    forzar_modal_login = False
+    error_modal_register = ""
+    success_modal_login = ""
+
+    if request.method == "POST":
+        if len(request.form) == 6:
+            contraseña = request.form.get("fr-contraseña")
+            repetir_contraseña = request.form.get("fr-repetir-contraseña")
+
+            if repetir_contraseña != contraseña:
+                forzar_modal_register = True
+                error_modal_register = "Las contraseñas no coinciden."
+
+            else:
+                datos_register = {
+                    "nombre": request.form.get("fr-nombre"),
+                    "apellido": request.form.get("fr-apellido"),
+                    "email": request.form.get("fr-email"),
+                    "telefono": request.form.get("fr-telefono"),
+                    "contraseña": request.form.get("fr-contraseña")
+                }
+
+                respuesta_api = requests.post(f"{API_URL}/usuarios/register", json = datos_register)
+
+                if respuesta_api.status_code == 201:
+                    json_api = respuesta_api.json()
+                    forzar_modal_login = True
+                    success_modal_login = json_api["success"]
+
+                elif respuesta_api.status_code == 400:
+                    json_api = respuesta_api.json()
+                    forzar_modal_register = True
+                    error_modal_register = json_api["error"]
+
+
+    return render_template("home.html", hoteles=hoteles, fecha_actual=fecha_actual, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida, cantidad_personas=cantidad_personas,
+    forzar_modal_register = forzar_modal_register, forzar_modal_login = forzar_modal_login, error_modal_register = error_modal_register, success_modal_login = success_modal_login)
 
 
 @app.route("/hotel/<int:hotel_id>")
