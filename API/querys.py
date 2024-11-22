@@ -87,7 +87,7 @@ def eliminar_usuario(usuario_id):
 def all_reservas():
     return run_query(QUERY_TODAS_LAS_RESERVAS).fetchall()
 
-def registrar_reserva():
+def registrar_reserva(data):
     return run_query(QUERY_REGISTRAR_RESERVA, data)
 
 def reserva_by_usuario_id(usuario_id):
