@@ -48,9 +48,6 @@ def reserva_by_usuario_id(usuario_id):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-    if len(result) == 0:
-        return jsonify({'error': 'No se encontró la reserva'}), 404
-
     response = []
     for row in result:
         response.append({
