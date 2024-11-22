@@ -11,5 +11,12 @@ pip install sqlalchemy
 pip install flask_sqlalchemy
 pip install mysql-connector-python  # alternativa: pip install PyMySQL
 
+# requerimientos app mobile 
 
-if
+python3 -m pip install --upgrade pip wheel setuptools
+
+
+sudo apt install python3-dev build-essential libgl1-mesa-dev libgles2-mesa-dev libgstreamer1.0 libgstreamer-plugins-base1.0
+
+
+python3 -m pip install kivy
