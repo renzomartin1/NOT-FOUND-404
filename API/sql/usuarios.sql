@@ -3,12 +3,12 @@ DROP TABLE IF EXISTS usuarios;
 
 -- Creación de la tabla "usuarios".
 CREATE TABLE usuarios (
-	usuario_id INT NOT NULL AUTO_INCREMENT,
+    usuario_id INT NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(50) NOT NULL,
     apellido VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL,
     contraseña VARCHAR(75) NOT NULL,
-    telefono INT NOT NULL,
+    telefono VARCHAR(20) NOT NULL,
     PRIMARY KEY (usuario_id)
 );
 
