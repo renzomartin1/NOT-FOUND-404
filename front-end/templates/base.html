@@ -16,7 +16,6 @@
 <body>
 
     <!-- HEADER: LOGOTIPO, BOTONES DE INGRESO/REGISTRO Y BARRA DE NAVEGACIÓN -->
-
     <header>
         <div id="contenedor-logotipo-botones-sesion-modales">
             <div id="logotipo">
@@ -38,13 +37,17 @@
     </header>
 
     <!-- DIALOG: MODAL LOGIN -->
-
     <dialog id="contenedor-modal-login">
         <div id="modal-login">
 
             {% if success_modal_login %}
             <div id="success-modal-login">
                 <p>{{ success_modal_login }}</p>
+            </div>
+            {% endif %}
+            {% if error_modal_login %}
+            <div id="error-modal-login">
+                <p>{{ error_modal_login }}</p>
             </div>
             {% endif %}
 
@@ -76,7 +79,6 @@
     </dialog>
 
     <!-- DIALOG: MODAL REGISTER -->
-
     <dialog id="contenedor-modal-register">
         <div id="modal-register">
 
@@ -133,7 +135,6 @@
     {% block body %}{% endblock %}
 
     <!-- FOOTER: LÍNEA Y TEXTO DEL FOOTER -->
-
     <footer>
         <div id="linea-footer">
             <hr>

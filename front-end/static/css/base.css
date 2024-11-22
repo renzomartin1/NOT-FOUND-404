@@ -125,6 +125,20 @@ header {
     padding: 35px;
 }
 
+/* Mensaje de error (si se dio) */
+
+#error-modal-login {
+    background-color: #eeb5b5;
+    border: 2px solid #b94444;
+    border-radius: 5px;
+    margin-bottom: 35px;
+}
+
+#error-modal-login p {
+    font-size: 13px;
+    text-align: center;
+}
+
 /* Mensaje de éxito (si se dio) */
 
 #success-modal-login {
