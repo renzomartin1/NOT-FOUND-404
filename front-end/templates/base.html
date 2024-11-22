@@ -147,6 +147,13 @@
     </footer>
 
     <script src="{{ url_for('static', filename='js/base.js') }}"></script>
-    {% block script %} {% endblock script %}
+    {% if forzar_modal_login %}
+    <script src="{{ url_for('static', filename='js/forzar_modal_login.js') }}"></script>
+    {% endif %}
+    {% if forzar_modal_register %}
+    <script src="{{ url_for('static', filename='js/forzar_modal_register.js') }}"></script>
+    {% endif %}
+
+    {% block script %}{% endblock %}
 </body>
 </html>
