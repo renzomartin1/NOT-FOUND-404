@@ -41,6 +41,13 @@
 
     <dialog id="contenedor-modal-login">
         <div id="modal-login">
+
+            {% if success_modal_login %}
+            <div id="success-modal-login">
+                <p>{{ success_modal_login }}</p>
+            </div>
+            {% endif %}
+
             <div id="titulo-boton-cerrar-modal-login">
                 <h2>Iniciar sesión</h2>
                 <button id="boton-cerrar-modal-login">
@@ -70,6 +77,13 @@
 
     <dialog id="contenedor-modal-register">
         <div id="modal-register">
+
+            {% if error_modal_register %}
+            <div id="error-modal-register">
+                <p>{{ error_modal_register }}</p>
+            </div>
+            {% endif %}
+
             <div id="titulo-boton-cerrar-modal-register">
                 <h2>Registrarse</h2>
                 <button id="boton-cerrar-modal-register">

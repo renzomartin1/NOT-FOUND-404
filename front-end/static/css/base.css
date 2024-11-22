@@ -125,6 +125,20 @@ header {
     padding: 35px;
 }
 
+/* Mensaje de éxito (si se dio) */
+
+#success-modal-login {
+    background-color: #bbeeb5;
+    border: 2px solid #44b944;
+    border-radius: 5px;
+    margin-bottom: 35px;
+}
+
+#success-modal-login p {
+    font-size: 13px;
+    text-align: center;
+}
+
 /* Título y botón de cierre (X) */
 
 #titulo-boton-cerrar-modal-login {
@@ -249,6 +263,20 @@ header {
     flex-direction: column;
     max-width: 400px;
     padding: 35px;
+}
+
+/* Mensaje de error (si se dio) */
+
+#error-modal-register {
+    background-color: #eeb5b5;
+    border: 2px solid #b94444;
+    border-radius: 5px;
+    margin-bottom: 35px;
+}
+
+#error-modal-register p {
+    font-size: 13px;
+    text-align: center;
 }
 
 /* Título y botón de cierre (X) */
