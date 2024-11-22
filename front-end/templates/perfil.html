@@ -38,6 +38,7 @@
     <section class="perfil-usuario__historial">
       <h2 class="perfil-usuario__historial-titulo">Historial de reservas</h2>
 
+      {% if reservas_historial %}
       {% for reserva in reservas_historial %}
       <article class="perfil-usuario__historial-reserva-contenedor">
         <div class="perfil-usuario__historial-reserva-barra"></div>
@@ -53,6 +54,15 @@
               <span class="perfil-usuario__historial-dato-titulo">Habitación</span>
               <span class="perfil-usuario__historial-habitacion">{{ reserva.habitacion_nombre }}</span>
             </div>
+          </section>
+        </div>
+      </article>
+      {% endfor %}
+      {% endif %}
+
+      {% if not reservas_historial %}
+        <p class="perfil-usuario__historial-vacio">No tienes ninguna reserva</p>
+      {% endif %}
           </section>
         </div>
       </article>
