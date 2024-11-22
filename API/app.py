@@ -279,7 +279,7 @@ def usuarios_register():
 @app.route("/api/usuarios/login", methods = ["POST"])
 def usuarios_login():
     datos_login = request.get_json()
-    query_verificacion = "SELECT contraseña FROM usuarios WHERE email = :email;"
+    query_verificacion = "SELECT usuario_id, contraseña FROM usuarios WHERE email = :email;"
 
     try:
         resultado_query_verificacion = querys.run_query(query_verificacion, datos_login)
@@ -295,8 +295,8 @@ def usuarios_login():
         return jsonify({"error": "La contraseña es incorrecta."}), 400
 
     else:
-        return jsonify({"success": "Has iniciado sesión correctamente."}), 200
-    
+        return jsonify({"usuario_id": fila.usuario_id}), 200
+
 #------------------------------------------- fin usuarios ------------------------------------------------
 
 if __name__ == "__main__":
