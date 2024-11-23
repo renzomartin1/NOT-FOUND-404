@@ -21,7 +21,19 @@
     border: 1px solid #beb8b8;
     border-radius: 15px;
     padding: 45px;
-    background-color: #E5EDF1;
+    background: 
+    radial-gradient(
+        circle, 
+        rgb(255, 208, 0),
+        rgb(255, 208, 0) 10px,
+        transparent 50px
+    ),
+    repeating-radial-gradient(
+        circle,
+        #69a4cc,
+        #69a4cc 10px,
+        transparent 50px
+    );
 }
 
 #cuerpo-formulario-contacto h2 {
