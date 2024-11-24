@@ -7,37 +7,21 @@ app = Flask(__name__)
 PORT = 5005
 
 #------------------------------------------- inicio reservaciones --------------------------------------------
-@app.route('/api/reservas', methods = ['GET'])
-def get_all_reservas():
-    try:
-        result = querys.all_reservas()
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
-    response = []
-    for row in result:
-        response.append({ 
-            'reserva_id':row[0],
-            'usuario_id': row[1],
-            'hotel_id': row[2], 
-            'habitacion_id':row[3],
-            'fecha_entrada': row[4], 
-            'fecha_salida': row[5]
-        })
-
-    return jsonify(response), 200
 
 @app.route('/api/reservas', methods = ['POST'])
 def crear_reservas():
     try:
         data = request.get_json()
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': str(e)}), 400
 
     if not data:
         return jsonify({'error': 'no se ha proporcionado ninguna informacion'}), 400
 
-    querys.registrar_reserva(data)
+    try:
+        querys.registrar_reserva(data)
+    except SQLAlchemyError as e:
+        return jsonify({'error': str(e)}), 500
 
     return jsonify(data), 201
 
@@ -62,6 +46,7 @@ def reserva_by_usuario_id(usuario_id):
 #------------------------------------------- fin reservaciones --------------------------------------------
 
 #------------------------------------------- inicio hoteles -----------------------------------------------
+
 @app.route('/api/hoteles', methods=['GET'])
 def filtrar_hoteles():
     
@@ -73,13 +58,11 @@ def filtrar_hoteles():
         cantidad_personas = int(cantidad_personas)
     else:
         cantidad_personas = None  
+
     try:
         result = querys.filtrar_hoteles(fecha_entrada,fecha_salida, cantidad_personas)
-        print(result)
-    
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
 
     response = []
     for row in result:
@@ -100,19 +83,17 @@ def obtener_hotel_by_id(hotel_id):  #hotel_by_id_y_habitaciones_hotel
     fecha_salida = request.args.get('fecha_salida')
     cantidad_personas = request.args.get('cantidad_personas')
 
-
     try:
         result_hotel = querys.obtener_hotel_by_id(hotel_id)
         result_habitaciones = querys.filtrar_habitaciones(hotel_id, None, fecha_entrada, fecha_salida, cantidad_personas)
-        
     except Exception as e:
-        return jsonify({'error': str(e)}), 404
+        return jsonify({'error': str(e)}), 500
     
     if not result_hotel:
-        return jsonify({'error': 'No se ha encontrado un hotel con el ID dado'})
+        return jsonify({'error': 'No se ha encontrado un hotel con el ID dado'}), 404
     
     if not result_habitaciones:
-        return jsonify({'error': 'No se ha encontrado una habitación para el hotel dado'})
+        return jsonify({'error': 'No se ha encontrado una habitación para el hotel dado'}), 404
     
     response_hotel = {
         'nombre': result_hotel[1],
@@ -122,7 +103,6 @@ def obtener_hotel_by_id(hotel_id):  #hotel_by_id_y_habitaciones_hotel
         'servicios': result_hotel[5],
         'telefono': result_hotel[6],
         'email': result_hotel[7]
-        
     }
 
     response_habitaciones = []
@@ -135,13 +115,13 @@ def obtener_hotel_by_id(hotel_id):  #hotel_by_id_y_habitaciones_hotel
             'precio': row[4],
             'capacidad': row[5]
         })
-    print (response_habitaciones)
 
     return jsonify({'hotel': response_hotel, 'habitaciones': response_habitaciones}), 200
 
 #------------------------------------------- fin hoteles -------------------------------------------------------
 
 #------------------------------------------- inicio habitaciones -----------------------------------------------
+
 @app.route('/api/habitacion/<int:habitacion_id>', methods = ['GET'])
 def habitacion_by_id(habitacion_id):   #habitacion_by_id_y_otras_habitaciones
     try:
@@ -167,6 +147,7 @@ def habitacion_by_id(habitacion_id):   #habitacion_by_id_y_otras_habitaciones
         'precio' : result_habitacion[4],
         'capacidad' : result_habitacion[5]
     }
+
     response_otras_habitaciones = []
     for row in result_otras_habitaciones:
         response_otras_habitaciones.append({
@@ -183,23 +164,6 @@ def habitacion_by_id(habitacion_id):   #habitacion_by_id_y_otras_habitaciones
 #------------------------------------------- fin habitaciones -----------------------------------------------
 
 #------------------------------------------- inicio usuarios ------------------------------------------------
-@app.route('/api/usuarios', methods = ['GET'])
-def obtener_todos_los_usuarios():
-    try:
-        result = querys.obtener_todos_los_usuarios()
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-    
-    response = []
-    for row in result:
-        response.append({
-            'nombre': row[0],
-            'apellido': row[1],
-            'email': row[2],
-            'telefono': row[3]
-        })
-    return jsonify(response), 200
-
 
 @app.route('/api/usuarios/<int:usuario_id>', methods = ['GET'])
 def obtener_usuario_por_id(usuario_id):
