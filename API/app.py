@@ -55,9 +55,12 @@ def filtrar_hoteles():
     cantidad_personas = request.args.get('cantidad_personas')
     
     if cantidad_personas:
-        cantidad_personas = int(cantidad_personas)
+        try:
+            cantidad_personas = int(cantidad_personas)
+        except Exception:
+            cantidad_personas = None
     else:
-        cantidad_personas = None  
+        cantidad_personas = None
 
     try:
         result = querys.filtrar_hoteles(fecha_entrada,fecha_salida, cantidad_personas)
