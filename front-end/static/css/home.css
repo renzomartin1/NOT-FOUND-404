@@ -18,7 +18,6 @@
 }
 
 body {
-    font-family:'montserrat', sans-serif;;
     margin: 0;
     padding: 0;
     display: flex;
@@ -200,22 +199,22 @@ input[type="date"]:focus {
 .hotel-info {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    flex-grow: 1;
-    padding: 20px;
-    padding-left: 40px;
+    padding: 20px 20px 20px 40px;
+    width: 100%;
 }
 
-.hotel-info h2 {
-    font-size: 40px;
-    margin-top: 10px;
-    margin-bottom:20px;
-    
+.hotel-name {
+    font-size: 30px;
+    margin: 0px;
 }
 
-.hotel-info p {
+.hotel-location {
     font-size: 20px;
-    margin-bottom: 30px;
+    margin-top: 10px;
+}
+
+.hotel-description {
+    margin-bottom: 17px;
 }
 
 .viewmore-button {
@@ -232,12 +231,14 @@ input[type="date"]:focus {
     transition: all 0.3s ease 0s;
     cursor: pointer;
     outline: none;
-    margin-top: auto;  
+    margin-top: auto;
+    align-self: flex-end;
+    width: 35%;
 }
 
 .viewmore-button:hover {
     background-color: #19465f;
-    box-shadow: 0px 15px 20px rgb(8, 102, 139);
+    box-shadow: 0px 6px 16px rgb(8, 102, 139);
     color: #fff;
     transform: translateY(-7px);
 }

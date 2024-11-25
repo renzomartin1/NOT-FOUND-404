@@ -35,7 +35,7 @@
             </div>
             <div class="hotel-info">
                 <h2 class="hotel-name">{{ hotel.nombre }}</h2>
-                <p class="hotel-location">{{ hotel.barrio }}</p>
+                <p class="hotel-location">{{ hotel.direccion }}, {{ hotel.barrio }}</p>
                 <p class="hotel-description">{{ hotel.descripcion }}</p>
                 <button class="viewmore-button" data-url="{{ url_for('hotel', hotel_id=hotel.hotel_id, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida, cantidad_personas=cantidad_personas) }}">Ver más</button>
             </div>
