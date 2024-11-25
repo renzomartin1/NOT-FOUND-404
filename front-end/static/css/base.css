@@ -21,7 +21,8 @@ header {
     flex-direction: column;
     background-color: var(--color1);
     align-items: center;
-    padding-bottom: 15px;
+    padding-top: 4px;
+    padding-bottom: 8px;
 }
 
 /* Logotipo */
@@ -116,7 +117,7 @@ header {
 
 #barra-navegacion {
     display: flex;
-    column-gap: 25px;
+    column-gap: 40px;
     list-style: none;
     padding: 0px;
 }
@@ -133,8 +134,7 @@ header {
 
 .barra-navegacion-opciones a:hover {
     background-color: var(--color4);
-    border-radius: 20px;
-    transform: scale(1.2);
+    transform: scale(1.1);
     margin-top: -5px; 
 }
 
