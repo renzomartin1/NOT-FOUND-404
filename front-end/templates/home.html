@@ -10,20 +10,22 @@
             <img class="hoteliscoIMG" src="{{url_for('static', filename='images/obeliscoBlanco.png')}}">
         </div>
     </div>
-<div class="filtros">
-    <form class="filter-form" method="GET">
-        <input type="date" name="fecha_entrada" placeholder="Fecha de Entrada" min="{{ fecha_actual }}" required> 
-        <input type="date" name="fecha_salida" placeholder="Fecha de Salida" min="{{ fecha_actual }}" required>
-        <select class="custom-select" name="cantidad_personas">
-            <option value="-">Cantidad de personas</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
-        <button type="submit" class="filter-button">Filtrar</button>    
-    </form>
+<div id="contenedor-filtros">
+    <div class="filtros">
+        <form class="filter-form" method="GET">
+            <input type="date" name="fecha_entrada" placeholder="Fecha de Entrada" min="{{ fecha_actual }}" required> 
+            <input type="date" name="fecha_salida" placeholder="Fecha de Salida" min="{{ fecha_actual }}" required>
+            <select class="custom-select" name="cantidad_personas">
+                <option value="-">Cantidad de personas</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <button type="submit" class="filter-button">Filtrar</button>    
+        </form>
+    </div>
 </div>
 <div class="hotels">
     {% for hotel in hoteles %}
