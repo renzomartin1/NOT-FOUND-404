@@ -29,10 +29,8 @@ body {
 
 .hoteliscoPresentacion{
     text-align: center;
-    background-image: url(https://cloudfront-us-east-1.images.arcpublishing.com/infobae/VE7XWWOVARGOZMG6NEQUOED27E.jpeg);
-    background-repeat: no-repeat;
+    background-image: url(../images/fondo_presentacion.jpg);
     background-size: cover;
-    background-attachment: fixed ;
     width: 100%;
     height: 40vh;
 }
@@ -46,7 +44,7 @@ body {
 .hoteliscoIMG{
     box-sizing: border-box;
     height: 60%;
-    margin: 5% 0;
+    margin: 4% 0;
 }
 
 .bienvenida{
