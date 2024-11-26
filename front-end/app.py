@@ -155,6 +155,9 @@ def habitacion(habitacion_id):
 
 @app.route("/confirmacion_compra/<int:habitacion_id>")
 def comprar(habitacion_id):
+    if "usuario_id" not in session:
+        return redirect(url_for("home"))
+
     fecha_entrada = request.args.get("fecha_entrada")
     fecha_salida = request.args.get("fecha_salida")
 
@@ -168,6 +171,27 @@ def comprar(habitacion_id):
         return jsonify({'error': str(e)}), 500
     
     return render_template("confirmacion_compra.html", habitacion=habitacion, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida, hotel=hotel)
+
+@app.route("/confirmacion_compra/reserva", methods = ["POST"])
+def reserva_compra():
+    usuario_id = int(request.form.get("usuario_id"))
+    hotel_id = int(request.form.get("hotel_id"))
+    habitacion_id = int(request.form.get("habitacion_id"))
+    fecha_entrada = request.form.get("fecha_entrada")
+    fecha_salida = request.form.get("fecha_salida")
+
+    reserva = {
+        "usuario_id": usuario_id,
+        "hotel_id": hotel_id,
+        "habitacion_id": habitacion_id,
+        "fecha_entrada": fecha_entrada,
+        "fecha_salida": fecha_salida
+    }
+
+    requests.post(f'{API_URL}/reservas', json=reserva)
+
+    return redirect(url_for('perfil', usuario_id=session["usuario_id"]))
+
 
 
 @app.route("/perfil/<int:usuario_id>")
