@@ -46,6 +46,7 @@ def home():
     success_modal_login = ""
 
     if request.method == "POST":
+        previous_url = request.referrer or url_for('home')  #Referrer es la URL anterior a la actual, si no existe devuelve la de hom
         if len(request.form) == 6:
             contraseña = request.form.get("fr-contraseña")
             repetir_contraseña = request.form.get("fr-repetir-contraseña")
@@ -92,6 +93,7 @@ def home():
             elif respuesta_api.status_code == 200:
                 json_api = respuesta_api.json()
                 session["usuario_id"] = json_api["usuario_id"]
+                return redirect(previous_url)
 
 
     return render_template("home.html", hoteles=hoteles, fecha_actual=fecha_actual, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida, cantidad_personas=cantidad_personas,
@@ -136,10 +138,14 @@ def hotel(hotel_id, fecha_entrada=None, fecha_salida=None, cantidad_personas=Non
     return render_template("hotel.html", hotel=hotel, habitaciones=habitaciones, fecha_actual=fecha_actual)
 
 
-@app.route("/habitacion/<int:habitacion_id>")
-def habitacion(habitacion_id):
+@app.route("/confirmacion_compra/<int:habitacion_id>")
+def comprar(habitacion_id):
+
     fecha_entrada = request.args.get("fecha_entrada")
     fecha_salida = request.args.get("fecha_salida")
+
+    forzar_modal_login = False
+
     try:
         response = requests.get(API_URL + '/habitacion/' + str(habitacion_id))
         response.raise_for_status()
@@ -150,7 +156,11 @@ def habitacion(habitacion_id):
     except requests.exceptions.RequestException as e:
         return jsonify({'error': str(e)}), 500
     
-    return render_template("habitacion.html", habitacion=habitacion, otras_habitaciones=otras_habitaciones, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida, hotel=hotel)
+    if "usuario_id" not in session:
+        forzar_modal_login = True
+        return render_template("habitacion.html", habitacion=habitacion, otras_habitaciones=otras_habitaciones, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida, hotel=hotel, forzar_modal_login=forzar_modal_login)
+    
+    return render_template("confirmacion_compra.html", habitacion=habitacion, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida, forzar_modal_login=forzar_modal_login,hotel=hotel)
 
 
 @app.route("/confirmacion_compra/<int:habitacion_id>")
