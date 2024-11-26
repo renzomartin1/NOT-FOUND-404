@@ -138,6 +138,23 @@ def hotel(hotel_id, fecha_entrada=None, fecha_salida=None, cantidad_personas=Non
     return render_template("hotel.html", hotel=hotel, habitaciones=habitaciones, fecha_actual=fecha_actual)
 
 
+@app.route("/habitacion/<int:habitacion_id>")
+def habitacion(habitacion_id):
+    fecha_entrada = request.args.get("fecha_entrada")
+    fecha_salida = request.args.get("fecha_salida")
+    try:
+        response = requests.get(API_URL + '/habitacion/' + str(habitacion_id))
+        response.raise_for_status()
+        result = response.json()
+        habitacion = result['habitacion']
+        hotel = result['hotel']
+        otras_habitaciones = result['otras_habitaciones']
+    except requests.exceptions.RequestException as e:
+        return jsonify({'error': str(e)}), 500
+    
+    return render_template("habitacion.html", habitacion=habitacion, otras_habitaciones=otras_habitaciones, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida, hotel=hotel)
+
+
 @app.route("/confirmacion_compra/<int:habitacion_id>")
 def comprar(habitacion_id):
 
@@ -162,46 +179,6 @@ def comprar(habitacion_id):
     
     return render_template("confirmacion_compra.html", habitacion=habitacion, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida, forzar_modal_login=forzar_modal_login,hotel=hotel)
 
-
-@app.route("/confirmacion_compra/<int:habitacion_id>")
-def comprar(habitacion_id):
-
-    fecha_entrada = request.args.get("fecha_entrada")
-    fecha_salida = request.args.get("fecha_salida")
-
-
-    forzar_modal_login = False
-
-    if "usuario_id" not in session:
-        forzar_modal_login = True
-
-        try:
-            response = requests.get(API_URL + '/habitacion/' + str(habitacion_id))
-            response.raise_for_status()
-            result = response.json()
-            habitacion = result['habitacion']
-            hotel = result['hotel']
-            otras_habitaciones = result['otras_habitaciones']
-        except requests.exceptions.RequestException as e:
-            return jsonify({'error': str(e)}), 500
-    
-
-        return render_template("habitacion.html", habitacion=habitacion, otras_habitaciones=otras_habitaciones, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida, hotel=hotel, forzar_modal_login=forzar_modal_login)
-
-
-    #fecha_entrada = request.args.get("fecha_entrada")
-    #fecha_salida = request.args.get("fecha_salida")
-
-    try:
-        response = requests.get(API_URL + '/habitacion/' + str(habitacion_id))
-        response.raise_for_status()
-        result = response.json()
-        habitacion = result['habitacion']
-        hotel = result['hotel']
-    except requests.exceptions.RequestException as e:
-        return jsonify({'error': str(e)}), 500
-    
-    return render_template("confirmacion_compra.html", habitacion=habitacion, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida, forzar_modal_login=forzar_modal_login,hotel=hotel)
 
 @app.route("/confirmacion_compra/reserva", methods = ["POST"])
 def reserva_compra():
