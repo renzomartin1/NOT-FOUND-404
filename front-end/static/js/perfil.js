@@ -1,4 +1,4 @@
-const contactoBotones = document.querySelectorAll('.perfil-usuario__contacto')
+const contactoBotones = document.querySelectorAll('.perfil-usuario__contacto');
 
 function copiarContactoContenido(contactoBtn) {
   const notifActivas = contactoBtn.parentElement.querySelectorAll('.texto-copiado-notif');
@@ -17,3 +17,15 @@ function copiarContactoContenido(contactoBtn) {
 for (const contactoBtn of contactoBotones) {
   contactoBtn.addEventListener('click', () => { copiarContactoContenido(contactoBtn); });
 }
+
+const eliminarCuentaBoton = document.querySelector('.eliminar-cuenta-boton');
+const confirmarEliminacionModal = document.getElementById('contenedor-confirmar-eliminacion-modal');
+const cancelarBoton = document.getElementById('cancelar-eliminacion-boton');
+
+eliminarCuentaBoton.addEventListener('click', () => {
+  confirmarEliminacionModal.showModal();
+});
+
+cancelarBoton.addEventListener('click', () => {
+  confirmarEliminacionModal.close();
+});

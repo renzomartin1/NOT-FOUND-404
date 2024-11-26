@@ -145,6 +145,93 @@
   color: var(--contacto-boton-texto-color);
 }
 
+.eliminar-cuenta-boton {
+  display: flex;
+  cursor: pointer;
+  margin-top: 1rem;
+  padding: 0.6rem 1rem;
+  background: rgb(203, 30, 30);
+  color: #ffffff;
+  outline: none;
+  border: none;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.eliminar-cuenta-boton:hover {
+  background: rgb(163, 14, 14);
+}
+
+#contenedor-confirmar-eliminacion-modal {
+  background-color: rgb(255, 245, 245);
+  border: none;
+  border-radius: 12px;
+}
+
+#contenedor-confirmar-eliminacion-modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+#confirmar-eliminacion-modal {
+  display: flex;
+  max-width: 400px;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2rem;
+  text-align: center;
+}
+
+#confirmar-eliminacion-modal h2 {
+  margin: 0;
+  line-height: 1.2;
+  color: #202020;
+  margin-bottom: 1rem;
+}
+
+#confirmar-eliminacion-modal p {
+  margin-block: 0.2rem;
+  font-size: 0.9rem;
+  color: #2e2e2e;
+}
+
+#confirmar-eliminacion-modal .modal-botones {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: 1.4rem;
+}
+
+#confirmar-eliminacion-modal .modal-botones * {
+  flex: 1 1 50%;
+}
+
+#confirmar-eliminacion-modal .modal-botones button {
+  cursor: pointer;
+  padding: 0.6rem 0rem;
+  color: #ffffff;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.modal-botones .confirmar-boton {
+  background: rgb(199, 45, 45);
+  width: 100%;
+}
+
+.modal-botones .confirmar-boton:hover {
+  background: rgb(209, 56, 56);
+}
+
+#cancelar-eliminacion-boton {
+  background: rgb(34, 31, 31);
+}
+
+#cancelar-eliminacion-boton:hover {
+  background: rgb(47, 43, 43);
+}
+
 /* Separador */
 
 .perfil-usuario__separador {
