@@ -135,6 +135,7 @@ def hotel(hotel_id, fecha_entrada=None, fecha_salida=None, cantidad_personas=Non
     fecha_actual = datetime.now().strftime("%Y-%m-%d")
     return render_template("hotel.html", hotel=hotel, habitaciones=habitaciones, fecha_actual=fecha_actual)
 
+
 @app.route("/habitacion/<int:habitacion_id>")
 def habitacion(habitacion_id):
     fecha_entrada = request.args.get("fecha_entrada")
@@ -169,7 +170,6 @@ def comprar(habitacion_id):
     return render_template("confirmacion_compra.html", habitacion=habitacion, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida, hotel=hotel)
 
 
-
 @app.route("/perfil/<int:usuario_id>")
 def perfil(usuario_id):
     dias_ES = {
@@ -196,6 +196,7 @@ def perfil(usuario_id):
         'November': 'Noviembre',
         'December': 'Diciembre'
     }
+
     try:
         usuario_response = requests.get(f"{API_URL}/usuarios/{usuario_id}")
         reservas_response = requests.get(f"{API_URL}/reservas/{usuario_id}")
@@ -244,10 +245,20 @@ def perfil(usuario_id):
                 'hotel_nombre': hotel_datos['nombre'],
                 'habitacion_nombre': habitacion_datos['nombre']
             })
+
     except requests.exceptions.RequestException as e:
         return jsonify({ 'error': str(e) }), 500
     
-    return render_template("perfil.html", usuario_datos = usuario_datos, reservas_historial = reservas_historial)
+    return render_template("perfil.html", usuario_datos = usuario_datos, reservas_historial = reservas_historial, usuario_id = usuario_id)
+
+
+@app.route("/eliminar-cuenta/<int:usuario_id>")
+def eliminar_cuenta(usuario_id):
+    response = requests.delete(f"{API_URL}/usuarios/{usuario_id}")
+    if response.status_code == 200:
+        return redirect(url_for("logout"))
+    else:
+        return redirect(url_for("error_404"))
 
 
 @app.errorhandler(404)      #manejo de errores
