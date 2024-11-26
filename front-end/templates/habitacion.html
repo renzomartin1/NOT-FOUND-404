@@ -83,4 +83,60 @@
     </div>
 </div>
 
+</dialog>
+
+<!-- DIALOG: MODAL REGISTER -->
+<dialog id="contenedor-modal-register">
+    <div id="modal-register">
+
+        {% if error_modal_register %}
+        <div id="error-modal-register">
+            <p>{{ error_modal_register }}</p>
+        </div>
+        {% endif %}
+
+        <div id="titulo-boton-cerrar-modal-register">
+            <h2>Registrarse</h2>
+            <button id="boton-cerrar-modal-register">
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z">
+                    </svg>
+                </div>
+            </button>
+        </div>
+        <form action="{{ url_for('home') }}" method="post">
+            <label for="fr-nombre">Nombre</label>
+            <input id="fr-nombre" type="text" name="fr-nombre" required>
+
+            <label for="fr-apellido">Apellido</label>
+            <input id="fr-apellido" type="text" name="fr-apellido" required>
+
+            <label for="fr-email">Correo electrónico</label>
+            <input id="fr-email" type="email" name="fr-email" required>
+
+            <label for="fr-telefono">Número telefónico</label>
+            <input id="fr-telefono" type="number" name="fr-telefono" required>
+
+            <label for="fr-contraseña">Contraseña</label>
+            <input id="fr-contraseña" type="password" name="fr-contraseña" required>
+
+            <label for="fr-repetir-contraseña">Repetir contraseña</label>
+            <input id="fr-repetir-contraseña" type="password" name="fr-repetir-contraseña" required>
+
+            <button id="boton-register" type="submit">Registrarse</button>
+        </form>
+        <div id="terminos-avisos">
+            <p>
+                Al hacer clic en Registrarse, aceptas nuestros Términos de servicio y Avisos de privacidad.
+            </p>
+        </div>
+        <div id="con-cuenta-modal-register">
+            <p>
+                ¿Ya tienes una cuenta? <span id="texto-login-modal-register">Inicia sesión</span>
+            </p>
+        </div>
+    </div>
+</dialog>
+
 {% endblock %}
