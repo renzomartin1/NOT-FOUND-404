@@ -29,3 +29,27 @@ eliminarCuentaBoton.addEventListener('click', () => {
 cancelarBoton.addEventListener('click', () => {
   confirmarEliminacionModal.close();
 });
+
+const eliminarReservaBotones = document.querySelectorAll('.eliminar-reserva-boton');
+
+eliminarReservaBotones.forEach(boton => {
+    boton.addEventListener('click', () => {
+        // Obtiene el siguiente elemento al boton para "abrirlo"(el dialog correspondiente)
+        const modal = boton.nextElementSibling;
+        if (modal.tagName === 'DIALOG') {
+            modal.showModal();
+        }
+    });
+});
+
+const cancelarBotones = document.querySelectorAll('.cancelar-eliminacion-boton-reserva');
+
+cancelarBotones.forEach(boton => {
+    boton.addEventListener('click', () => {
+        // Encuentra el dialog mas cercano al boton para cerrarlo (hacia arriba)
+        const modal = boton.closest('dialog');
+        if (modal) {
+            modal.close();
+        }
+    });
+});
