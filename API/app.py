@@ -43,6 +43,37 @@ def reserva_by_usuario_id(usuario_id):
         })
     return jsonify(response), 200
 
+@app.route('/api/reservas/<int:reserva_id>', methods=['DELETE'])
+def eliminar_reserva(reserva_id):
+    try:
+        reserva = querys.eliminar_reserva(reserva_id)
+        if not reserva:
+            return jsonify({'error': 'reserva no encontrada'}), 404
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+    try:
+        querys.eliminar_reserva(reserva_id)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+    return jsonify({'message': 'reserva eliminada'}), 200
+
+@app.route('/api/verificar_reserva', methods=['POST'])
+def verificar_reserva():
+    data = request.json
+    reserva_id = data.get('reserva_id')
+    usuario_id = data.get('usuario_id')
+    try:
+        result = querys.reserva_by_reserva_id_usuario_id(reserva_id, usuario_id)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+    if result:
+        return jsonify({'message': 'reserva encontrada', "usuario_id": result[0], "reserva_id": result[1]}), 200
+    else:
+        return jsonify({'message': 'reserva no encontrada'}), 404
+
 #------------------------------------------- fin reservaciones --------------------------------------------
 
 #------------------------------------------- inicio hoteles -----------------------------------------------
@@ -260,8 +291,24 @@ def usuarios_login():
 
     else:
         return jsonify({"usuario_id": fila.usuario_id}), 200
+    
+
+@app.route('/api/verificar_usuario', methods=['POST'])
+def verificar_usuario():
+    data = request.json
+    email = data.get('email')
+    contraseña = data.get('contraseña')
+
+    result = querys.obtener_usuario_by_email(email, contraseña)
+    print("Resultado de la consulta:", result)
+
+    if result:
+        return jsonify({"status": "success", "usuario_id": result[0]})
+    else:
+        return jsonify({"status": "error", "message": "Usuario o contraseña incorrectos"}), 401
 
 #------------------------------------------- fin usuarios ------------------------------------------------
 
 if __name__ == "__main__":
     app.run("127.0.0.1", port = PORT, debug = True)
+
