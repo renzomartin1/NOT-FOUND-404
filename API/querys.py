@@ -1,125 +1,313 @@
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import create_engine
-from sqlalchemy import text
+from flask import Flask, jsonify, request
 from sqlalchemy.exc import SQLAlchemyError
-import os
-
-# Usuarios
-QUERY_OBTENER_TODOS_LOS_USUARIOS = "SELECT nombre, apellido, email, telefono FROM usuarios"
-QUERY_OBTENER_USUARIO_POR_ID = "SELECT nombre, apellido, email, telefono FROM usuarios WHERE usuario_id = :usuario_id"
-QUERY_ELIMINAR_USUARIO = "DELETE FROM usuarios WHERE usuario_id = :usuario_id"
-QUERY_OBTENER_USUARIO_POR_EMAIL = "SELECT * FROM usuarios WHERE email = :email AND contraseña = :contraseña"
-
-# Reservas
-QUERY_TODAS_LAS_RESERVAS = "SELECT reserva_id, usuario_id, hotel_id, habitacion_id, fecha_entrada, fecha_salida FROM reservaciones"
-QUERY_RESERVA_BY_USUARIO_ID = "SELECT reserva_id, hotel_id, habitacion_id, fecha_entrada, fecha_salida FROM reservaciones WHERE usuario_id = :usuario_id"
-QUERY_REGISTRAR_RESERVA = """
-INSERT INTO reservaciones(usuario_id, hotel_id, habitacion_id, fecha_entrada, fecha_salida)
-VALUES
-(:usuario_id, :hotel_id, :habitacion_id, :fecha_entrada, :fecha_salida);
-"""
-QUERY_ELIMINAR_RESERVA = "DELETE FROM reservaciones WHERE reserva_id = :reserva_id"
-QUERY_RESERVA_BY_RESERVAID_USUARIOID = "SELECT * FROM reservaciones WHERE usuario_id = :usuario_id AND reserva_id = :reserva_id"
+import querys
 
 
-# Hoteles
-QUERY_OBTENER_TODOS_LOS_HOTELES = "SELECT * FROM hoteles"
-QUERY_OBTENER_HOTELES_POR_ID = "SELECT * FROM hoteles WHERE hotel_id = :hotel_id"
+app = Flask(__name__)
+PORT = 5005
 
-QUERY_FILTRAR_HOTELES = """
-SELECT h.hotel_id, h.nombre, h.barrio, h.direccion, h.descripcion, h.servicios FROM hoteles h
-INNER JOIN habitaciones hab ON h.hotel_id = hab.hotel_id
-LEFT JOIN reservaciones res ON res.habitacion_id = hab.habitacion_id                         
-WHERE (                                                                                
-    res.habitacion_id IS NULL OR  
-    NOT (res.fecha_entrada < :fecha_salida AND res.fecha_salida > :fecha_entrada)
-)
-AND (:cantidad_personas IS NULL OR hab.capacidad = :cantidad_personas)
-GROUP BY h.hotel_id, h.barrio, h.nombre, h.descripcion, h.direccion;
-"""
+#------------------------------------------- inicio reservaciones --------------------------------------------
 
-#HABITACIONES
-QUERY_FILTRAR_HABITACIONES = """
-SELECT hab.habitacion_id, hab.hotel_id, hab.nombre, hab.descripcion, hab.precio, hab.capacidad 
-FROM habitaciones hab
-INNER JOIN hoteles ON :hotel_id = hab.hotel_id
-LEFT JOIN reservaciones res ON res.habitacion_id = hab.habitacion_id
-WHERE :hotel_id = :hotel_id 
-AND (:habitacion_id IS NULL OR hab.habitacion_id != :habitacion_id)
-AND (
-    (:fecha_entrada IS NULL AND :fecha_salida IS NULL) OR
-    res.habitacion_id IS NULL OR
-    NOT (res.fecha_entrada < :fecha_salida AND res.fecha_salida > :fecha_entrada)
-)
-AND (:cantidad_personas IS NULL OR hab.capacidad >= :cantidad_personas)
-GROUP BY hab.habitacion_id, hab.hotel_id, hab.nombre, hab.descripcion, hab.precio, hab.capacidad;
-"""
+@app.route('/api/reservas', methods = ['POST'])
+def crear_reservas():
+    try:
+        data = request.get_json()
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
 
+    if not data:
+        return jsonify({'error': 'no se ha proporcionado ninguna informacion'}), 400
 
-QUERY_HABITACION_BY_ID = "SELECT hab.habitacion_id, hab.hotel_id, hab.nombre, hab.descripcion, hab.precio, hab.capacidad FROM habitaciones hab WHERE hab.habitacion_id = :habitacion_id"
+    try:
+        querys.registrar_reserva(data)
+    except SQLAlchemyError as e:
+        return jsonify({'error': str(e)}), 500
 
+    return jsonify(data), 201
 
-# credenciales
-db_username = os.getenv('MYSQL_USERNAME')
-db_password = os.getenv('MYSQL_PASSWORD')
-
-# string de conexión a la base de datos: mysql://usuario:password@host:puerto/nombre_schema
-# engine = create_engine("mysql://'usuario':'contraseña'@localhost:'puerto'/'nombre_db'")
-engine = create_engine(f"mysql+mysqlconnector://{db_username}:{db_password}:@localhost:3306/hospedajes")
-
-def run_query(query, parameters = None):
-    with engine.connect() as conn:
-        try:
-            result = conn.execute(text(query), parameters)
-            conn.commit()
-            conn.close()
-            return result
-        except SQLAlchemyError as e:
-            conn.rollback()
-            raise e
-
-def obtener_todos_los_usuarios():
-    return run_query(QUERY_OBTENER_TODOS_LOS_USUARIOS).fetchall()
-
-def obtener_usuario_by_id(usuario_id):
-    return run_query(QUERY_OBTENER_USUARIO_POR_ID, { 'usuario_id': usuario_id }).fetchone()
-
-def eliminar_usuario(usuario_id):
-    return run_query(QUERY_ELIMINAR_USUARIO, { 'usuario_id': usuario_id })
-
-def obtener_usuario_by_email(email, contraseña):
-    return run_query(QUERY_OBTENER_USUARIO_POR_EMAIL, { 'email': email, 'contraseña': contraseña }).fetchone()
-
-#-----------------------Reservas-------------------------------------------------------------------
-def all_reservas():
-    return run_query(QUERY_TODAS_LAS_RESERVAS).fetchall()
-
-def registrar_reserva(data):
-    return run_query(QUERY_REGISTRAR_RESERVA, data)
-
+@app.route('/api/reservas/<int:usuario_id>', methods=['GET'])
 def reserva_by_usuario_id(usuario_id):
-    return run_query(QUERY_RESERVA_BY_USUARIO_ID, {'usuario_id': usuario_id}).fetchall()
+    try:
+        result = querys.reserva_by_usuario_id(usuario_id)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
+    response = []
+    for row in result:
+        response.append({
+            'reserva_id': row[0],
+            'hotel_id': row[1],
+            'habitacion_id': row[2], 
+            'fecha_entrada': row[3], 
+            'fecha_salida': row[4]
+        })
+    return jsonify(response), 200
+
+@app.route('/api/reservas/<int:reserva_id>', methods=['DELETE'])
 def eliminar_reserva(reserva_id):
-    return run_query(QUERY_ELIMINAR_RESERVA, { 'reserva_id': reserva_id })
+    try:
+        reserva = querys.obtener_reserva(reserva_id)
+        if not reserva:
+            return jsonify({'error': 'reserva no encontrada'}), 404
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+    try:
+        querys.eliminar_reserva(reserva_id)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
-def reserva_by_reserva_id_usuario_id(reserva_id, usuario_id):
-    return run_query(QUERY_RESERVA_BY_RESERVAID_USUARIOID, {'reserva_id': reserva_id, 'usuario_id': usuario_id}).fetchone()
-#------------------------Fin Reservas-------------------------------------------------------------------
+    return jsonify({'message': 'reserva eliminada'}), 200
 
-def filtrar_hoteles(fecha_entrada, fecha_salida, cantidad_personas):
-    return run_query(QUERY_FILTRAR_HOTELES, {"fecha_entrada":fecha_entrada, "fecha_salida":fecha_salida, "cantidad_personas":cantidad_personas}).fetchall()
+@app.route('/api/verificar_reserva', methods=['POST'])
+def verificar_reserva():
+    data = request.json
+    reserva_id = data.get('reserva_id')
+    usuario_id = data.get('usuario_id')
+    try:
+        result = querys.reserva_by_reserva_id_usuario_id(reserva_id, usuario_id)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
-def obtener_hotel_by_id(hotel_id):
-    return run_query(QUERY_OBTENER_HOTELES_POR_ID, { 'hotel_id': hotel_id }).fetchone()
+    if result:
+        return jsonify({'message': 'reserva encontrada', "usuario_id": result[0], "reserva_id": result[1]}), 200
+    else:
+        return jsonify({'message': 'reserva no encontrada'}), 404
 
-def obtener_todos_los_hoteles(): 
-    return run_query(QUERY_OBTENER_TODOS_LOS_HOTELES).fetchall()
+#------------------------------------------- fin reservaciones --------------------------------------------
 
-#------------------------Habitaciones-------------------------------------------------------------------
-def filtrar_habitaciones(hotel_id, habitacion_id, fecha_entrada, fecha_salida, cantidad_personas):
-    return run_query(QUERY_FILTRAR_HABITACIONES, {"hotel_id":hotel_id, "habitacion_id":habitacion_id, "fecha_entrada":fecha_entrada, "fecha_salida":fecha_salida, "cantidad_personas":cantidad_personas}).fetchall()
+#------------------------------------------- inicio hoteles -----------------------------------------------
 
-def obtener_habitacion_by_id(habitacion_id):
-    return run_query(QUERY_HABITACION_BY_ID, { 'habitacion_id': habitacion_id }).fetchone()
+@app.route('/api/hoteles', methods=['GET'])
+def filtrar_hoteles():
+    
+    fecha_entrada = request.args.get('fecha_entrada')
+    fecha_salida = request.args.get('fecha_salida')
+    cantidad_personas = request.args.get('cantidad_personas')
+    
+    if cantidad_personas:
+        try:
+            cantidad_personas = int(cantidad_personas)
+        except Exception:
+            cantidad_personas = None
+    else:
+        cantidad_personas = None
 
+    try:
+        result = querys.filtrar_hoteles(fecha_entrada,fecha_salida, cantidad_personas)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+    response = []
+    for row in result:
+        response.append({
+            'hotel_id': row[0],
+            'nombre': row[1],
+            'barrio': row[2],
+            'direccion': row[3],
+            'descripcion': row[4],
+            'servicios': row[5]
+        })
+
+    return jsonify(response), 200
+
+@app.route('/api/hoteles/<int:hotel_id>', methods=['GET'])
+def obtener_hotel_by_id(hotel_id):  #hotel_by_id_y_habitaciones_hotel
+    fecha_entrada = request.args.get('fecha_entrada')
+    fecha_salida = request.args.get('fecha_salida')
+    cantidad_personas = request.args.get('cantidad_personas')
+
+    try:
+        result_hotel = querys.obtener_hotel_by_id(hotel_id)
+        result_habitaciones = querys.filtrar_habitaciones(hotel_id, None, fecha_entrada, fecha_salida, cantidad_personas)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+    if not result_hotel:
+        return jsonify({'error': 'No se ha encontrado un hotel con el ID dado'}), 404
+    
+    if not result_habitaciones:
+        return jsonify({'error': 'No se ha encontrado una habitación para el hotel dado'}), 404
+    
+    response_hotel = {
+        'nombre': result_hotel[1],
+        'barrio': result_hotel[2],
+        'direccion': result_hotel[3],
+        'descripcion': result_hotel[4],
+        'servicios': result_hotel[5],
+        'telefono': result_hotel[6],
+        'email': result_hotel[7]
+    }
+
+    response_habitaciones = []
+    for row in result_habitaciones:
+        response_habitaciones.append({
+            'habitacion_id': row[0],
+            'hotel_id': row[1],
+            'nombre': row[2],
+            'descripcion': row[3],
+            'precio': row[4],
+            'capacidad': row[5]
+        })
+
+    return jsonify({'hotel': response_hotel, 'habitaciones': response_habitaciones}), 200
+
+#------------------------------------------- fin hoteles -------------------------------------------------------
+
+#------------------------------------------- inicio habitaciones -----------------------------------------------
+
+@app.route('/api/habitacion/<int:habitacion_id>', methods = ['GET'])
+def habitacion_by_id(habitacion_id):   #habitacion_by_id_y_otras_habitaciones
+    try:
+        result_habitacion = querys.obtener_habitacion_by_id(habitacion_id)
+        result_otras_habitaciones = querys.filtrar_habitaciones(hotel_id=result_habitacion[1], habitacion_id=habitacion_id, fecha_entrada=None, fecha_salida=None, cantidad_personas=None)
+        result_hotel = querys.obtener_hotel_by_id(hotel_id=result_habitacion[1])
+    except Exception as e:
+        return jsonify({ 'error': str(e) }), 404
+    
+    if result_habitacion is None or result_otras_habitaciones is None:
+        return jsonify({ 'error': 'No se ha encontrado una habitacion con el ID dado' }), 404
+    
+    response_hotel = {
+        'hotel_id' : result_hotel[0],
+        'hotel_nombre' : result_hotel[1]
+    }
+
+    response_habitacion = {
+        'habitacion_id' : result_habitacion[0],
+        'hotel_id' : result_habitacion[1],
+        'nombre' : result_habitacion[2],
+        'descripcion' : result_habitacion[3],
+        'precio' : result_habitacion[4],
+        'capacidad' : result_habitacion[5]
+    }
+
+    response_otras_habitaciones = []
+    for row in result_otras_habitaciones:
+        response_otras_habitaciones.append({
+            'habitacion_id': row[0],
+            'hotel_id': row[1],
+            'nombre': row[2],
+            'descripcion': row[3],
+            'precio': row[4],
+            'capacidad': row[5]
+        })
+
+    return jsonify({'habitacion': response_habitacion, 'otras_habitaciones': response_otras_habitaciones, 'hotel': response_hotel}), 200
+
+#------------------------------------------- fin habitaciones -----------------------------------------------
+
+#------------------------------------------- inicio usuarios ------------------------------------------------
+
+@app.route('/api/usuarios/<int:usuario_id>', methods = ['GET'])
+def obtener_usuario_por_id(usuario_id):
+    try:
+        result = querys.obtener_usuario_by_id(usuario_id)
+    except Exception as e:
+        return jsonify({ 'error': str(e) }), 500
+    
+    if result is None:
+        return jsonify({ 'error': 'No se ha encontrado un usuario con el ID dado' }), 404
+    
+    response = {
+        'nombre': result[0],
+        'apellido': result[1],
+        'email': result[2],
+        'telefono': result[3]
+    }
+    return jsonify(response), 200
+
+
+@app.route('/api/usuarios/<int:usuario_id>', methods = ['DELETE'])
+def eliminar_usuario_por_id(usuario_id):    
+    try:
+        usuario_data = querys.obtener_usuario_by_id(usuario_id)
+        if not usuario_data:
+            return jsonify({ 'error': 'No se ha encontrado un usuario con el ID dado' }), 404
+    except Exception as e:
+        return jsonify({ 'error': str(e) }), 500
+    
+    try:
+        querys.eliminar_usuario(usuario_id)
+    except Exception as e:
+        return jsonify({ 'error': 'Hubo un error en el servidor intentando eliminar el usuario' }), 500
+    
+    return jsonify({ 'message': 'El usuario ha sido eliminado con éxito' }), 200
+
+
+@app.route("/api/usuarios/register", methods = ["POST"])
+def usuarios_register():
+    datos_register = request.get_json()
+    query_verificacion = "SELECT email, telefono FROM usuarios WHERE email = :email OR telefono = :telefono;"
+
+    try:
+        resultado_query_verificacion = querys.run_query(query_verificacion, datos_register)
+    except SQLAlchemyError as error:
+        return jsonify({"error": str(error)}), 500
+
+    if resultado_query_verificacion.rowcount == 0:
+        query_register = "INSERT INTO usuarios (nombre, apellido, email, contraseña, telefono) VALUES (:nombre, :apellido, :email, :contraseña, :telefono);"
+
+        try:
+            querys.run_query(query_register, datos_register)
+        except SQLAlchemyError as error:
+            return jsonify({"error": str(error)}), 500
+
+        return jsonify({"success": "Usuario registrado correctamente."}), 201
+
+    elif resultado_query_verificacion.rowcount == 1:
+        fila = resultado_query_verificacion.fetchone()
+
+        if datos_register["email"] == fila.email and datos_register["telefono"] == fila.telefono:
+            return jsonify({"error": "El correo electrónico y el número telefónico ya se encuentran registrados."}), 400
+
+        elif datos_register["email"] == fila.email:
+            return jsonify({"error": "El correo electrónico ya se encuentra registrado."}), 400
+
+        elif datos_register["telefono"] == fila.telefono:
+            return jsonify({"error": "El número telefónico ya se encuentra registrado."}), 400
+
+    elif resultado_query_verificacion.rowcount == 2:
+        return jsonify({"error": "El correo electrónico y el número telefónico ya se encuentran registrados."}), 400
+
+
+@app.route("/api/usuarios/login", methods = ["POST"])
+def usuarios_login():
+    datos_login = request.get_json()
+    query_verificacion = "SELECT usuario_id, contraseña FROM usuarios WHERE email = :email;"
+
+    try:
+        resultado_query_verificacion = querys.run_query(query_verificacion, datos_login)
+    except SQLAlchemyError as error:
+        return jsonify({"error": str(error)}), 500
+
+    fila = resultado_query_verificacion.fetchone()
+
+    if fila == None:
+        return jsonify({"error": "No hay ningún usuario asociado a este correo electrónico."}), 404
+
+    elif datos_login["contraseña"] != fila.contraseña:
+        return jsonify({"error": "La contraseña es incorrecta."}), 400
+
+    else:
+        return jsonify({"usuario_id": fila.usuario_id}), 200
+    
+
+@app.route('/api/verificar_usuario', methods=['POST'])
+def verificar_usuario():
+    data = request.json
+    email = data.get('email')
+    contraseña = data.get('contraseña')
+
+    result = querys.obtener_usuario_by_email(email, contraseña)
+    print("Resultado de la consulta:", result)
+
+    if result:
+        return jsonify({"status": "success", "usuario_id": result[0]})
+    else:
+        return jsonify({"status": "error", "message": "Usuario o contraseña incorrectos"}), 401
+
+#------------------------------------------- fin usuarios ------------------------------------------------
+
+if __name__ == "__main__":
+    app.run("127.0.0.1", port = PORT, debug = True)
