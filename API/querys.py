@@ -8,6 +8,7 @@ import os
 QUERY_OBTENER_TODOS_LOS_USUARIOS = "SELECT nombre, apellido, email, telefono FROM usuarios"
 QUERY_OBTENER_USUARIO_POR_ID = "SELECT nombre, apellido, email, telefono FROM usuarios WHERE usuario_id = :usuario_id"
 QUERY_ELIMINAR_USUARIO = "DELETE FROM usuarios WHERE usuario_id = :usuario_id"
+QUERY_OBTENER_USUARIO_POR_EMAIL = "SELECT * FROM usuarios WHERE email = :email AND contraseña = :contraseña"
 
 # Reservas
 QUERY_TODAS_LAS_RESERVAS = "SELECT reserva_id, usuario_id, hotel_id, habitacion_id, fecha_entrada, fecha_salida FROM reservaciones"
@@ -17,6 +18,8 @@ INSERT INTO reservaciones(usuario_id, hotel_id, habitacion_id, fecha_entrada, fe
 VALUES
 (:usuario_id, :hotel_id, :habitacion_id, :fecha_entrada, :fecha_salida);
 """
+QUERY_ELIMINAR_RESERVA = "DELETE FROM reservaciones WHERE reserva_id = :reserva_id"
+QUERY_RESERVA_BY_RESERVAID_USUARIOID = "SELECT * FROM reservaciones WHERE usuario_id = :usuario_id AND reserva_id = :reserva_id"
 
 
 # Hoteles
@@ -62,7 +65,7 @@ db_password = os.getenv('MYSQL_PASSWORD')
 
 # string de conexión a la base de datos: mysql://usuario:password@host:puerto/nombre_schema
 # engine = create_engine("mysql://'usuario':'contraseña'@localhost:'puerto'/'nombre_db'")
-engine = create_engine(f"mysql+mysqlconnector://{db_username}:{db_password}@localhost:3306/hospedajes")
+engine = create_engine(f"mysql+mysqlconnector://{db_username}:{db_password}:@localhost:3306/hospedajes")
 
 def run_query(query, parameters = None):
     with engine.connect() as conn:
@@ -83,6 +86,10 @@ def obtener_usuario_by_id(usuario_id):
 
 def eliminar_usuario(usuario_id):
     return run_query(QUERY_ELIMINAR_USUARIO, { 'usuario_id': usuario_id })
+
+def obtener_usuario_by_email(email, contraseña):
+    return run_query(QUERY_OBTENER_USUARIO_POR_EMAIL, { 'email': email, 'contraseña': contraseña }).fetchone()
+
 #-----------------------Reservas-------------------------------------------------------------------
 def all_reservas():
     return run_query(QUERY_TODAS_LAS_RESERVAS).fetchall()
@@ -92,6 +99,12 @@ def registrar_reserva(data):
 
 def reserva_by_usuario_id(usuario_id):
     return run_query(QUERY_RESERVA_BY_USUARIO_ID, {'usuario_id': usuario_id}).fetchall()
+
+def eliminar_reserva(reserva_id):
+    return run_query(QUERY_ELIMINAR_RESERVA, { 'reserva_id': reserva_id })
+
+def reserva_by_reserva_id_usuario_id(reserva_id, usuario_id):
+    return run_query(QUERY_RESERVA_BY_RESERVAID_USUARIOID, {'reserva_id': reserva_id, 'usuario_id': usuario_id}).fetchone()
 #------------------------Fin Reservas-------------------------------------------------------------------
 
 def filtrar_hoteles(fecha_entrada, fecha_salida, cantidad_personas):
@@ -109,3 +122,4 @@ def filtrar_habitaciones(hotel_id, habitacion_id, fecha_entrada, fecha_salida, c
 
 def obtener_habitacion_by_id(habitacion_id):
     return run_query(QUERY_HABITACION_BY_ID, { 'habitacion_id': habitacion_id }).fetchone()
+
