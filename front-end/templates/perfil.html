@@ -71,6 +71,20 @@
               <span class="perfil-usuario__historial-habitacion">{{ reserva.habitacion_nombre }}</span>
             </div>
           </section>
+          <button class="eliminar-reserva-boton">Eliminar</button>
+          <dialog id="contenedor-confirmar-eliminacion-modal-reserva">
+          <div id="confirmar-eliminacion-modal-reserva">
+              <h2>Confirmar eliminación</h2>
+              <p>¿Estás seguro de que quieres eliminar la reserva?</p>
+              <p>Esta acción es irreversible.</p>
+              <div class="modal-botones">
+                <button class="cancelar-eliminacion-boton-reserva">Cancelar</button>
+                  <form action="{{ url_for('eliminar_reserva', reserva_id = reserva.reserva_id) }}" method="DELETE">
+                      <button type="submit" class="confirmar-boton">Eliminar reserva</button>
+                  </form>
+              </div>
+          </div>
+          </dialog>
         </div>
       </article>
       {% endfor %}
