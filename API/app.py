@@ -59,6 +59,25 @@ def eliminar_reserva(reserva_id):
 
     return jsonify({'message': 'reserva eliminada'}), 200
 
+@app.route('/api/reservas/<int:reserva_id>', methods=['GET'])
+def reserva_by_reserva_id(reserva_id):
+    try:
+        result = querys.reserva_by_reserva_id(reserva_id)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+    if result is None:
+        return jsonify({'error': 'No se ha encontrado una reserva con el ID dado'}), 404
+
+    response = {
+        'reserva_id': result[0],
+        'hotel_id': result[1],
+        'habitacion_id': result[2], 
+        'fecha_entrada': result[3], 
+        'fecha_salida': result[4]
+    }
+    return jsonify(response), 200
+
 @app.route('/api/verificar_reserva', methods=['POST'])
 def verificar_reserva():
     data = request.json
