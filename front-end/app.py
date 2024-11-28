@@ -105,6 +105,7 @@ def logout():
     session.pop("usuario_id")
     return redirect(url_for("home"))
 
+# funcion hotel
 
 @app.route("/hotel/<int:hotel_id>")
 def hotel(hotel_id, fecha_entrada=None, fecha_salida=None, cantidad_personas=None): 
@@ -137,11 +138,13 @@ def hotel(hotel_id, fecha_entrada=None, fecha_salida=None, cantidad_personas=Non
     fecha_actual = datetime.now().strftime("%Y-%m-%d")
     return render_template("hotel.html", hotel=hotel, habitaciones=habitaciones, fecha_actual=fecha_actual)
 
+# funcion habitacion
 
 @app.route("/habitacion/<int:habitacion_id>")
 def habitacion(habitacion_id):
     fecha_entrada = request.args.get("fecha_entrada")
     fecha_salida = request.args.get("fecha_salida")
+    fecha_actual=datetime.now().strftime("%Y-%m-%d")
     try:
         response = requests.get(API_URL + '/habitacion/' + str(habitacion_id))
         response.raise_for_status()
@@ -152,8 +155,7 @@ def habitacion(habitacion_id):
     except requests.exceptions.RequestException as e:
         return jsonify({'error': str(e)}), 500
     
-    return render_template("habitacion.html", habitacion=habitacion, otras_habitaciones=otras_habitaciones, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida, hotel=hotel)
-
+    return render_template("habitacion.html", habitacion=habitacion, otras_habitaciones=otras_habitaciones, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida, hotel=hotel, fecha_actual=fecha_actual)
 
 @app.route("/confirmacion_compra/<int:habitacion_id>")
 def comprar(habitacion_id):
@@ -179,6 +181,7 @@ def comprar(habitacion_id):
     
     return render_template("confirmacion_compra.html", habitacion=habitacion, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida, forzar_modal_login=forzar_modal_login,hotel=hotel)
 
+# funcion confirmar-compra 
 
 @app.route("/confirmacion_compra/reserva", methods = ["POST"])
 def reserva_compra():
@@ -200,7 +203,7 @@ def reserva_compra():
 
     return redirect(url_for('perfil', usuario_id=session["usuario_id"]))
 
-
+# funcion para perfil
 
 @app.route("/perfil/<int:usuario_id>")
 def perfil(usuario_id):
@@ -283,6 +286,7 @@ def perfil(usuario_id):
     
     return render_template("perfil.html", usuario_datos = usuario_datos, reservas_historial = reservas_historial, usuario_id = usuario_id)
 
+# funcion eliminar cuenta
 
 @app.route("/eliminar-cuenta/<int:usuario_id>")
 def eliminar_cuenta(usuario_id):
@@ -291,12 +295,12 @@ def eliminar_cuenta(usuario_id):
         return redirect(url_for("logout"))
     else:
         return redirect(url_for("error_404"))
-
+        
 
 @app.errorhandler(404)      #manejo de errores
 def error_404(e):
     return render_template('404.html'), 404
-
+    
 
 @app.route("/contacto")
 def contacto():
