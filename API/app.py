@@ -74,6 +74,21 @@ def verificar_reserva():
     else:
         return jsonify({'message': 'reserva no encontrada'}), 404
 
+@app.route('/api/actualizar_servicios', methods = ['PUT'])
+def actualizar_servicios():
+    data = request.get_json()
+    servicios_contratados = data.get("servicios_contratados")
+    reserva_id = data.get("reserva_id")
+
+    if not servicios_contratados or not reserva_id:
+        return jsonify({ "error": "No se han dado los datos necesarios." }), 400
+
+    try:
+        querys.actualizar_servicios(reserva_id, servicios_contratados)
+        return jsonify({ "message": "La lista de servicios contratados se ha actualizado con éxito" }), 200
+    except Exception as e:
+        return jsonify({ "error": str(e) }), 500
+    
 #------------------------------------------- fin reservaciones --------------------------------------------
 
 #------------------------------------------- inicio hoteles -----------------------------------------------
