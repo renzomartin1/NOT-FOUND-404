@@ -5,8 +5,14 @@
     --color4: #96C2DB;
 }
 
-
 /* estilo tarjeta de habitacion */
+
+.titulo{
+    color: #522305;
+    font-family:'montserrat', sans-serif;
+    font-size: 20px;
+    text-align: center;
+}
 
 .contenedor1{
     background-color: #eee;
@@ -19,7 +25,7 @@
 
 .sub-contenedor11{
     margin-left: 30%;
-    display: flex;
+    margin-right: 30%;
 }
 
 /* Estilo calificacion */
@@ -42,26 +48,6 @@
     color: #666;
 }
 
-.rating:not(:checked) > label:before {
-    content: '★';
-}
-
-.rating > input:checked + label:hover,
-.rating > input:checked + label:hover ~ label,
-.rating > input:checked ~ label:hover,
-.rating > input:checked ~ label:hover ~ label,
-.rating > label:hover ~ input:checked ~ label {
-    color: #e58e09;
-}
-
-.rating:not(:checked) > label:hover,
-.rating:not(:checked) > label:hover ~ label {
-    color: #ff9e0b;
-}
-
-.rating > input:checked ~ label {
-    color: #ffa723;
-}
 
 /* estilo de carrusel imagenes */
 
@@ -92,11 +78,10 @@
 
 .deslizador{
     display: flex;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 14 / 9;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-    /* box-shadow: 0 1.5rem 3rem -0.75rem #222; */
     border-radius: 0.5rem;
 }
 
@@ -145,7 +130,6 @@
     font-size: 25px;
     border-top: 1px #522305 solid;
     text-align: left;
-    /* margin-top: 5%; */
     margin-left: 15%;
     margin-right: 25%;
     font-family:'montserrat', sans-serif;
@@ -265,7 +249,6 @@ input[type="date"]:focus {
 .grillaImg{
     height: 100%;
     max-width: 40%;
-    padding: 0px;
     margin-right: 5%;
 }
 
@@ -274,6 +257,10 @@ input[type="date"]:focus {
 .texto-habitacion{
     color: #522305;
     font-family:'montserrat', sans-serif;
+}
+
+.texto-habitacion a{
+    margin-bottom: 5px;
 }
 
 .boton-habitacion {
@@ -329,47 +316,3 @@ input[type="date"]:focus {
     height: 20%;
     margin: 1% 5%;
 }
-
-#grilla{
-    background-color: #96C2DB;
-    border-radius: 0.5rem;
-    margin: 1rem 0;
-    width: 65%;
-    height: 200px;
-    display: flex;
-}
-
-.grillaImg{
-    height: 90%;
-    max-width: 40%;
-    padding: 10px;
-    margin-right: 5%;
-}
-
-/* boton y texto otras habitaciones */
-
-.texto-habitacion{
-    color: #522305;
-    font-family:'montserrat', sans-serif;
-}
-
-.boton-habitacion {
-    padding: 0.625rem 1rem;
-    font-size: 0.875rem;
-    font-weight: bold;
-    color: #522305;
-    background-color: #eee;
-    border: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
-}
-
-.titulo{
-    font-size: 20px;
-    text-align: center;
-    background-color: transparent;
-    width: 50%;
-    color: #522305;
-    font-family:'montserrat', sans-serif;
-}
-
