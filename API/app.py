@@ -152,6 +152,19 @@ def obtener_hotel_by_id(hotel_id):  #hotel_by_id_y_habitaciones_hotel
 
     return jsonify({'hotel': response_hotel, 'habitaciones': response_habitaciones}), 200
 
+
+@app.route('/api/hoteles/servicios/<int:hotel_id>', methods=['GET'])
+def obtener_servicios_por_id(hotel_id):
+    try:
+        result = querys.obtener_hotel_by_id(hotel_id)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+    if result is None:
+        return jsonify({'error': 'No se ha encontrado un hotel con el ID dado'}), 404
+
+    return jsonify({'servicios': result[5]}), 200
+
 #------------------------------------------- fin hoteles -------------------------------------------------------
 
 #------------------------------------------- inicio habitaciones -----------------------------------------------
