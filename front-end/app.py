@@ -15,12 +15,6 @@ def home():
     fecha_salida = request.args.get("fecha_salida")
     cantidad_personas = request.args.get("cantidad_personas")
 
-    if not fecha_entrada:
-        fecha_entrada = None
-    if not fecha_salida:
-        fecha_salida = None
-    if not cantidad_personas:
-        cantidad_personas = None
     
     try:
         params = {
