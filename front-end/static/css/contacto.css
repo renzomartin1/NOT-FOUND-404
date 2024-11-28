@@ -10,6 +10,8 @@
 #contenedor-formulario-contacto {
     background-image: url(../images/fondo_contacto.jpg);
     background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed ;
 }
 
 #coloracion-fondo {
