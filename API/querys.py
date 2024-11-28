@@ -12,7 +12,7 @@ QUERY_OBTENER_USUARIO_POR_EMAIL = "SELECT * FROM usuarios WHERE email = :email A
 
 # Reservas
 QUERY_TODAS_LAS_RESERVAS = "SELECT reserva_id, usuario_id, hotel_id, habitacion_id, fecha_entrada, fecha_salida FROM reservaciones"
-QUERY_RESERVA_BY_USUARIO_ID = "SELECT reserva_id, hotel_id, habitacion_id, fecha_entrada, fecha_salida FROM reservaciones WHERE usuario_id = :usuario_id"
+QUERY_RESERVA_BY_USUARIO_ID = "SELECT * FROM reservaciones WHERE usuario_id = :usuario_id"
 QUERY_REGISTRAR_RESERVA = """
 INSERT INTO reservaciones(usuario_id, hotel_id, habitacion_id, fecha_entrada, fecha_salida)
 VALUES
