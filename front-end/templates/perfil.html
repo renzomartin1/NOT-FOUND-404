@@ -70,6 +70,14 @@
               <span class="perfil-usuario__historial-dato-titulo">Habitación</span>
               <span class="perfil-usuario__historial-habitacion">{{ reserva.habitacion_nombre }}</span>
             </div>
+            <div class="perfil-usuario__historial-dato">
+              <span class="perfil-usuario__historial-dato-titulo">Servicios</span>
+              <span class="perfil-usuario__historial-precio">{{ reserva.servicios_contratados }}</span>
+            </div>
+            <div class="perfil-usuario__historial-dato">
+              <span class="perfil-usuario__historial-dato-titulo">ID de reserva</span>
+              <span class="perfil-usuario__historial-precio">{{ reserva.reserva_id }}</span>
+            </div>
           </section>
           <button class="eliminar-reserva-boton">Eliminar</button>
           <dialog id="contenedor-confirmar-eliminacion-modal-reserva">

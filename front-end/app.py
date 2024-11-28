@@ -244,6 +244,8 @@ def perfil(usuario_id):
 
         reservas_historial = []
         for reserva in reservas_datos:
+
+            reserva_id = reserva['reserva_id']
             hotel_id = reserva['hotel_id']
             habitacion_id = reserva['habitacion_id']
 
@@ -274,11 +276,15 @@ def perfil(usuario_id):
             fecha_entrada_formateada = f"{dias_ES[dia_nombre_entrada]}, {dia_numero_entrada} de {meses_ES[mes_entrada]} {año_entrada}"
             fecha_salida_formateada = f"{dias_ES[dia_nombre_salida]}, {dia_numero_salida} de {meses_ES[mes_salida]} {año_salida}"
 
+            servicios_contratados = reserva['servicios']
+
             reservas_historial.append({
                 'fecha_entrada': fecha_entrada_formateada,
                 'fecha_salida': fecha_salida_formateada,
                 'hotel_nombre': hotel_datos['nombre'],
-                'habitacion_nombre': habitacion_datos['nombre']
+                'habitacion_nombre': habitacion_datos['nombre'],
+                'servicios_contratados': servicios_contratados,
+                'reserva_id': reserva_id
             })
 
     except requests.exceptions.RequestException as e:

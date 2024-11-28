@@ -234,9 +234,10 @@
 
 /* eliminar reserva */
 .eliminar-reserva-boton {
-  display: flex;
+  width: 30%;
   cursor: pointer;
   margin-top: 1rem;
+  margin-left: 1rem;
   padding: 0.6rem 1rem;
   background: rgb(203, 30, 30);
   color: #ffffff;
