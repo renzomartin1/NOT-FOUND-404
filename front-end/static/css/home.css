@@ -180,7 +180,6 @@ input[type="date"]:focus {
     display: flex;
     align-items: stretch;
     width: 70%;
-    height: 275px;
 }
 
 .hotel-image {
@@ -197,7 +196,8 @@ input[type="date"]:focus {
 .hotel-info {
     display: flex;
     flex-direction: column;
-    padding: 20px 20px 20px 40px;
+    padding: 30px;
+    padding-bottom: 25px;
     width: 100%;
 }
 
@@ -212,7 +212,7 @@ input[type="date"]:focus {
 }
 
 .hotel-description {
-    margin-bottom: 17px;
+    margin-bottom: 27px;
 }
 
 .viewmore-button {
@@ -220,7 +220,6 @@ input[type="date"]:focus {
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 2.5px;
-    font-weight: 500;
     color: var(--color2);
     background-color: var(--color4);
     border: none;
@@ -236,6 +235,7 @@ input[type="date"]:focus {
 
 .viewmore-button:hover {
     background-color: #19465f;
+    font-weight: bold;
     box-shadow: 0px 6px 16px rgb(8, 102, 139);
     color: #fff;
     transform: translateY(-7px);
