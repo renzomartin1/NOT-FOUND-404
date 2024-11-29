@@ -36,10 +36,12 @@ def reserva_by_usuario_id(usuario_id):
     for row in result:
         response.append({
             'reserva_id': row[0],
-            'hotel_id': row[1],
-            'habitacion_id': row[2], 
-            'fecha_entrada': row[3], 
-            'fecha_salida': row[4]
+            'hotel_id': row[2],
+            'habitacion_id': row[3], 
+            'fecha_entrada': row[4], 
+            'fecha_salida': row[5],
+            'servicios': row[6],
+            'usuario_id': row[1]
         })
     return jsonify(response), 200
 
@@ -92,23 +94,7 @@ def verificar_reserva():
         return jsonify({'message': 'reserva encontrada', "usuario_id": result[0], "reserva_id": result[1]}), 200
     else:
         return jsonify({'message': 'reserva no encontrada'}), 404
-
-@app.route('/api/actualizar_servicios', methods = ['PUT'])
-def actualizar_servicios():
-    data = request.get_json()
-    servicios_contratados = data.get("servicios_contratados")
-    reserva_id = data.get("reserva_id")
-
-    if not servicios_contratados or not reserva_id:
-        return jsonify({ "error": "No se han dado los datos necesarios." }), 400
-
-    try:
-        querys.actualizar_servicios(reserva_id, servicios_contratados)
-        return jsonify({ "message": "La lista de servicios contratados se ha actualizado con éxito" }), 200
-    except Exception as e:
-        return jsonify({ "error": str(e) }), 500
     
-
 @app.route('/api/actualizar_servicios', methods=['PUT'])
 def actualizar_servicios():
     data = request.get_json()
