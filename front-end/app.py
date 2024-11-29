@@ -197,28 +197,6 @@ def reserva_compra():
 
     return redirect(url_for('perfil', usuario_id=session["usuario_id"]))
 
-
-@app.route("/confirmacion_compra/reserva", methods = ["POST"])
-def reserva_compra():
-    usuario_id = int(request.form.get("usuario_id"))
-    hotel_id = int(request.form.get("hotel_id"))
-    habitacion_id = int(request.form.get("habitacion_id"))
-    fecha_entrada = request.form.get("fecha_entrada")
-    fecha_salida = request.form.get("fecha_salida")
-
-    reserva = {
-        "usuario_id": usuario_id,
-        "hotel_id": hotel_id,
-        "habitacion_id": habitacion_id,
-        "fecha_entrada": fecha_entrada,
-        "fecha_salida": fecha_salida
-    }
-
-    requests.post(f'{API_URL}/reservas', json=reserva)
-
-    return redirect(url_for('perfil', usuario_id=session["usuario_id"]))
-
-
 # funcion para perfil
 
 @app.route("/perfil/<int:usuario_id>")
