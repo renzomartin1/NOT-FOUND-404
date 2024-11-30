@@ -5,6 +5,7 @@
     --color4: #96C2DB;
 }
 
+
 /* estilo tarjeta de habitacion */
 
 .titulo{
@@ -17,8 +18,8 @@
 .contenedor1{
     background-color: #eee;
     box-shadow: 1px 1px 6px #000;
-    width: auto;
-    height: auto;
+    width: 80vw;
+    height: 70vh;
     margin: 15px 10vw;
     padding-top: 5px;
 }
@@ -27,27 +28,6 @@
     margin-left: 30%;
     margin-right: 30%;
 }
-
-/* Estilo calificacion */
-
-.cajaRating{
-    width: 15%;
-    height: 5%;
-    margin-top: 80px;
-}
-
-.rating:not(:checked) > input {
-    position: absolute;
-    appearance: none;
-}
-
-.rating:not(:checked) > label {
-    float: right;
-    cursor: pointer;
-    font-size: 30px;
-    color: #666;
-}
-
 
 /* estilo de carrusel imagenes */
 
@@ -133,6 +113,7 @@
     margin-left: 15%;
     margin-right: 25%;
     font-family:'montserrat', sans-serif;
+    margin-bottom: 20%;
 }
 
 /* estilo reserva */
@@ -200,105 +181,15 @@ input[type="date"]:focus {
 
 /* estilo otras habitaciones */
 
-#hotel{
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    
-}
-
 .titulo2{
     font-size: 30px;
     text-align: center;
     background-color: transparent;
-    width: 40%;
-    margin: 0 30%;
+    padding: 20px;
     color: #522305;
     letter-spacing: 1px;
-    margin-bottom: 25px;
-    margin-top: 25px;
+    margin: 25px auto;
     font-weight: bold;
-    font-family:'montserrat', sans-serif;
-}
-
-.contenedor2{
-    background-color: #eee;
-    box-shadow: 1px 1px 6px #000;
-    width: 80vw;
-    margin: 70px 10vw;
-    padding-top: 5px;
-
-}
-
-.otrasHab{
-    width: 90%;
-    height: 20%;
-    margin: 1% 5%;
-}
-
-#grilla{
-    background-color: #96C2DB;
-    border-radius: 0.5rem;
-    margin: 1rem 0;
-    width: 75%;
-    height: 200px;
-    display: flex;
-    box-shadow: #000 1px 1px 6px;
-}
-
-.grillaImg{
-    height: 100%;
-    max-width: 40%;
-    margin-right: 5%;
-}
-
-/* boton y texto otras habitaciones */
-
-.texto-habitacion{
-    color: #522305;
-    font-family:'montserrat', sans-serif;
-}
-
-.texto-habitacion a{
-    margin-bottom: 5px;
-}
-
-.boton-habitacion {
-    padding: 0.625rem 1rem;
-    font-size: 0.875rem;
-    font-weight: bold;
-    color: #522305;
-    background-color: var(--color1);
-    border: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.boton-habitacion:hover {
-    color:var(--color1);
-    background-color: #19465f;
-    font-size: 20px;
-    transition: 0.2s;
-}
-
-/* estilo otras habitaciones */
-
-#hotel{
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    
-}
-
-.titulo2{
-    font-size: 30px;
-    text-align: center;
-    background-color: transparent;
-    width: 40%;
-    margin: 0 30%;
-    color: #522305;
-    letter-spacing: 1px;
     font-family:'montserrat', sans-serif;
 }
 
@@ -308,11 +199,78 @@ input[type="date"]:focus {
     width: 80vw;
     margin: 15px 10vw;
     padding-top: 5px;
-
+    padding-bottom: 30px;
+    height: auto;
 }
 
 .otrasHab{
+    display: grid;
+    background-color: transparent;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));  /* Ajusta el numero de columnas segun el contenedor y el tamaño de la caja */
+    gap: 20px;  
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+#grilla{
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    background-color: #96C2DB;
     width: 90%;
-    height: 20%;
-    margin: 1% 5%;
+    border-radius: 7px 7px 7px 7px;
+    box-shadow: 4px 4px 3.5px 3.5px rgba(150, 149, 149, 0.562);
+}
+
+.grillaImg{
+    display: block;
+    border-radius: 7px 7px 0 0;
+    height: 260px;
+    width: 100%;
+    padding: 0;
+}
+
+.texto-habitacion p{
+    text-align: justify;
+    margin: 0;
+    padding: 10px 0 15px 18px;
+}
+
+.texto-habitacion h2{
+    text-align: justify;
+    margin: 0;
+    padding: 15px 0 15px 18px;
+}
+
+.texto-habitacion a{
+    text-align: justify;
+    margin: 0;
+    padding: 10px;
+}
+
+
+/* boton y texto otras habitaciones */
+
+.texto-habitacion{
+    width: 100%;
+    padding-bottom: 20px;
+    color: #522305;
+    font-family:'montserrat', sans-serif;
+}
+
+.texto-habitacion a{
+    margin-bottom: 5px;
+}
+
+.boton-habitacion {
+    padding: 15px 0 15px 18px;
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    font-weight: bold;
+    color: #522305;
+    background-color: var(--color1);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
 }
