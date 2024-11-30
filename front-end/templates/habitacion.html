@@ -10,7 +10,7 @@
 <div class="contenedor1">
     <div class="sub-contenedor11">
         <div class="titulo">
-            <h2>{{ habitacion.nombre }}</h2>
+            <h2>{{ hotel.hotel_nombre }} - {{ habitacion.nombre }}</h2>
         </div>
     </div>
     <!-- Caja contenedora de "carrusel" de imagenes -->
@@ -51,21 +51,20 @@
 
 <!-- Contenedor de "Otras Habitaciones" -->
 <div class="contenedor2">
+    <p class="titulo2">MÁS HABITACIONES</p>
     <div class="otrasHab">
-        <p class="titulo2">MÁS HABITACIONES</p>
-        <div id="hotel"> <!-- Datos habitaciones del hotel seleccionado -->
-            {% for habitacion in otras_habitaciones %}
-                <div id="grilla">
+        <!-- Datos habitaciones del hotel seleccionado -->
+        {% for habitacion in otras_habitaciones %}
+            <div id="grilla">
+                <div class="texto-habitacion">
                     <img class="grillaImg" src="{{ url_for('static', filename='images/hoteles/' + hotel.hotel_nombre + '/' + habitacion.nombre + '/imagen0.jpg') }}" class="imagen-habitacion" alt="habitaciones">
-                    <div class="texto-habitacion">
-                        <h2 >{{habitacion.nombre}}</h2>
-                        <p >Capacidad: {{habitacion.capacidad}}</p>
-                        <p >Precio(por noche): {{habitacion.precio}}</p>
-                        <a href="{{url_for('habitacion', habitacion_id=habitacion.habitacion_id)}}"><button class="boton-habitacion">Ver</button></a>
-                    </div>
+                    <h2 >{{habitacion.nombre}}</h2>
+                    <p >Capacidad: {{habitacion.capacidad}}</p>
+                    <p >Precio(por noche): {{habitacion.precio}}</p>
+                    <a href="{{url_for('habitacion', habitacion_id=habitacion.habitacion_id)}}"><button class="boton-habitacion">Ver</button></a>
                 </div>
-            {% endfor %}  
-        </div>
+            </div>
+        {% endfor %}
     </div>
 </div>
 
