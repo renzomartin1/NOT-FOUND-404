@@ -77,3 +77,51 @@ class Reservas(Screen):
 
     def on_enter(self):
         self.ids.message.text = "Bienvenido. Ingresa tu ID de reserva."
+
+    #Se encarga de traer el reserva_id que escribio el usuario
+    def validar_reserva(self): 
+        reserva_id = self.ids.reserva_id.text
+        
+        if not reserva_id:
+            self.ids.message.text = "Por favor ingrese un ID de reserva."
+            return
+        
+        # Validar si la reserva existe y está asociada al usuario
+        result = App.get_running_app().verificar_reserva(self.usuario_id, reserva_id)
+
+        if not result:
+            self.ids.message.text = "No se encontró una reserva con ese ID para el usuario."
+            return
+
+
+class Servicios(Screen):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.usuario_id = None
+        self.reserva_id = None
+        self.checkboxes = []
+        self.labels = []  
+    
+    def obtener_servicios(self):
+        servicios_json = {}
+        data = {"reserva_id": self.reserva_id, "usuario_id": self.usuario_id}
+        try:
+            response_hotel_id = requests.post(f"{URL}verificar_reserva", json=data)
+            if response_hotel_id.status_code == 200:
+                hotel_id = response_hotel_id.json().get("hotel_id")
+                response_servicios = requests.get(f"{URL}hoteles/servicios/{hotel_id}")
+                if response_servicios.status_code == 200:
+                    servicios_json = response_servicios.json()
+                else:
+                    print(f"Error: No se pudo obtener los servicios, {response_servicios.status_code}")
+            else:
+                print(f"Error: No se pudo obtener el hotel_id, {response_hotel_id.status_code}")
+
+        except Exception as e:
+            print(f"Error al obtener los servicios: {e}")
+        
+        if "servicios" in servicios_json:
+            lista_servicios = servicios_json["servicios"].split(", ")
+        else:
+                lista_servicios = []
+        return lista_servicios  
