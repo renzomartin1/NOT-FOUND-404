@@ -107,7 +107,7 @@
     background-color: transparent;
     text-align: center;
     color: #522305;
-    font-size: 25px;
+    font-size: 1.4rem;
     border-top: 1px #522305 solid;
     text-align: left;
     margin-left: 15%;
@@ -198,7 +198,7 @@ input[type="date"]:focus {
     width: 80vw;
     margin: 15px 10vw;
     padding-top: 5px;
-    padding-bottom: 30px;
+    padding-bottom: 70px;
     height: auto;
 }
 
@@ -272,4 +272,91 @@ input[type="date"]:focus {
     border: none;
     border-radius: 0.5rem;
     cursor: pointer;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 1500px){
+    .contenedor1{
+        box-sizing: content-box;
+        height: auto;
+    }
+    .sub-contenedor11{
+        width: 100%;
+        margin: 0;
+    }
+    .sub-contenedor12{
+        flex-direction: column;
+    }
+    .caja1{
+        width: 90%;
+        margin: auto;
+    }
+    .caja2{
+        width: 100%;
+    }
+    .info{
+        margin: 25px 10%;
+        border-bottom: 1px #522305 solid;
+    }
+    .reserva{
+        margin-bottom: 25px;
+    }
+    .filter-form{
+        margin: auto;
+    }
+    /* OTRAS HABITACIONES */
+    .otrasHab{
+        gap: 0;
+    }
+    #grilla{
+        margin: 25px auto;
+    }
+}
+
+@media (max-width: 450px){
+    .contenedor1{
+        width: 100%;
+        margin: 0;
+        box-sizing: content-box;
+        height: auto;
+    }
+    .sub-contenedor11 h2{
+        font-size: 1.4em;
+    }
+    .info{
+        width: 80%;
+        margin: 25px auto;
+    }
+    /* FILTROS */
+    .reserva{
+        width: 100%;
+    }
+    .filter-form {
+        box-sizing: border-box;
+        flex-direction: column;
+        align-items: center;
+        margin: auto;
+        gap: 10px;
+        width: 95%;
+        padding: 20px 20px 20px 20px;
+        border-radius: 50px;
+        background-color: var(--color4);
+    }
+    input[type="date"]{
+        width: 85%;
+    }
+    .custom-select{
+        width: 95%;
+    }
+    .filter-button{
+        width: 60%;
+    }
+    /* MAS HABITACIONES */
+    .contenedor2{
+        width: 100%;
+        margin: 0;
+        box-shadow: unset;
+    }
 }
