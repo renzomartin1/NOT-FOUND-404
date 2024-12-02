@@ -9,6 +9,8 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0px;
+    position: relative;
+    min-height: 100vh;
 }
 
 
@@ -432,6 +434,7 @@ header {
     display: flex;
     justify-content: center;
     margin-top: 30px;
+    text-align: center;
 }
 
 #con-cuenta-modal-register p {
@@ -458,6 +461,8 @@ footer {
     flex-direction: column;
     background-color: var(--color1);
     align-items: center;
+    bottom: 0;
+    width: 100%;
 }
 
 /* Línea del footer */
@@ -483,4 +488,73 @@ footer {
     text-align: center;
     margin-top: 0px;
     margin-bottom: 8px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 1500px){
+    /* header */
+}
+
+@media(max-width: 450px){
+    /* header */
+    html{
+        width: auto;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+    header{
+        align-items: unset;
+    }
+    
+    /* BOTONES DE SESION */
+    
+    #contenedor-logotipo-botones-sesion{
+        width: 100%;
+    }
+    #logotipo{
+        width: 50%;
+    }
+    #botones-sesion{
+        width: 50%;
+        flex-direction: column;
+    }
+    #boton-abrir-modal-login{
+        width: 60%;
+    }
+    #boton-abrir-modal-register{
+        width: 60%;
+    }
+    /* NAVEGACION */
+    #barra-navegacion{
+        column-gap: 5%;
+    }
+    .barra-navegacion-opciones{
+        width: 30%;
+        text-align: center;
+        margin: auto;
+    }
+    /* BLOQUE EMERGENTE INICIO SESION */
+    #modal-login form input{
+        box-sizing: border-box;
+        width: 100%;
+    }
+    #sin-cuenta-modal-login{
+        text-align: center;
+    }
+    #modal-register form input{
+        box-sizing: border-box;
+        width: 100%;
+    }
+    #terminos-avisos{
+        margin-top: 0;
+    }
+    #con-cuenta-modal-register{
+        justify-content: unset;
+        text-align: center;
+        margin: 10px auto;
+        margin-bottom: 0;
+    }
 }
