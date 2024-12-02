@@ -125,3 +125,49 @@ class Servicios(Screen):
         else:
                 lista_servicios = []
         return lista_servicios  
+
+    def on_enter(self): 
+        for checkbox in self.checkboxes:
+            self.remove_widget(checkbox.parent)
+        self.checkboxes.clear()
+        self.labels.clear()
+        # Inserto diseño al layout desde main.py para poder iterar checkboxes
+        lista_servicios = self.obtener_servicios()
+        resta_altura_porcentaje_y = 0
+        for servicio in lista_servicios:
+            box = BoxLayout(orientation = "horizontal", size_hint = (0.60, 0.03), pos_hint = {"center_x": 0.50, "center_y": 0.82 - resta_altura_porcentaje_y})
+            resta_altura_porcentaje_y += 0.075
+
+            label = Label(text = servicio, font_size = "22.5dp", color = (1, 1, 1, 1), valign = "middle")
+            checkbox = CheckBox(color = (1, 1, 1, 1), size_hint = (None, None), size = (50,50))
+
+            box.add_widget(label)
+            box.add_widget(checkbox)
+            self.add_widget(box)
+            
+            self.checkboxes.append(checkbox)
+            self.labels.append(label)
+
+    def guardar_servicios_seleccionados(self):
+        servicios_seleccionados = []
+        for i, checkbox in enumerate(self.checkboxes):
+            if checkbox.active:
+                servicios_seleccionados.append(self.labels[i].text)
+        return servicios_seleccionados
+
+    def contratar_servicios(self):
+        servicios_seleccionados = self.guardar_servicios_seleccionados()
+        if servicios_seleccionados:
+            data = {"reserva_id": self.reserva_id, "servicios_contratados": ', '.join(servicios_seleccionados)}
+            try:
+                response = requests.put(f"{URL}actualizar_servicios", json=data)
+                if response.status_code == 200:
+                    print("Servicios contratados exitosamente")
+                else:
+                    print(f"Error al contratar los servicios, {response.status_code}")
+            except Exception as e:
+                print(f"Error al contratar os servicios: {e}")
+            self.manager.get_screen("contrataciones").servicios_seleccionados = servicios_seleccionados
+            self.manager.current = "contrataciones"
+        else:
+            self.ids.message.text = "Por favor, seleccione al menos un servicio."
