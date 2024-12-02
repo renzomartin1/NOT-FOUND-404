@@ -415,3 +415,43 @@
   line-height: 1.4;
   color: var(--texto-primario-claro-color);
 }
+
+
+@media(max-width: 1500px){
+  /* header */
+}
+
+@media(max-width: 450px){
+  .contenedor-perfil-usuario {
+    width: 90%;
+  
+    
+  }
+  footer {
+    /*position: fixed;*/
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  #boton-ver-mi-perfil {
+    margin-bottom: 5px;
+    padding: 8px 12px;
+  }
+
+  #boton-cerrar-sesion {
+    padding: 8px 8px;
+  }
+  
+  #botones-sesion {
+    margin-left: 25%;
+    margin-top: 10px;
+  }
+
+  nav {
+  height: 70px; 
+
+  }
+  
+}
