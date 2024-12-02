@@ -171,3 +171,59 @@ class Servicios(Screen):
             self.manager.current = "contrataciones"
         else:
             self.ids.message.text = "Por favor, seleccione al menos un servicio."
+
+class Contrataciones(Screen):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.servicios_seleccionados = None
+
+    def on_enter(self):
+        # Limpiar cualquier elemento anterior en el layout
+        self.clear_widgets()
+        mensaje = Label(
+            text = "¡Servicios contratados exitosamente!", 
+            font_size = "22.5dp", 
+            bold = True, 
+            color = (1, 1, 1, 1), 
+            pos_hint = {
+                "center_x": 0.50, 
+                "center_y": 0.90
+            }
+        )
+        self.add_widget(mensaje)
+        resta_altura_porcentaje_y = 0
+
+        for servicio in self.servicios_seleccionados:
+            servicio_label = Label(
+                text = servicio, 
+                font_size = "22.5dp", 
+                color = (1, 1, 1, 1), 
+                valign = "middle", 
+                size_hint = (0.60, 0.03), 
+                pos_hint = {
+                    "center_x": 0.50, 
+                    "center_y": 0.82 - resta_altura_porcentaje_y
+                }
+            )
+            self.add_widget(servicio_label)
+            resta_altura_porcentaje_y += 0.075
+
+        button = Button(
+            text = "Volver", 
+            color = (1, 1, 1, 1), 
+            size_hint = (None, None), 
+            pos_hint = {
+                "center_x": 0.5, 
+                "center_y": 0.20
+            }, 
+            height = "48dp", 
+            width = 200, 
+            padding = 20, 
+            background_color = (25/255, 71/255, 95/255, 1)
+        )
+        button.bind(on_press = App.get_running_app().volver_atras)  
+        self.add_widget(button)
+
+
+if __name__ == "__main__":
+    Hotelisco().run()
