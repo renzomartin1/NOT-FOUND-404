@@ -197,9 +197,15 @@ def reserva_compra():
         "fecha_creacion": fecha_creacion
     }
 
-    requests.post(f'{API_URL}/reservas', json=reserva)
+    try:
+        response = requests.post(f'{API_URL}/reservas', json=reserva)
+        if response.status_code == 201:
+            return redirect(url_for('perfil', usuario_id=session["usuario_id"]))
+        else:
+            return jsonify({"error": "Error al crear la reserva"}), 500
 
-    return redirect(url_for('perfil', usuario_id=session["usuario_id"]))
+    except requests.exceptions.RequestException as e:
+        return jsonify({ 'error': str(e) }), 500
 
 
 
@@ -293,20 +299,26 @@ def perfil(usuario_id):
 
 @app.route("/eliminar_reserva/<int:reserva_id>")
 def eliminar_reserva(reserva_id):
-    response = requests.delete(f"{API_URL}/reservas/{reserva_id}")
-    if response.status_code == 200:
-        return redirect(url_for("perfil", usuario_id=session["usuario_id"]))
-    else:
-        return redirect(url_for("error_404"))
+    try:
+        response = requests.delete(f"{API_URL}/reservas/{reserva_id}")
+        if response.status_code == 200:
+            return redirect(url_for("perfil", usuario_id=session["usuario_id"]))
+        else:
+            return redirect(url_for("error_404"))
+    except requests.exceptions.RequestException as e:
+        return jsonify({ 'error': str(e) }), 500
 
 
 @app.route("/eliminar-cuenta/<int:usuario_id>")
 def eliminar_cuenta(usuario_id):
-    response = requests.delete(f"{API_URL}/usuarios/{usuario_id}")
-    if response.status_code == 200:
-        return redirect(url_for("logout"))
-    else:
-        return redirect(url_for("error_404"))
+    try:
+        response = requests.delete(f"{API_URL}/usuarios/{usuario_id}")
+        if response.status_code == 200:
+            return redirect(url_for("logout"))
+        else:
+            return redirect(url_for("error_404"))
+    except requests.exceptions.RequestException as e:
+        return jsonify({ 'error': str(e) }), 500
 
 
 @app.errorhandler(404)      #manejo de errores
