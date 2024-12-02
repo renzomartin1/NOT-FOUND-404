@@ -42,6 +42,7 @@
         </nav>
     </header>
 
+    {% if "usuario_id" not in session %}
     <!-- DIALOG: MODAL LOGIN -->
     <dialog id="contenedor-modal-login">
         <div id="modal-login">
@@ -83,7 +84,9 @@
             </div>
         </div>
     </dialog>
+    {% endif %}
 
+    {% if "usuario_id" not in session %}
     <!-- DIALOG: MODAL REGISTER -->
     <dialog id="contenedor-modal-register">
         <div id="modal-register">
@@ -137,6 +140,7 @@
             </div>
         </div>
     </dialog>
+    {% endif %}
 
     {% block body %}{% endblock %}
 
@@ -155,7 +159,9 @@
         </div>
     </footer>
 
+    {% if "usuario_id" not in session %}
     <script src="{{ url_for('static', filename='js/base.js') }}"></script>
+    {% endif %}
     {% if forzar_modal_login %}
     <script src="{{ url_for('static', filename='js/forzar_modal_login.js') }}"></script>
     {% endif %}
