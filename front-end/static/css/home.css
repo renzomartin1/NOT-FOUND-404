@@ -22,8 +22,6 @@ body {
     padding: 0;
     display: flex;
     flex-direction: column;
-    
-    
 }
 /* IMAGERN PRESENTACION */
 
@@ -181,7 +179,9 @@ input[type="date"]:focus {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     display: flex;
     align-items: stretch;
-    width: 70%;
+    min-width: 70%;
+    max-width: 75%;
+    height: 275px;
 }
 
 .hotel-image {
@@ -198,8 +198,7 @@ input[type="date"]:focus {
 .hotel-info {
     display: flex;
     flex-direction: column;
-    padding: 30px;
-    padding-bottom: 25px;
+    padding: 20px 20px 10px 40px;
     width: 100%;
 }
 
@@ -211,10 +210,14 @@ input[type="date"]:focus {
 .hotel-location {
     font-size: 20px;
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-.hotel-description {
-    margin-bottom: 27px;
+.hotel-description{
+    font-size: 1em;
+    min-height: 114px;
+    max-height: 114px;
+    margin: 0;
 }
 
 .viewmore-button {
@@ -222,6 +225,7 @@ input[type="date"]:focus {
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 2.5px;
+    font-weight: 500;
     color: var(--color2);
     background-color: var(--color4);
     border: none;
@@ -230,14 +234,12 @@ input[type="date"]:focus {
     transition: all 0.3s ease 0s;
     cursor: pointer;
     outline: none;
-    margin-top: auto;
     align-self: flex-end;
     width: 35%;
 }
 
 .viewmore-button:hover {
     background-color: #19465f;
-    font-weight: bold;
     box-shadow: 0px 6px 16px rgb(8, 102, 139);
     color: #fff;
     transform: translateY(-7px);
@@ -253,4 +255,119 @@ input[type="date"]:focus {
     height: 2px;
     background: rgb(8, 102, 139);
     background-image: linear-gradient(to right, var(--color4), rgb(8,102,139), var(--color4));
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1500px){
+    /* LOGO */
+    .hoteliscoIMG{
+        margin: 12% 0;
+    }
+    /* HOTELES */
+    .hotel{
+        display: flex;
+        width: 80%;
+        flex-direction: column;
+        height: 750px;
+        position: relative;
+    }
+
+    .hotel-image{
+        max-height: 450px;
+    }
+
+    .hotel-info{
+        height: auto;
+        padding: 0;
+    }
+    .hotel-name{
+        margin-top: 10px;
+        text-align: center;
+        padding: 0 5px;
+    }
+    .hotel-location{
+        text-align: center;
+    }
+    .hotel-description{
+        padding: 20px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        line-clamp: auto;
+        -webkit-line-clamp: 7;
+        overflow: hidden;
+    }
+    .viewmore-button{
+        position: absolute;
+        align-self: center;
+        bottom: 0;
+        margin-bottom: 10px;
+    }
+    /* FILTROS */
+    .filtros{
+        width: 80%;
+    }
+    .filter-form {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 95%;
+        padding: 20px 20px 20px 20px;
+        border-radius: 50px;
+        background-color: var(--color1);
+    }
+    input[type="date"]{
+        width: 85%;
+    }
+    .custom-select{
+        width: 95%;
+    }
+    .filter-button{
+        width: 60%;
+    }
+}
+
+@media (max-width: 450px){
+    /* LOGO */
+    .hoteliscoIMG{
+        margin: 15% 0;
+    }
+    /* HOTELES */
+    .hotel{
+        display: flex;
+        width: 90%;
+        flex-direction: column;
+        position: relative;
+    }
+    .viewmore-button{
+        position: absolute;
+        align-self: center;
+        bottom: 0;
+        margin-bottom: 10px;
+        width: 60%;
+    }
+    /* FILTROS */
+    .filtros{
+        width: 80%;
+    }
+    .filter-form {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 95%;
+        padding: 20px 20px 20px 20px;
+        border-radius: 50px;
+        background-color: var(--color1);
+    }
+    input[type="date"]{
+        width: 85%;
+    }
+    .custom-select{
+        width: 95%;
+    }
+    .filter-button{
+        width: 60%;
+    }
 }
