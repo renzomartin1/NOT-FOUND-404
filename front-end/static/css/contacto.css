@@ -101,3 +101,31 @@
     background-color: #19465f;
     cursor: pointer;
 }
+
+@media(max-width: 1500px){
+    #coloracion-fondo{
+        padding: 10%;
+        width: 80%;
+    }
+    #cuerpo-formulario-contacto{
+        width: 80%;
+    }
+}
+@media(max-width: 450px){
+    #cuerpo-formulario-contacto form{
+        flex-direction: column;
+    }
+    #datos-personales-formulario-contacto{
+        padding: 0;
+        width: 100%;
+    }
+    #mensaje-boton-formulario-contacto{
+        width: 100%;
+    }
+    #cuerpo-formulario-contacto form textarea {
+        height: 150px;
+    }
+    #boton-formulario-contacto{
+        align-self: center;
+    }
+}
