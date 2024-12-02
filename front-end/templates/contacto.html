@@ -9,20 +9,22 @@
     <div id="coloracion-fondo">
         <div id="cuerpo-formulario-contacto">
             <h2>Contacto</h2>
-            <form>
+            <form action="https://formsubmit.co/4ef08a93011ac74398bc60f081efb117", method="post">
                 <div id="datos-personales-formulario-contacto">
-                    <label for="fcname">Nombre</label>
-                    <input id="fcname" type="text" name="fcname" required>
-                    <label for="fcemail">Correo electrónico</label>
-                    <input id="fcemail" type="email" name="fcemail" required>
-                    <label for="fcnumber">Número telefónico</label>
-                    <input id="fcnumber" type="number" name="fcnumber" required>
-                    <label for="fcmotive">Motivo</label>
-                    <input id="fcmotive" type="text" name="fcmotive" required>
+                    <label for="fc-nombre">Nombre</label>
+                    <input id="fc-nombre" type="text" name="Nombre" required>
+                    <label for="fc-email">Correo electrónico</label>
+                    <input id="fc-email" type="email" name="Correo electrónico" required>
+                    <label for="fc-telefono">Número telefónico</label>
+                    <input id="fc-telefono" type="number" name="Número telefónico" required>
+                    <label for="fc-motivo">Motivo</label>
+                    <input id="fc-motivo" type="text" name="Motivo" required>
                 </div>
                 <div id="mensaje-boton-formulario-contacto">
-                    <label for="fcmessage">Mensaje</label>
-                    <textarea id="fcmessage" name="fcmessage" required></textarea>
+                    <label for="fc-mensaje">Mensaje</label>
+                    <textarea id="fc-mensaje" name="Mensaje" required></textarea>
+                    <input type="hidden" name="_next" value="http://127.0.0.1:5001/">
+                    <input type="hidden" name="_captcha" value="false">
                     <button id="boton-formulario-contacto" type="submit">ENVIAR</button>
                 </div>
             </form>
