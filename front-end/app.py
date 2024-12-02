@@ -2,7 +2,7 @@ from flask import Flask, render_template, jsonify, request, session, redirect, u
 from datetime import datetime
 import requests
 
-API_URL = 'http://127.0.0.1:5005/api'
+API_URL = 'https://nmendozab.pythonanywhere.com/api'
 PORT = 5001
 
 app = Flask(__name__)
@@ -14,7 +14,6 @@ def home():
     fecha_entrada = request.args.get("fecha_entrada")
     fecha_salida = request.args.get("fecha_salida")
     cantidad_personas = request.args.get("cantidad_personas")
-
     
     try:
         params = {
@@ -40,7 +39,7 @@ def home():
     success_modal_login = ""
 
     if request.method == "POST":
-        previous_url = request.referrer or url_for('home')  #Referrer es la URL anterior a la actual, si no existe devuelve la de hom
+        previous_url = request.referrer or url_for('home')  #Referrer es la URL anterior a la actual, si no existe devuelve la de home
         if len(request.form) == 6:
             contraseña = request.form.get("fr-contraseña")
             repetir_contraseña = request.form.get("fr-repetir-contraseña")
@@ -99,13 +98,13 @@ def logout():
     session.pop("usuario_id")
     return redirect(url_for("home"))
 
-# funcion hotel
 
 @app.route("/hotel/<int:hotel_id>")
 def hotel(hotel_id, fecha_entrada=None, fecha_salida=None, cantidad_personas=None): 
     fecha_entrada = request.args.get("fecha_entrada")
     fecha_salida = request.args.get("fecha_salida")
     cantidad_personas = request.args.get("cantidad_personas")
+    fecha_actual=datetime.now().strftime("%Y-%m-%d")
 
     if not fecha_entrada:
         fecha_entrada = None
@@ -126,13 +125,14 @@ def hotel(hotel_id, fecha_entrada=None, fecha_salida=None, cantidad_personas=Non
         hotel = result["hotel"]
         habitaciones = result["habitaciones"]
         hotel["servicios"] = hotel["servicios"].split(", ")
+        if not habitaciones:
+            return render_template("hotel.html", hotel=hotel, habitaciones=[], fecha_actual=fecha_actual)
     except requests.exceptions.RequestException as e:
         return jsonify({ 'error': str(e) }), 500
     
     fecha_actual = datetime.now().strftime("%Y-%m-%d")
     return render_template("hotel.html", hotel=hotel, habitaciones=habitaciones, fecha_actual=fecha_actual)
 
-# funcion habitacion
 
 @app.route("/habitacion/<int:habitacion_id>")
 def habitacion(habitacion_id):
@@ -150,6 +150,7 @@ def habitacion(habitacion_id):
         return jsonify({'error': str(e)}), 500
     
     return render_template("habitacion.html", habitacion=habitacion, otras_habitaciones=otras_habitaciones, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida, hotel=hotel, fecha_actual=fecha_actual)
+
 
 @app.route("/confirmacion_compra/<int:habitacion_id>")
 def comprar(habitacion_id):
@@ -175,7 +176,6 @@ def comprar(habitacion_id):
     
     return render_template("confirmacion_compra.html", habitacion=habitacion, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida, forzar_modal_login=forzar_modal_login,hotel=hotel)
 
-# funcion confirmar-compra 
 
 @app.route("/confirmacion_compra/reserva", methods = ["POST"])
 def reserva_compra():
@@ -184,20 +184,24 @@ def reserva_compra():
     habitacion_id = int(request.form.get("habitacion_id"))
     fecha_entrada = request.form.get("fecha_entrada")
     fecha_salida = request.form.get("fecha_salida")
+    servicios_contratados = None
+    fecha_creacion = datetime.now().strftime("%Y-%m-%d")
 
     reserva = {
         "usuario_id": usuario_id,
         "hotel_id": hotel_id,
         "habitacion_id": habitacion_id,
         "fecha_entrada": fecha_entrada,
-        "fecha_salida": fecha_salida
+        "fecha_salida": fecha_salida,
+        "servicios_contratados": servicios_contratados,
+        "fecha_creacion": fecha_creacion
     }
 
     requests.post(f'{API_URL}/reservas', json=reserva)
 
     return redirect(url_for('perfil', usuario_id=session["usuario_id"]))
 
-# funcion para perfil
+
 
 @app.route("/perfil/<int:usuario_id>")
 def perfil(usuario_id):
@@ -296,8 +300,6 @@ def eliminar_reserva(reserva_id):
         return redirect(url_for("error_404"))
 
 
-# funcion eliminar cuenta
-
 @app.route("/eliminar-cuenta/<int:usuario_id>")
 def eliminar_cuenta(usuario_id):
     response = requests.delete(f"{API_URL}/usuarios/{usuario_id}")
@@ -305,12 +307,12 @@ def eliminar_cuenta(usuario_id):
         return redirect(url_for("logout"))
     else:
         return redirect(url_for("error_404"))
-        
+
 
 @app.errorhandler(404)      #manejo de errores
 def error_404(e):
     return render_template('404.html'), 404
-    
+
 
 @app.route("/contacto")
 def contacto():
