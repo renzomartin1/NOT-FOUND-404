@@ -95,7 +95,7 @@ VALUES
 (30000, "Suite Serenidad", "Suite de lujo con balcón privado y vista panorámica de la ciudad, perfecta para una estancia relajante", 135, 2, 4),
 (30000, "Habitación Zen", "Hab. sencilla pero acogedora, con decoración minimalista y una atmósfera tranquila para descansar profundamente", 80, 1, 3),
 (30000, "Suite Relax", "Suite espaciosa con jacuzzi privado y un balcon espacioso, para una experiencia de total relajación", 150, 4, 2),
-(30000, "Habitación familiar", "Ideal para disfrutar con la familia de una jornada de descanso, rodeado de silencio y paz", 170, 5, 1);
+(30000, "Habitación Familiar", "Ideal para disfrutar con la familia de una jornada de descanso, rodeado de silencio y paz", 170, 5, 1);
 
 INSERT INTO habitaciones (hotel_id, nombre, descripcion, precio, capacidad, calificacion)
 VALUES 
