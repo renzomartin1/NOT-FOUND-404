@@ -50,3 +50,30 @@ class Hotelisco(App):
 
     def logout(self):
         self.root.current = "login"
+
+    def volver_atras(self, instance):
+        self.root.current = "reservas"
+
+    def verificar_reserva(self, usuario_id, reserva_id):
+        data = {"reserva_id": reserva_id, "usuario_id": usuario_id}	
+        try:
+            response = requests.post(URL + "verificar_reserva", json=data)
+
+            if response.status_code == 200:
+                nueva_reserva_id = response.json().get("usuario_id")
+                self.root.get_screen("servicios").reserva_id = nueva_reserva_id
+                self.root.get_screen("servicios").usuario_id = usuario_id
+                self.root.current = "servicios"
+            else:
+                self.root.get_screen("reservas").ids.message.text = response.json().get("message", "Error desconocido.")
+        except requests.RequestException as err:
+            self.root.get_screen("reservas").ids.message.text = f"Error al conectar con el servidor: {err}"
+    
+class LoginScreen(Screen):
+    pass
+
+class Reservas(Screen):
+    usuario_id = None
+
+    def on_enter(self):
+        self.ids.message.text = "Bienvenido. Ingresa tu ID de reserva."
