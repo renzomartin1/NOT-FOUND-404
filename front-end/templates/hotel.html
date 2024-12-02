@@ -60,6 +60,9 @@
         
 
         <div class="habitaciones">
+            {% if habitaciones == [] %}
+                <p id="sinHabitaciones">No hay habitaciones disponibles</p>
+            {% endif %}
             {% for habitacion in habitaciones %}
                 <div id="grilla">
                     <div class="texto-habitacion">
@@ -74,8 +77,6 @@
         </div>
 
     </div>
-
-    <div class="contenedor2"></div>
 </div>
 
 {% endblock %}
