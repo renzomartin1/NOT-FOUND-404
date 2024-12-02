@@ -1,0 +1,224 @@
+<LoginScreen>:
+    canvas:
+        Color:
+            rgba: 229/255, 237/255, 241/255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    Image:
+        source: "logotipo.png"
+        size_hint: None, None
+        size: "200dp", "175dp"
+        pos_hint: {"center_x": 0.50, "center_y": 0.80}
+
+    Image:
+        source: "hotelisco.png"
+        size_hint: None, None
+        size: "200dp", "100dp"
+        pos_hint: {"center_x": 0.50, "center_y": 0.65}
+
+    Label:
+        text: "Correo electrónico"
+        font_size: 17
+        bold: True
+        color: 0, 0, 0, 1
+
+        text_size: self.size   # Toma el ancho y alto del padre
+        halign: "left"
+        valign: "middle"
+
+        size_hint: 0.80, 0.05
+        pos_hint: {"center_x": 0.50, "center_y": 0.56}
+
+    TextInput:
+        id: email
+        font_size: 16
+        size_hint: 0.80, 0.05
+        pos_hint: {"center_x": 0.50, "center_y": 0.51}
+        cursor_color: 0, 0, 0, 1
+        padding: 12, 12.5, 6, 6
+        background_normal: ""  # Quita ese molesta capa gris
+
+    Label:
+        text: "Contraseña"
+        font_size: 17
+        bold: True
+        color: 0, 0, 0, 1
+
+        text_size: self.size
+        halign: "left"
+        valign: "middle"
+
+        size_hint: 0.80, 0.05
+        pos_hint: {"center_x": 0.50, "center_y": 0.45}
+
+    TextInput:
+        id: contraseña
+        password: True
+        font_size: 16
+        size_hint: 0.80, 0.05
+        pos_hint: {"center_x": 0.50, "center_y": 0.40}
+        cursor_color: 0, 0, 0, 1
+        padding: 12, 12.5, 6, 6
+        background_normal: ""
+
+    Button:
+        text: "Iniciar sesión"
+        font_size: 17
+        size_hint: 0.35, 0.05
+        pos_hint: {"center_x": 0.50, "center_y": 0.31}
+        background_normal: ""
+        background_color: 150/255, 194/255, 219/255, 1
+
+        on_press: app.verificar_usuario()
+        on_press: self.background_color = 25/255, 71/255, 95/255, 1
+        on_release: self.background_color = 150/255, 194/255, 219/255, 1  #cuando se deja de presionar
+
+    Label:
+        id: message
+        text: ""
+        font_size: 16
+        bold: True
+        color: 185/255, 68/255, 68/255, 1
+        pos_hint: {"center_x": 0.50, "center_y": 0.24}
+
+
+
+
+<Reservas>:
+    canvas:
+        Color:
+            rgba: 229/255, 237/255, 241/255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    Image:
+        source: "logotipo.png"
+        size_hint: None, None
+        size: "200dp", "175dp"
+        pos_hint: {"center_x": 0.50, "center_y": 0.80}
+
+    Image:
+        source: "hotelisco.png"
+        size_hint: None, None
+        size: "200dp", "100dp"
+        pos_hint: {"center_x": 0.50, "center_y": 0.65}
+
+    Label:
+        text: "Número de reserva"
+        font_size: 17
+        bold: True
+        color: 0, 0, 0, 1
+
+        text_size: self.size
+        halign: "left"
+        valign: "middle"
+
+        size_hint: 0.80, 0.05
+        pos_hint: {"center_x": 0.50, "center_y": 0.56}
+
+    TextInput:
+        id: reserva_id
+        font_size: 16
+        size_hint: 0.80, 0.05
+        pos_hint: {"center_x": 0.50, "center_y": 0.51}
+        cursor_color: 0, 0, 0, 1
+        padding: 12, 12.5, 6, 6
+        background_normal: ""
+
+    Button:
+        text: "Ver servicios disponibles"
+        font_size: 17
+        size_hint: 0.57, 0.05
+        pos_hint: {"center_x": 0.50, "center_y": 0.42}
+        background_normal: ""
+        background_color: 150/255, 194/255, 219/255, 1
+
+        on_press: root.validar_reserva()
+        on_press: self.background_color = 25/255, 71/255, 95/255, 1
+        on_release: self.background_color = 150/255, 194/255, 219/255, 1
+
+    Label:
+        id: message
+        text: ""
+        font_size: 16
+        bold: True
+        color: 185/255, 68/255, 68/255, 1
+        pos_hint: {"center_x": 0.50, "center_y": 0.35}
+
+    Button:
+        text: "Cerrar sesión"
+        font_size: 17
+        bold: True
+        color: 25/255, 71/255, 95/255, 1
+        size_hint: 0.30, 0.05
+        pos_hint: {"center_x": 0.16, "center_y": 0.97}
+        background_normal: ""
+        background_color: 229/255, 237/255, 241/255, 1
+
+        on_press: app.logout()
+        on_press: self.background_color = 229/255, 237/255, 241/255, 0
+        on_release: self.background_color = 229/255, 237/255, 241/255, 0
+
+
+
+
+<Servicios>:
+    canvas:
+        Color:
+            rgba: 229/255, 237/255, 241/255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    Label:
+        text: "¿Qué servicios quieres contratar?"
+        font_size: 20
+        bold: True
+        color: 25/255, 71/255, 95/255, 1
+        pos_hint: {"center_x": 0.50, "center_y": 0.90}
+
+    Button:
+        text: "Contratar"
+        font_size: 17
+        size_hint: 0.35, 0.05
+        pos_hint: {"center_x": 0.30, "center_y": 0.19}
+        background_normal: ""
+        background_color: 150/255, 194/255, 219/255, 1
+
+        on_press: root.contratar_servicios()
+        on_press: self.background_color = 25/255, 71/255, 95/255, 1
+        on_release: self.background_color = 150/255, 194/255, 219/255, 1
+
+    Label:
+        id: message
+        text: ""
+        font_size: 16
+        bold: True
+        color: 185/255, 68/255, 68/255, 1
+        pos_hint: {"center_x": 0.50, "center_y": 0.12}
+
+    Button:
+        text: "Atrás"
+        font_size: 17
+        size_hint: 0.35, 0.05
+        pos_hint: {"center_x": 0.70, "center_y": 0.19}
+        background_normal: ""
+        background_color: 150/255, 194/255, 219/255, 1
+
+        on_press: app.volver_atras(None)
+        on_press: self.background_color = 25/255, 71/255, 95/255, 1
+        on_release: self.background_color = 150/255, 194/255, 219/255, 1
+
+
+
+
+<Contrataciones>:
+    canvas:
+        Color:
+            rgba: 229/255, 237/255, 241/255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
