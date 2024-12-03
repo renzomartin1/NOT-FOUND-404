@@ -172,57 +172,69 @@
 <Servicios>:
     canvas:
         Color:
-            rgba: 229/255, 237/255, 241/255, 1
+            rgba: 21/255, 68/255, 95/255, 1
         Rectangle:
             pos: self.pos
             size: self.size
 
     Label:
         text: "¿Qué servicios quieres contratar?"
-        font_size: 20
+        font_size: "18.75dp"
         bold: True
-        color: 25/255, 71/255, 95/255, 1
+        color: 1, 1, 1, 1
         pos_hint: {"center_x": 0.50, "center_y": 0.90}
 
     Button:
         text: "Contratar"
-        font_size: 17
+        font_size: "22.5dp"
         size_hint: 0.35, 0.05
-        pos_hint: {"center_x": 0.30, "center_y": 0.19}
+        pos_hint: {"center_x": 0.50, "center_y": 0.20}
+        color: 21/255, 68/255, 95/255, 1
         background_normal: ""
         background_color: 150/255, 194/255, 219/255, 1
 
         on_press: root.contratar_servicios()
-        on_press: self.background_color = 25/255, 71/255, 95/255, 1
+        on_press: self.background_color = 104/255, 148/255, 166/255, 1
         on_release: self.background_color = 150/255, 194/255, 219/255, 1
 
     Label:
         id: message
         text: ""
-        font_size: 16
+        font_size: "12dp"
         bold: True
         color: 185/255, 68/255, 68/255, 1
-        pos_hint: {"center_x": 0.50, "center_y": 0.12}
-
+        pos_hint: {"center_x": 0.50, "center_y": 0.14}
+    
     Button:
-        text: "Atrás"
-        font_size: 17
+        text: "Volver átras"
+        font_size: "22.5dp"
         size_hint: 0.35, 0.05
-        pos_hint: {"center_x": 0.70, "center_y": 0.19}
+        pos_hint: {"center_x": 0.50, "center_y": 0.09}
+        color: 21/255, 68/255, 95/255, 1
         background_normal: ""
         background_color: 150/255, 194/255, 219/255, 1
 
         on_press: app.volver_atras(None)
-        on_press: self.background_color = 25/255, 71/255, 95/255, 1
-        on_release: self.background_color = 150/255, 194/255, 219/255, 1
-
-
 
 
 <Contrataciones>:
     canvas:
         Color:
-            rgba: 229/255, 237/255, 241/255, 1
+            rgba: 21/255, 68/255, 95/255, 1
         Rectangle:
             pos: self.pos
             size: self.size
+
+
+<CheckBox>:
+    size_hint: None, None
+    border: 1, 1, 1, 1
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1  # Color de fondo del CheckBox
+        Ellipse:
+            pos: self.pos
+            size: self.size
+    canvas.after:
+        Color:
+            rgba: 0, 1, 0, 1 
