@@ -164,23 +164,38 @@ def comprar(habitacion_id):
     fecha_entrada = request.args.get("fecha_entrada")
     fecha_salida = request.args.get("fecha_salida")
 
+    fecha_entrada_dt = datetime.strptime(fecha_entrada, "%Y-%m-%d")
+    fecha_salida_dt = datetime.strptime(fecha_salida, "%Y-%m-%d")
+
     forzar_modal_login = False
 
     try:
         response = requests.get(API_URL + '/habitacion/' + str(habitacion_id))
         response.raise_for_status()
+        response_disponible = requests.get(API_URL + '/reservas_habitacion/' + str(habitacion_id), params={'fecha_entrada': fecha_entrada, 'fecha_salida': fecha_salida})
+        response_disponible.raise_for_status()
+
         result = response.json()
         habitacion = result['habitacion']
         hotel = result['hotel']
         otras_habitaciones = result['otras_habitaciones']
+        reservas = response_disponible.json()
+        #Si la habitacion ya esta reservada en esa fecha, no te deja reservarla
+        for reserva in reservas:
+           if fecha_entrada_dt < datetime.strptime(reserva['fecha_salida'], "%a, %d %b %Y %H:%M:%S GMT") and fecha_salida_dt > datetime.strptime(reserva['fecha_entrada'], "%a, %d %b %Y %H:%M:%S GMT"):
+                error_reserva = "La habitación no está disponible en las fechas seleccionadas."
+                return render_template("habitacion.html",habitacion=habitacion, otras_habitaciones=otras_habitaciones, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida, hotel=hotel, error_reserva=error_reserva)
+
     except requests.exceptions.RequestException as e:
         return jsonify({'error': str(e)}), 500
-    
+
+    # Verificar si el usuario está logueado
     if "usuario_id" not in session:
         forzar_modal_login = True
-        return render_template("habitacion.html", habitacion=habitacion, otras_habitaciones=otras_habitaciones, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida, hotel=hotel, forzar_modal_login=forzar_modal_login)
-    
-    return render_template("confirmacion_compra.html", habitacion=habitacion, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida, forzar_modal_login=forzar_modal_login,hotel=hotel)
+        return render_template( "habitacion.html",habitacion=habitacion, otras_habitaciones=otras_habitaciones, fecha_entrada=fecha_entrada, fecha_salida=fecha_salida, hotel=hotel,forzar_modal_login=forzar_modal_login)
+
+    return render_template( "confirmacion_compra.html",habitacion=habitacion, fecha_entrada=fecha_entrada,fecha_salida=fecha_salida, forzar_modal_login=forzar_modal_login,hotel=hotel)
+
 
 
 @app.route("/confirmacion_compra/reserva", methods = ["POST"])
