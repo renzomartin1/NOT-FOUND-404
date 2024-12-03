@@ -1,14 +1,97 @@
-#container{
-    background-color: rgba(171, 223, 240, 0.856);
+
+.container {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 90%; 
+    text-align: center; 
+  
 }
-#grilla{
+.titulo-error {
+    font-size: 3rem; 
+    color: red; 
+    position: relative;
+    left: 70%;
+}
+
+.link {
+  
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    margin-top: 10% ;
+    color: blue;
+    font-size: 1.3rem; 
+    font-weight: bold; 
+}
+
+
+.grilla{
     display: grid;
-    margin-left: 20%;
+    margin-top: 5%;
     grid-template-columns: repeat(3, 1fr);
-    padding-top: 40px;
-    padding-bottom: 40px;
 }
+
 .imagen-404{
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: 300px; 
+    position: relative;
+    left: 30%;
 }
+
+.mensaje-h2{
+    position: relative;
+    top: 50px;
+    left: 10px;
+    margin: 20px;
+}
+
+
+footer {
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
+}
+
+
+  
+@media (max-width: 450px) {
+   
+    #contenedor-logotipo-botones-sesion{
+        height: 60px; 
+    }
+
+    .titulo-error {
+        font-size: 1rem;
+        position: relative;
+        top: 10px;
+        left: 75%
+    }
+
+
+    .link{
+        margin-top: 20% ;
+    }
+    .grilla{
+
+        margin-left: 15%;
+        margin-top: 30%;
+      
+    }
+      
+    .imagen-404 {
+        width: 100px; 
+        height: 200px;
+        position: relative;
+        left:10%;
+        top: 20%;
+    }
+
+
+    footer {
+        position: fixed;
+    }
+   
+}
+  
+  
