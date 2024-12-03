@@ -2,7 +2,7 @@ from flask import Flask, render_template, jsonify, request, session, redirect, u
 from datetime import datetime
 import requests
 
-API_URL = 'https://nmendozab.pythonanywhere.com/api'
+API_URL = "http://127.0.0.1:5005/api"
 PORT = 5001
 
 app = Flask(__name__)
