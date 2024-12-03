@@ -1,87 +1,90 @@
 <LoginScreen>:
     canvas:
         Color:
-            rgba: 229/255, 237/255, 241/255, 1
+            rgba: 21/255, 68/255, 95/255, 1
         Rectangle:
             pos: self.pos
             size: self.size
+            # 15445f
 
     Image:
-        source: "logotipo.png"
+        source: "assets/images/logotipoBlanco.png"
         size_hint: None, None
         size: "200dp", "175dp"
-        pos_hint: {"center_x": 0.50, "center_y": 0.80}
+        pos_hint: {"center_x": 0.50, "center_y": 0.75}
 
     Image:
-        source: "hotelisco.png"
+        source: "assets/images/hoteliscoBlanco.png"
         size_hint: None, None
         size: "200dp", "100dp"
-        pos_hint: {"center_x": 0.50, "center_y": 0.65}
+        pos_hint: {"center_x": 0.50, "center_y": 0.60}
 
     Label:
         text: "Correo electrónico"
-        font_size: 17
+        font_size: "22.5dp"
         bold: True
-        color: 0, 0, 0, 1
+        color: 1, 1, 1, 1
 
         text_size: self.size   # Toma el ancho y alto del padre
         halign: "left"
         valign: "middle"
 
         size_hint: 0.80, 0.05
-        pos_hint: {"center_x": 0.50, "center_y": 0.56}
+        pos_hint: {"center_x": 0.50, "center_y": 0.53}
 
     TextInput:
         id: email
-        font_size: 16
+        font_size: "18.75dp"
         size_hint: 0.80, 0.05
-        pos_hint: {"center_x": 0.50, "center_y": 0.51}
+        pos_hint: {"center_x": 0.50, "center_y": 0.48}
         cursor_color: 0, 0, 0, 1
         padding: 12, 12.5, 6, 6
         background_normal: ""  # Quita ese molesta capa gris
 
     Label:
         text: "Contraseña"
-        font_size: 17
+        font_size: "22.5dp"
         bold: True
-        color: 0, 0, 0, 1
+        color: 1, 1, 1, 1
 
         text_size: self.size
         halign: "left"
         valign: "middle"
 
         size_hint: 0.80, 0.05
-        pos_hint: {"center_x": 0.50, "center_y": 0.45}
+        pos_hint: {"center_x": 0.50, "center_y": 0.43}
 
     TextInput:
         id: contraseña
         password: True
-        font_size: 16
+        font_size: "18.75dp"
         size_hint: 0.80, 0.05
-        pos_hint: {"center_x": 0.50, "center_y": 0.40}
+        pos_hint: {"center_x": 0.50, "center_y": 0.38}
         cursor_color: 0, 0, 0, 1
         padding: 12, 12.5, 6, 6
         background_normal: ""
 
     Button:
         text: "Iniciar sesión"
-        font_size: 17
+        font_size: "22.5dp"
+        color: 21/255, 68/255, 95/255, 1
         size_hint: 0.35, 0.05
-        pos_hint: {"center_x": 0.50, "center_y": 0.31}
+        pos_hint: {"center_x": 0.50, "center_y": 0.30}
+        color: 21/255, 68/255, 95/255, 1
         background_normal: ""
-        background_color: 150/255, 194/255, 219/255, 1
+        background_color: 1, 1, 1, 1
 
         on_press: app.verificar_usuario()
-        on_press: self.background_color = 25/255, 71/255, 95/255, 1
+        on_press: self.background_color = 104/255, 148/255, 166/255, 1
         on_release: self.background_color = 150/255, 194/255, 219/255, 1  #cuando se deja de presionar
 
     Label:
         id: message
         text: ""
-        font_size: 16
+        font_size: "18.75dp"
         bold: True
         color: 185/255, 68/255, 68/255, 1
-        pos_hint: {"center_x": 0.50, "center_y": 0.24}
+        pos_hint: {"center_x": 0.50, "center_y": 0.20}
 
 
 
