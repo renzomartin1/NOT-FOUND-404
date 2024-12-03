@@ -68,4 +68,10 @@
     </div>
 </div>
 
+{% if error_reserva %}
+<script type="text/javascript">
+    alert("{{ error_reserva }}");
+</script>
+{% endif %}
+
 {% endblock %}
