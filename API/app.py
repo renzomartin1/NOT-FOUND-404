@@ -375,7 +375,7 @@ def verificar_usuario():
     print("Resultado de la consulta:", result)
 
     if result:
-        return jsonify({"status": "success", "usuario_id": result[0]})
+        return jsonify({"status": "success", "usuario_id": result[0]}), 200
     else:
         return jsonify({"status": "error", "message": "Usuario o contraseña incorrectos"}), 401
 
