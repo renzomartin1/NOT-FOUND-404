@@ -1,3 +1,4 @@
+
 :root {
   --texto-primario-oscuro-color: #2d2d2d;
   --texto-primario-claro-color: #4b4b4b;
@@ -13,6 +14,7 @@
   flex-direction: column;
   width: min(900px, calc(90% - 2rem));
   margin: 2rem auto;
+  min-height: 70vh;
 }
 
 .contenedor-perfil-usuario > * + * {
@@ -313,11 +315,11 @@
   background: rgb(209, 56, 56);
 }
 
-#cancelar-eliminacion-boton-reserva {
+.cancelar-eliminacion-boton-reserva {
   background: rgb(34, 31, 31);
 }
 
-#cancelar-eliminacion-boton-reserva:hover {
+.cancelar-eliminacion-boton-reserva:hover {
   background: rgb(47, 43, 43);
 }
 
@@ -418,40 +420,33 @@
 
 
 @media(max-width: 1500px){
-  /* header */
+  /*  */
 }
 
 @media(max-width: 450px){
+  dialog{
+    margin: auto auto;
+  }
+  #contenedor-confirmar-eliminacion-modal{
+    width: 100%;
+    padding: unset;
+  }
   .contenedor-perfil-usuario {
     width: 90%;
-  
-    
   }
-  footer {
-    /*position: fixed;*/
-    bottom: 0;
-    left: 0;
+  .perfil-usuario__etiqueta{
+    box-sizing: border-box;
     width: 100%;
-    text-align: center;
+    min-width: unset;
   }
-
-  #boton-ver-mi-perfil {
-    margin-bottom: 5px;
-    padding: 8px 12px;
+  .perfil-usuario__nombre-completo{
+    width: 100%;
   }
-
-  #boton-cerrar-sesion {
-    padding: 8px 8px;
+  #contenedor-confirmar-eliminacion-modal-reserva{
+    padding: unset;
+    width: 100%;
   }
-  
-  #botones-sesion {
-    margin-left: 25%;
-    margin-top: 10px;
+  .eliminar-reserva-boton {
+    width: unset;
   }
-
-  nav {
-  height: 70px; 
-
-  }
-  
 }
