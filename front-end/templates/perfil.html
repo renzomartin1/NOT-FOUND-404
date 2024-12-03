@@ -72,7 +72,7 @@
             </div>
             <div class="perfil-usuario__historial-dato">
               <span class="perfil-usuario__historial-dato-titulo">Servicios</span>
-              <span class="perfil-usuario__historial-precio">{{ reserva.servicios_contratados }}</span>
+              <span class="perfil-usuario__historial-precio"> {%if reserva.servicios_contratados %} {{ reserva.servicios_contratados }} {% endif %} </span>
             </div>
             <div class="perfil-usuario__historial-dato">
               <span class="perfil-usuario__historial-dato-titulo">ID de reserva</span>
