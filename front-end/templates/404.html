@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/404.css') }}">
+{% endblock %}
+
+{% block header %}
+
+<header>
+    <div id="contenedor-logotipo-botones-sesion">
+        <div id="logotipo">
+        <!-- <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/obelisco_blanco.png') }}"></a> -->
+            
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <img src="{{url_for('static', filename='images/logotipoERROR.png')}}" class="imagen-404" alt="error 404">
+    <h2 class="titulo-error">ERROR 404</h2>
+    <p>La pagina a la que estas intentando acceder, no existe</p>
+</div>
+<div id="redirigir-home">
+    <a class="link" href="{{url_for('home')}}"> Toca para redireccionarte al Inicio</a>
+</div>
+{% endblock %}
+

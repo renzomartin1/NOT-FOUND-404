@@ -1,0 +1,22 @@
+# Instalar Kivy
+
+sudo apt-get -y install python3-pip
+pip install kivy
+
+
+# Compilar el APK para Android
+
+    ## Instalar dependencias
+
+        pip install cython
+        sudo apt-get -y install openjdk-17-jdk
+        sudo apt-get -y install autoconf
+        sudo apt-get -y install libtool
+        pip3 install --user --upgrade buildozer
+
+        // Reinicia visual studio code luego de ejecutar los comandos
+
+    ## Compilar la app
+
+        buildozer init
+        buildozer -v android debug

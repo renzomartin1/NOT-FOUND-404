@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>Hotelisco | Sitio oficial</title>
+    {% endblock %}
+    <link rel="icon" href="{{ url_for('static', filename='images/icono.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    {% block head %}{% endblock %}
+</head>
+<body>
+
+    {% block header %}
+    <!-- HEADER: LOGOTIPO, BOTONES DE INICIAR SESIÓN O VER MI PERFIL Y REGISTRARSE O CERRAR SESIÓN, Y BARRA DE NAVEGACIÓN -->
+    <header>
+        <div id="contenedor-logotipo-botones-sesion">
+            <div id="logotipo">
+                <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/logotipo.png') }}"></a>
+            </div>
+            <div id="botones-sesion">
+
+                {% if "usuario_id" not in session %}
+                <button id="boton-abrir-modal-login">Iniciar sesión</button>
+                <button id="boton-abrir-modal-register">Registrarse</button>
+                {% else %}
+                <a id="boton-ver-mi-perfil" href="{{ url_for('perfil', usuario_id=session['usuario_id']) }}">Ver mi perfil</a>
+                <a id="boton-cerrar-sesion" href="{{ url_for('logout') }}">Cerrar sesión</a>
+                {% endif %}
+
+            </div>
+        </div>
+        <nav>
+            <ul id="barra-navegacion">
+                <li class="barra-navegacion-opciones"><a href="{{ url_for('home') }}">Inicio</a></li>
+                <li class="barra-navegacion-opciones"><a href="{{ url_for('contacto') }}">Contacto</a></li>
+                <li class="barra-navegacion-opciones"><a href="{{ url_for('sobre_nosotros') }}">Sobre nosotros</a></li>
+            </ul>
+        </nav>
+    </header>
+    {% endblock %}
+
+    {% if "usuario_id" not in session %}
+    <!-- DIALOG: MODAL LOGIN -->
+    <dialog id="contenedor-modal-login">
+        <div id="modal-login">
+
+            {% if success_modal_login %}
+            <div id="success-modal-login">
+                <p>{{ success_modal_login }}</p>
+            </div>
+            {% endif %}
+            {% if error_modal_login %}
+            <div id="error-modal-login">
+                <p>{{ error_modal_login }}</p>
+            </div>
+            {% endif %}
+
+            <div id="titulo-boton-cerrar-modal-login">
+                <h2>Iniciar sesión</h2>
+                <button id="boton-cerrar-modal-login">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z">
+                        </svg>
+                    </div>
+                </button>
+            </div>
+            <form action="{{ url_for('home') }}" method="post">
+                <label for="fl-email">Correo electrónico</label>
+                <input id="fl-email" type="email" name="fl-email" required>
+
+                <label for="fl-contraseña">Contraseña</label>
+                <input id="fl-contraseña" type="password" name="fl-contraseña" required>
+
+                <button id="boton-login" type="submit">Iniciar sesión</button>
+            </form>
+            <div id="sin-cuenta-modal-login">
+                <p>
+                    ¿No tienes una cuenta? <span id="texto-register-modal-login">Registrate</span>
+                </p>
+            </div>
+        </div>
+    </dialog>
+    {% endif %}
+
+    {% if "usuario_id" not in session %}
+    <!-- DIALOG: MODAL REGISTER -->
+    <dialog id="contenedor-modal-register">
+        <div id="modal-register">
+
+            {% if error_modal_register %}
+            <div id="error-modal-register">
+                <p>{{ error_modal_register }}</p>
+            </div>
+            {% endif %}
+
+            <div id="titulo-boton-cerrar-modal-register">
+                <h2>Registrarse</h2>
+                <button id="boton-cerrar-modal-register">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z">
+                        </svg>
+                    </div>
+                </button>
+            </div>
+            <form action="{{ url_for('home') }}" method="post">
+                <label for="fr-nombre">Nombre</label>
+                <input id="fr-nombre" type="text" name="fr-nombre" required>
+
+                <label for="fr-apellido">Apellido</label>
+                <input id="fr-apellido" type="text" name="fr-apellido" required>
+
+                <label for="fr-email">Correo electrónico</label>
+                <input id="fr-email" type="email" name="fr-email" required>
+
+                <label for="fr-telefono">Número telefónico</label>
+                <input id="fr-telefono" type="number" name="fr-telefono" required>
+
+                <label for="fr-contraseña">Contraseña</label>
+                <input id="fr-contraseña" type="password" name="fr-contraseña" required>
+
+                <label for="fr-repetir-contraseña">Repetir contraseña</label>
+                <input id="fr-repetir-contraseña" type="password" name="fr-repetir-contraseña" required>
+
+                <button id="boton-register" type="submit">Registrarse</button>
+            </form>
+            <div id="terminos-avisos">
+                <p>
+                    Al hacer clic en Registrarse, aceptas nuestros Términos de servicio y Avisos de privacidad.
+                </p>
+            </div>
+            <div id="con-cuenta-modal-register">
+                <p>
+                    ¿Ya tienes una cuenta? <br><span id="texto-login-modal-register">Inicia sesión</span>
+                </p>
+            </div>
+        </div>
+    </dialog>
+    {% endif %}
+
+    {% block body %}{% endblock %}
+
+    <!-- FOOTER: LÍNEA Y TEXTO DEL FOOTER -->
+    <footer>
+        <div id="linea-footer">
+            <hr>
+        </div>
+        <div id="texto-footer">
+            <p>
+                Trabajo Práctico de IDS.
+            </p>
+            <p>
+                Not Found 404 - Grupo 17, 2024.
+            </p>
+        </div>
+    </footer>
+
+    {% if "usuario_id" not in session %}
+    <script src="{{ url_for('static', filename='js/base.js') }}"></script>
+    {% endif %}
+    {% if forzar_modal_login %}
+    <script src="{{ url_for('static', filename='js/forzar_modal_login.js') }}"></script>
+    {% endif %}
+    {% if forzar_modal_register %}
+    <script src="{{ url_for('static', filename='js/forzar_modal_register.js') }}"></script>
+    {% endif %}
+
+    {% block script %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/habitacion.css')}}">
+{% endblock %}
+
+{% block body %}
+
+<!-- Titulo de habitacion -->
+<div class="contenedor1">
+    <div class="sub-contenedor11">
+        <div class="titulo">
+            <h2>{{ hotel.hotel_nombre }} - {{ habitacion.nombre }}</h2>
+        </div>
+    </div>
+    <!-- Caja contenedora de "carrusel" de imagenes -->
+    <div class="sub-contenedor12">
+        
+        <div class="caja1">
+            <div class="contenedorImg">
+                <div class="deslizador">
+                    {% for i in range(4) %}
+                    <img id="img-{{i}}" src="{{ url_for('static', filename='images/hoteles/' + hotel.hotel_nombre + '/' + habitacion.nombre + '/imagen' + (i|string) + '.jpg') }}">
+                    {% endfor %}
+                </div>
+                <div class="deslizadorNav">
+                    {% for i in range(4) %}
+                    <a href="#img-{{i}}"></a>
+                    {% endfor %}
+                </div>
+            </div>
+            </div>
+        <!-- Caja contenedora de descripcion de habitacion y fechas de reserva -->
+        <div class="caja2">
+            <div class="info">
+                <p>{{habitacion.descripcion}}</p>
+                <p>Precio (por noche): {{habitacion.precio}}</p>
+            </div>
+            <div class="reserva">
+                <h3 class="tituloRes">En que fechas vas a visitarnos?</h3>
+                <form class="filter-form" method="GET" action="{{ url_for('comprar', habitacion_id=habitacion.habitacion_id) }}">
+                    <input type="date" name="fecha_entrada" placeholder="Fecha de Entrada" min="{{ fecha_actual }}" required> 
+                    <input type="date" name="fecha_salida" placeholder="Fecha de Salida" min="{{ fecha_actual }}" required>
+                    <button class="filter-button" type="submit">Reservar</button>
+                </form>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contenedor de "Otras Habitaciones" -->
+<div class="contenedor2">
+    <p class="titulo2">MÁS HABITACIONES</p>
+    <div class="otrasHab">
+        <!-- Datos habitaciones del hotel seleccionado -->
+        {% for habitacion in otras_habitaciones %}
+            <div id="grilla">
+                <div class="texto-habitacion">
+                    <img class="grillaImg" src="{{ url_for('static', filename='images/hoteles/' + hotel.hotel_nombre + '/' + habitacion.nombre + '/imagen0.jpg') }}" class="imagen-habitacion" alt="habitaciones">
+                    <h2 >{{habitacion.nombre}}</h2>
+                    <p >Capacidad: {{habitacion.capacidad}}</p>
+                    <p >Precio(por noche): {{habitacion.precio}}</p>
+                    <a href="{{url_for('habitacion', habitacion_id=habitacion.habitacion_id)}}"><button class="boton-habitacion">Ver</button></a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% if error_reserva %}
+<script type="text/javascript">
+    alert("{{ error_reserva }}");
+</script>
+{% endif %}
+
+{% endblock %}

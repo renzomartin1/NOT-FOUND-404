@@ -1,0 +1,452 @@
+
+:root {
+  --texto-primario-oscuro-color: #2d2d2d;
+  --texto-primario-claro-color: #4b4b4b;
+  --texto-secundario-color: #a1a1a1;
+  --contacto-boton-texto-color: #848484;
+  --contacto-boton-bg-color: #ababab;
+  --separador-color: #e5e5e5;
+}
+
+/* MAIN: PERFIL DE USUARIO, HOSPEDAJE ACTIVO,  */
+.contenedor-perfil-usuario {
+  display: flex;
+  flex-direction: column;
+  width: min(900px, calc(90% - 2rem));
+  margin: 2rem auto;
+  min-height: 70vh;
+}
+
+.contenedor-perfil-usuario > * + * {
+  margin-top: 2rem;
+}
+
+/* Encabezado del perfil de usuario */
+
+.perfil-usuario__encabezado {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  column-gap: 3rem;
+	row-gap: 1rem;
+  height: fit-content;
+  background-color: unset;
+  border-radius: 10px;
+}
+
+.perfil-usuario__avatar {
+  display: inline-block;
+  width: min(180px, 40%);
+  background: #848484;
+  border-radius: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+.perfil-usuario__avatar-img {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.perfil-usuario__etiqueta {
+  display: inline-block;
+  min-width: 400px;
+}
+
+.perfil-usuario__nombre-completo {
+  font-size: 2rem;
+  line-height: 0;
+  font-weight: bold;
+  color: var(--texto-primario-oscuro-color);
+}
+
+.perfil-usuario__hospedaje-dato,
+.perfil-usuario__dato {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.perfil-usuario__hospedaje-dato {
+  font-size: 0.6rem;
+  line-height: 1.4;
+  color: var(--texto-secundario-color);
+}
+
+.perfil-usuario__hospedaje-activo {
+  display: block;
+  font-size: 0.8rem;
+  color: rgb(50, 94, 190);
+}
+
+.perfil-usuario__informacion {
+  display: inline-flex;
+  flex-direction: column;
+  column-gap: 1rem;
+  row-gap: 0.4rem;
+}
+
+.perfil-usuario__dato {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.2;
+  background: none;
+  color: var(--texto-primario-oscuro-color);
+}
+
+.perfil-usuario__dato span {
+  display: block;
+  margin-top: 0.2rem;
+}
+
+.perfil-usuario__contactos {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin-top: 0.4rem;
+  gap: 0.8rem;
+}
+
+.perfil-usuario__contacto {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 1rem;
+  background: #ffffff;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--contacto-boton-texto-color);
+  border: 2px solid var(--contacto-boton-bg-color);
+  border-radius: 4px;
+  transition-property: filter, border, color;
+  transition-duration: 0.3s;
+  transition-delay: ease-in-out;
+}
+
+.perfil-usuario__contacto:hover {
+  transition-duration: 0.1s;
+  filter: brightness(97%);
+}
+
+.perfil-usuario__contacto:active {
+  transition-duration: 0.1s;
+  border-color: #585858;
+  color: #343434;
+}
+
+.perfil-usuario__contacto img {
+  width: 20px;
+  margin-right: 0.5rem;
+}
+
+.texto-copiado-notif {
+  font-size: 0.7rem;
+  color: var(--contacto-boton-texto-color);
+}
+
+.eliminar-cuenta-boton {
+  display: flex;
+  cursor: pointer;
+  margin-top: 1rem;
+  padding: 0.6rem 1rem;
+  background: rgb(203, 30, 30);
+  color: #ffffff;
+  outline: none;
+  border: none;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.eliminar-cuenta-boton:hover {
+  background: rgb(163, 14, 14);
+}
+
+#contenedor-confirmar-eliminacion-modal {
+  background-color: rgb(255, 245, 245);
+  border: none;
+  border-radius: 12px;
+}
+
+#contenedor-confirmar-eliminacion-modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+#confirmar-eliminacion-modal {
+  display: flex;
+  max-width: 400px;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2rem;
+  text-align: center;
+}
+
+#confirmar-eliminacion-modal h2 {
+  margin: 0;
+  line-height: 1.2;
+  color: #202020;
+  margin-bottom: 1rem;
+}
+
+#confirmar-eliminacion-modal p {
+  margin-block: 0.2rem;
+  font-size: 0.9rem;
+  color: #2e2e2e;
+}
+
+#confirmar-eliminacion-modal .modal-botones {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: 1.4rem;
+}
+
+#confirmar-eliminacion-modal .modal-botones * {
+  flex: 1 1 50%;
+}
+
+#confirmar-eliminacion-modal .modal-botones button {
+  cursor: pointer;
+  padding: 0.6rem 0rem;
+  color: #ffffff;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.modal-botones .confirmar-boton {
+  background: rgb(199, 45, 45);
+  width: 100%;
+}
+
+.modal-botones .confirmar-boton:hover {
+  background: rgb(209, 56, 56);
+}
+
+#cancelar-eliminacion-boton {
+  background: rgb(34, 31, 31);
+}
+
+#cancelar-eliminacion-boton:hover {
+  background: rgb(47, 43, 43);
+}
+
+/* eliminar reserva */
+.eliminar-reserva-boton {
+  width: 30%;
+  cursor: pointer;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  padding: 0.6rem 1rem;
+  background: rgb(203, 30, 30);
+  color: #ffffff;
+  outline: none;
+  border: none;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.eliminar-reserva-boton:hover {
+  background: rgb(163, 14, 14);
+}
+
+#contenedor-confirmar-eliminacion-modal-reserva {
+  background-color: rgb(255, 245, 245);
+  border: none;
+  border-radius: 12px;
+}
+
+#contenedor-confirmar-eliminacion-modal-reserva::backdrop {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+#confirmar-eliminacion-modal-reserva {
+  display: flex;
+  max-width: 400px;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2rem;
+  text-align: center;
+}
+
+#confirmar-eliminacion-modal-reserva h2 {
+  margin: 0;
+  line-height: 1.2;
+  color: #202020;
+  margin-bottom: 1rem;
+}
+
+#confirmar-eliminacion-modal-reserva p {
+  margin-block: 0.2rem;
+  font-size: 0.9rem;
+  color: #2e2e2e;
+}
+
+#confirmar-eliminacion-modal-reserva .modal-botones {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: 1.4rem;
+}
+
+#confirmar-eliminacion-modal-reserva .modal-botones * {
+  flex: 1 1 50%;
+}
+
+#confirmar-eliminacion-modal-reserva .modal-botones button {
+  cursor: pointer;
+  padding: 0.6rem 0rem;
+  color: #ffffff;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.modal-botones .confirmar-boton {
+  background: rgb(199, 45, 45);
+  width: 100%;
+}
+
+.modal-botones .confirmar-boton:hover {
+  background: rgb(209, 56, 56);
+}
+
+.cancelar-eliminacion-boton-reserva {
+  background: rgb(34, 31, 31);
+}
+
+.cancelar-eliminacion-boton-reserva:hover {
+  background: rgb(47, 43, 43);
+}
+
+/* Separador */
+
+.perfil-usuario__separador {
+  width: 100%;
+  height: 0.2rem;
+  background: var(--separador-color);
+  margin-top: 2rem;
+  margin-inline: 0;
+  border-radius: 20px;
+}
+
+/* Historial de reservas */
+.perfil-usuario__historial {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+}
+
+.perfil-usuario__historial-titulo {
+  width: 100%;
+  font-size: clamp(1rem, 1.8rem, 2rem);
+  font-weight: bold;
+  line-height: 0;
+  color: var(--texto-primario-oscuro-color);
+}
+
+/* Tarjeta que contiene la información sobre una reserva del usuario */
+
+.perfil-usuario__historial-reserva-contenedor {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+  border: 2px solid var(--texto-secundario-color);
+  border-radius: 8px;
+}
+
+/* Barra vertical a la izquierda del contenido */
+
+.perfil-usuario__historial-reserva-barra {
+  position: absolute;
+  display: inline-block;
+  width: 0.3rem;
+  height: calc(100% - 4rem);
+  background: #1ea177;
+  border-radius: 20px;
+}
+
+/* Texto de la tarjeta */
+
+.perfil-usuario__historial-reserva-contenido {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.perfil-usuario__historial-hotel,
+.perfil-usuario__historial-datos-contenedor {
+  margin: 0 2rem;
+}
+
+.perfil-usuario__historial-hotel {
+  font-size: 1.2rem;
+  color: var(--texto-primario-oscuro-color);
+}
+
+/* Datos de la reserva */
+
+.perfil-usuario__historial-datos-contenedor {
+  display: inline-flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  column-gap: 2rem;
+  row-gap: 1rem;
+  justify-content: space-between;
+}
+
+.perfil-usuario__historial-dato {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.perfil-usuario__historial-dato-titulo {
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--texto-primario-oscuro-color);
+}
+
+.perfil-usuario__historial-datos-contenedor span:not(.perfil-usuario__historial-dato-titulo) {
+  line-height: 1.4;
+  color: var(--texto-primario-claro-color);
+}
+
+
+@media(max-width: 1500px){
+  /*  */
+}
+
+@media(max-width: 450px){
+  dialog{
+    margin: auto auto;
+  }
+  #contenedor-confirmar-eliminacion-modal{
+    width: 100%;
+    padding: unset;
+  }
+  .contenedor-perfil-usuario {
+    width: 90%;
+  }
+  .perfil-usuario__etiqueta{
+    box-sizing: border-box;
+    width: 100%;
+    min-width: unset;
+  }
+  .perfil-usuario__nombre-completo{
+    width: 100%;
+  }
+  #contenedor-confirmar-eliminacion-modal-reserva{
+    padding: unset;
+    width: 100%;
+  }
+  .eliminar-reserva-boton {
+    width: unset;
+  }
+}

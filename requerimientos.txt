@@ -1,0 +1,12 @@
+
+#  crear entorno y levantarlo
+python3 -m venv .venv
+. .venv/bin/activate
+
+# instalaciones
+
+pip3 install flask
+pip3 install requests
+pip install sqlalchemy
+pip install flask_sqlalchemy
+pip install mysql-connector-python  # alternativa: pip install PyMySQL

@@ -1,0 +1,560 @@
+/* paleta de prueba */
+:root{
+    --color1:#E5EDF1 ;
+    --color2: #2A2922;
+    --color3: #FFFFFF;
+    --color4: #96C2DB;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px;
+    position: relative;
+    min-height: 100vh;
+}
+
+
+
+
+/* HEADER: LOGOTIPO, BOTONES DE INICIAR SESIÓN O VER MI PERFIL Y REGISTRARSE O CERRAR SESIÓN, Y BARRA DE NAVEGACIÓN */
+
+header {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color1);
+    align-items: center;
+    padding-top: 4px;
+    padding-bottom: 8px;
+}
+
+/* Logotipo */
+
+#contenedor-logotipo-botones-sesion {
+    display: flex;
+    justify-content: space-between;
+    width: 55%;
+}
+
+#logotipo a img {
+    width: 192px;
+    height: 66px;
+}
+
+/* Contenedor de los botones de sesión */
+
+#botones-sesion {
+    display: flex;
+    align-items: center;
+    column-gap: 12px;
+}
+
+/* Si no se inicio sesión; botones de iniciar sesión y registrarse */
+
+#boton-abrir-modal-login {
+    color: #fff;
+    background-color: var(--color4);
+    border: 0px;
+    border-radius: 5px;
+    padding: 10px;
+    transition: 0.2s;
+}
+
+#boton-abrir-modal-login:hover {
+    background-color: #19465f;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.2s;
+}
+
+#boton-abrir-modal-register {
+    color: var(--color2);
+    background-color: var(--color3);
+    border: 0px;
+    border-radius: 5px;
+    padding: 10px;
+    transition: 0.2s;
+}
+
+#boton-abrir-modal-register:hover {
+    background-color: #19465f;
+    cursor: pointer;
+    color: var(--color3);
+    font-size: 16px;
+    transition: 0.2s;
+}
+
+/* Si se inicio sesión; botones de ver mi perfil y cerrar sesión */
+
+#boton-ver-mi-perfil {
+    color: #fff;
+    background-color: var(--color4);
+    font-size: 13px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 10px;
+    transition: 0.2s;
+}
+
+#boton-ver-mi-perfil:hover {
+    background-color: #19465f;
+    font-size: 16px;
+    transition: 0.2s;
+}
+
+#boton-cerrar-sesion {
+    color: var(--color2);
+    background-color: var(--color3);
+    font-size: 13px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 10px;
+    transition: 0.2s;
+}
+
+#boton-cerrar-sesion:hover {
+    color: var(--color3);
+    background-color: #19465f;
+    font-size: 16px;
+    transition: 0.2s;
+}
+
+/* Barra de navegación */
+
+#barra-navegacion {
+    display: flex;
+    column-gap: 40px;
+    list-style: none;
+    padding: 0px;
+}
+
+.barra-navegacion-opciones a {
+    color: var(--color2);
+    font-weight: bold;
+    text-decoration: none;
+    padding: 15px 20px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    border-radius: 30px;
+    display: inline-block;
+}
+
+.barra-navegacion-opciones a:hover {
+    background-color: var(--color4);
+    transform: scale(1.1);
+    margin-top: -5px; 
+}
+
+
+
+
+/* DIALOG: MODAL LOGIN */
+
+#contenedor-modal-login {
+    background-color: var(--color1);
+    border: 0px;
+    border-radius: 5px;
+    padding: 0px;
+}
+
+#contenedor-modal-login::backdrop {
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+#modal-login {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    padding: 35px;
+}
+
+/* Mensaje de error (si se dio) */
+
+#error-modal-login {
+    background-color: #eeb5b5;
+    border: 2px solid #b94444;
+    border-radius: 5px;
+    margin-bottom: 35px;
+}
+
+#error-modal-login p {
+    font-size: 13px;
+    text-align: center;
+}
+
+/* Mensaje de éxito (si se dio) */
+
+#success-modal-login {
+    background-color: #bbeeb5;
+    border: 2px solid #44b944;
+    border-radius: 5px;
+    margin-bottom: 35px;
+}
+
+#success-modal-login p {
+    font-size: 13px;
+    text-align: center;
+}
+
+/* Título y botón de cierre (X) */
+
+#titulo-boton-cerrar-modal-login {
+    display: flex;
+    justify-content: space-between;
+}
+
+#titulo-boton-cerrar-modal-login h2 {
+    color: #19465f;
+    margin-top: 0px;
+    margin-bottom: 35px;
+}
+
+#boton-cerrar-modal-login {
+    background-color: var(--color1);
+    width: 32px;
+    height: 32px;
+    border: 0px;
+}
+
+#boton-cerrar-modal-login:hover {
+    background-color: #c1c1c1;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#boton-cerrar-modal-login div {
+    height: 16px;
+}
+
+/* Formulario de ingreso */
+
+
+#modal-login form {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color1);
+    
+}
+
+#modal-login form label {
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#modal-login form input {
+    width: 385px;
+    border: 0px;
+    border-radius: 5px;
+    outline: 1px solid #beb8b8;
+    padding: 8px;
+    margin-bottom: 20px;
+}
+
+#modal-login form input:hover {
+    outline: 2px solid #beb8b8;
+}
+
+#modal-login form input:focus {
+    outline: 3px solid var(--color4);
+}
+
+#boton-login {
+    color:#fff;
+    background-color: var(--color4);
+    align-self: center;
+    font-size: 13px;
+    font-weight: bold;
+    width: 75%;
+    border: 0px;
+    border-radius: 45px;
+    padding: 15px;
+    margin: 10px 0px;
+}
+
+#boton-login:hover {
+    background-color: #19465f;
+    cursor: pointer;
+}
+
+/* Texto: ¿No tienes una cuenta? Registrate */
+
+#sin-cuenta-modal-login {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#sin-cuenta-modal-login p {
+    margin: 0px;
+}
+
+#texto-register-modal-login {
+    color: var(--color4);
+    font-weight: bold;
+}
+
+#texto-register-modal-login:hover {
+    color: #19465f;
+    cursor: pointer;
+}
+
+
+
+
+/* DIALOG: MODAL REGISTER */
+
+#contenedor-modal-register {
+    background-color: var(--color1);
+    border: 0px;
+    border-radius: 5px;
+    padding: 0px;
+}
+
+#contenedor-modal-register::backdrop {
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+#modal-register {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    padding: 35px;
+}
+
+/* Mensaje de error (si se dio) */
+
+#error-modal-register {
+    background-color: #eeb5b5;
+    border: 2px solid #b94444;
+    border-radius: 5px;
+    margin-bottom: 35px;
+}
+
+#error-modal-register p {
+    font-size: 13px;
+    text-align: center;
+}
+
+/* Título y botón de cierre (X) */
+
+#titulo-boton-cerrar-modal-register {
+    display: flex;
+    justify-content: space-between;
+}
+
+#titulo-boton-cerrar-modal-register h2 {
+    color: #19465f;
+    margin-top: 0px;
+    margin-bottom: 35px;
+}
+
+#boton-cerrar-modal-register {
+    background-color: var(--color1);
+    width: 32px;
+    height: 32px;
+    border: 0px;
+}
+
+#boton-cerrar-modal-register:hover {
+    background-color: #c1c1c1;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#boton-cerrar-modal-register div {
+    height: 16px;
+}
+
+/* Formulario de registro */
+
+#modal-register form {
+    display: flex;
+    flex-direction: column;
+}
+
+#modal-register form label {
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#modal-register form input {
+    width: 385px;
+    border: 0px;
+    border-radius: 5px;
+    outline: 1px solid #beb8b8;
+    padding: 8px;
+    margin-bottom: 20px;
+}
+
+#modal-register form input:hover {
+    outline: 2px solid #beb8b8;
+}
+
+#modal-register form input:focus {
+    outline: 3px solid var(--color4);
+}
+
+#boton-register {
+    color:#fff;
+    background-color: var(--color4);
+    align-self: center;
+    font-size: 13px;
+    font-weight: bold;
+    width: 75%;
+    border: 0px;
+    border-radius: 45px;
+    padding: 15px;
+    margin: 10px 0px;
+}
+
+#boton-register:hover {
+    background-color: #19465f;
+    cursor: pointer;
+}
+
+/* Texto: Términos y Avisos */
+
+#terminos-avisos {
+    color: #646161;
+    text-align: center;
+    font-size: 12px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+#terminos-avisos p {
+    margin: 0px;
+}
+
+/* Texto: ¿Ya tienes una cuenta? Inicia sesión */
+
+#con-cuenta-modal-register {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    text-align: center;
+}
+
+#con-cuenta-modal-register p {
+    margin: 0px;
+}
+
+#texto-login-modal-register {
+    color: var(--color4);
+    font-weight: bold;
+}
+
+#texto-login-modal-register:hover {
+    color: #19465f;
+    cursor: pointer;
+}
+
+
+
+
+/* FOOTER: LÍNEA Y TEXTO DEL FOOTER */
+
+footer {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color1);
+    align-items: center;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Línea del footer */
+
+#linea-footer {
+    width: 45%;
+}
+
+#linea-footer hr {
+    border: 1px solid #eee7e7;
+}
+
+/* Texto del footer */
+
+#texto-footer {
+    display: flex;
+    flex-direction: column;
+}
+
+#texto-footer p {
+    color: #5a5a5a;
+    font-size: smaller;
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 8px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 1500px){
+    /* header */
+}
+
+@media(max-width: 450px){
+    /* header */
+    html{
+        width: auto;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+    header{
+        align-items: unset;
+    }
+    
+    /* BOTONES DE SESION */
+    
+    #contenedor-logotipo-botones-sesion{
+        width: 100%;
+    }
+    #logotipo{
+        width: 50%;
+    }
+    #botones-sesion{
+        width: 50%;
+        flex-direction: column;
+    }
+    #boton-abrir-modal-login{
+        width: 60%;
+    }
+    #boton-abrir-modal-register{
+        width: 60%;
+    }
+    /* NAVEGACION */
+    #barra-navegacion{
+        column-gap: 5%;
+    }
+    .barra-navegacion-opciones{
+        width: 30%;
+        text-align: center;
+        margin: auto;
+    }
+    /* BLOQUE EMERGENTE INICIO SESION */
+    #modal-login form input{
+        box-sizing: border-box;
+        width: 100%;
+    }
+    #sin-cuenta-modal-login{
+        text-align: center;
+    }
+    #modal-register form input{
+        box-sizing: border-box;
+        width: 100%;
+    }
+    #terminos-avisos{
+        margin-top: 0;
+    }
+    #con-cuenta-modal-register{
+        justify-content: unset;
+        text-align: center;
+        margin: 10px auto;
+        margin-bottom: 0;
+    }
+}
