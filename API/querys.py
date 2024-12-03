@@ -33,7 +33,7 @@ SELECT h.hotel_id, h.nombre, h.barrio, h.direccion, h.descripcion, h.servicios F
 INNER JOIN habitaciones hab ON h.hotel_id = hab.hotel_id
 LEFT JOIN reservaciones res ON res.habitacion_id = hab.habitacion_id                         
 WHERE (                                                                                
-    res.habitacion_id IS NULL OR  
+    res.habitacion_id IS NULL OR (:fecha_entrada is NULL AND :fecha_salida is NULL) OR
     NOT (res.fecha_entrada < :fecha_salida AND res.fecha_salida > :fecha_entrada)
 )
 AND (:cantidad_personas IS NULL OR hab.capacidad = :cantidad_personas)
