@@ -57,7 +57,10 @@ def home():
                     "contraseña": request.form.get("fr-contraseña")
                 }
 
-                respuesta_api = requests.post(f"{API_URL}/usuarios/register", json = datos_register)
+                try:
+                    respuesta_api = requests.post(f"{API_URL}/usuarios/register", json = datos_register)
+                except requests.exceptions.RequestException as error:
+                    return jsonify({"error": str(error)}), 500
 
                 if respuesta_api.status_code == 201:
                     json_api = respuesta_api.json()
@@ -76,7 +79,10 @@ def home():
                 "contraseña": request.form.get("fl-contraseña")
             }
 
-            respuesta_api = requests.post(f"{API_URL}/usuarios/login", json = datos_login)
+            try:
+                respuesta_api = requests.post(f"{API_URL}/usuarios/login", json = datos_login)
+            except requests.exceptions.RequestException as error:
+                return jsonify({"error": str(error)}), 500
 
             if respuesta_api.status_code == 400 or respuesta_api.status_code == 404:
                 json_api = respuesta_api.json()
