@@ -16,7 +16,7 @@ QUERY_RESERVA_BY_USUARIO_ID = "SELECT * FROM reservaciones WHERE usuario_id = :u
 QUERY_REGISTRAR_RESERVA = """
 INSERT INTO reservaciones(usuario_id, hotel_id, habitacion_id, fecha_entrada, fecha_salida, servicios_contratados, fecha_creacion)
 VALUES
-(:usuario_id, :hotel_id, :habitacion_id, :fecha_entrada, :fecha_salida);
+(:usuario_id, :hotel_id, :habitacion_id, :fecha_entrada, :fecha_salida, :servicios_contratados, :fecha_creacion);
 """
 QUERY_ELIMINAR_RESERVA = "DELETE FROM reservaciones WHERE reserva_id = :reserva_id"
 QUERY_RESERVA_BY_RESERVAID_USUARIOID = "SELECT * FROM reservaciones WHERE usuario_id = :usuario_id AND reserva_id = :reserva_id"
