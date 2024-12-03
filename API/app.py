@@ -91,7 +91,7 @@ def verificar_reserva():
         return jsonify({'error': str(e)}), 500
 
     if result:
-        return jsonify({'message': 'reserva encontrada', "usuario_id": result[0], "reserva_id": result[1]}), 200
+        return jsonify({'message': 'reserva encontrada', "usuario_id": result[0], "reserva_id": result[1], "hotel_id":result[2]}), 200
     else:
         return jsonify({'message': 'reserva no encontrada'}), 404
     
