@@ -8,13 +8,13 @@
   body {
     background-color: var(--color1); /* Fondo celeste claro */
     color: #19465f;
-    font-family: 'montserrat', sans-serif;
   }
   
   main {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+    font-family: 'montserrat', sans-serif;
   }
   
   a {
