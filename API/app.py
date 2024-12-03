@@ -109,6 +109,30 @@ def actualizar_servicios():
         return jsonify({"message": "Servicios contratados actualizados con éxito"}), 200
     except Exception as e:
         return jsonify({"error": f"Error al actualizar los servicios: {str(e)}"}), 500
+
+@app.route('/api/reservas_habitacion/<int:habitacion_id>', methods=['GET'])
+def reservas_habitacion(habitacion_id):
+    fecha_entrada = request.args.get('fecha_entrada')
+    fecha_salida = request.args.get('fecha_salida')
+
+    if not fecha_entrada or not fecha_salida:
+        return jsonify({'error': 'Faltan parámetros: fecha_entrada o fecha_salida'}), 400
+
+    try:
+        result = querys.reservas_habitacion(habitacion_id, fecha_entrada, fecha_salida)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+    response = []
+    for row in result:
+        response.append({
+            'reserva_id': row[0],
+            'hotel_id': row[1],
+            'habitacion_id': row[2], 
+            'fecha_entrada': row[3], 
+            'fecha_salida': row[4]
+        })
+    return jsonify(response), 200
 #------------------------------------------- fin reservaciones --------------------------------------------
 
 #------------------------------------------- inicio hoteles -----------------------------------------------
