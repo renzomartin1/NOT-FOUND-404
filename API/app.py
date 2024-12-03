@@ -185,9 +185,6 @@ def obtener_hotel_by_id(hotel_id):  #hotel_by_id_y_habitaciones_hotel
     if not result_hotel:
         return jsonify({'error': 'No se ha encontrado un hotel con el ID dado'}), 404
     
-    if not result_habitaciones:
-        return jsonify({'error': 'No se ha encontrado una habitación para el hotel dado'}), 404
-    
     response_hotel = {
         'nombre': result_hotel[1],
         'barrio': result_hotel[2],
@@ -237,7 +234,7 @@ def habitacion_by_id(habitacion_id):   #habitacion_by_id_y_otras_habitaciones
     except Exception as e:
         return jsonify({ 'error': str(e) }), 404
     
-    if result_habitacion is None or result_otras_habitaciones is None:
+    if result_habitacion is None:
         return jsonify({ 'error': 'No se ha encontrado una habitacion con el ID dado' }), 404
     
     response_hotel = {
