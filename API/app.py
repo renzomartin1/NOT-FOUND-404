@@ -356,10 +356,10 @@ def usuarios_login():
     fila = resultado_query_verificacion.fetchone()
 
     if fila == None:
-        return jsonify({"error": "No hay ningún usuario asociado a este correo electrónico."}), 404
+        return jsonify({"error": "Correo electrónico o contraseña incorrectos."}), 404
 
     elif datos_login["contraseña"] != fila.contraseña:
-        return jsonify({"error": "La contraseña es incorrecta."}), 400
+        return jsonify({"error": "Correo electrónico o contraseña incorrectos."}), 400
 
     else:
         return jsonify({"usuario_id": fila.usuario_id}), 200
