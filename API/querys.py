@@ -22,6 +22,7 @@ QUERY_ELIMINAR_RESERVA = "DELETE FROM reservaciones WHERE reserva_id = :reserva_
 QUERY_RESERVA_BY_RESERVAID_USUARIOID = "SELECT * FROM reservaciones WHERE usuario_id = :usuario_id AND reserva_id = :reserva_id"
 QUERY_RESERVA_BY_RESERVAID = "SELECT * FROM reservaciones WHERE reserva_id = :reserva_id"
 QUERY_ACTUALIZAR_SERVICIOS = "UPDATE reservaciones SET servicios_contratados = :servicios_contratados WHERE reserva_id = :reserva_id"
+QUERY_RESERVAS_HABITACION = "SELECT reserva_id, hotel_id, habitacion_id, fecha_entrada, fecha_salida FROM reservaciones WHERE (fecha_entrada <= :fecha_salida AND fecha_salida >= :fecha_entrada) AND habitacion_id = :habitacion_id;"
 
 # Hoteles
 QUERY_OBTENER_TODOS_LOS_HOTELES = "SELECT * FROM hoteles"
@@ -112,6 +113,9 @@ def reserva_by_reserva_id(reserva_id):
 
 def actualizar_servicios(reserva_id, servicios_contratados):
     return run_query(QUERY_ACTUALIZAR_SERVICIOS, {"reserva_id": reserva_id, "servicios_contratados": servicios_contratados})
+
+def reservas_habitacion(habitacion_id, fecha_entrada, fecha_salida):
+    return run_query(QUERY_RESERVAS_HABITACION, {"habitacion_id":habitacion_id, "fecha_entrada":fecha_entrada, "fecha_salida":fecha_salida}).fetchall()
 #------------------------Fin Reservas-------------------------------------------------------------------
 
 def filtrar_hoteles(fecha_entrada, fecha_salida, cantidad_personas):
